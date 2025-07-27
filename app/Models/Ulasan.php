@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ulasan extends Model
 {
-    //
+     protected $fillable = [
+        'id_kursus',
+        'id_user',
+        'ulasa',
+    ];
 }

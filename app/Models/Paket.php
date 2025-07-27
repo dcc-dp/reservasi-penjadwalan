@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Paket extends Model
 {
-    //
+    protected $fillable = [
+      'id_materi',
+      'jenis',
+      'harga',
+      'jam1',
+       
+    ];
 }
