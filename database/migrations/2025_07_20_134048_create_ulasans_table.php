@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('id_kursus');
             $table->unsignedInteger('id_user');
-            $table->text('ulasa');
+            $table->text('ulasan');
 
             $table->timestamps();
         });
