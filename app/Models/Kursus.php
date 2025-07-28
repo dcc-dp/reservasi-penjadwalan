@@ -12,4 +12,15 @@ class Kursus extends Model
         'id_paket',
         'deskripsi',
     ];
+
+    public function instruktur()
+    {
+        return $this->belongsTo(Instruktur_Profile::class, 'id_instruktur');
+    }
+
+    public function paket()
+    {
+        return $this->belongsTo(Paket::class, 'id_paket');
+    }
+
 }

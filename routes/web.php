@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\KursusController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
@@ -77,6 +78,14 @@ use Illuminate\Support\Facades\Route;
 	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
 	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
 	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+
+	// Kursus
+	Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
+	Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
+	Route::post('/kursus/update', [KursusController::class, 'store'])->name('kursus.store');
+	Route::get('/kursus/edit', [KursusController::class, 'edit'])->name('kursus.edit');
+	Route::put('/kursus/update', [KursusController::class, 'update'])->name('kursus.update');
+	Route::delete('/kursus/hapus', [KursusController::class, 'destroy'])->name('kursus.destroy');
 
 
 
