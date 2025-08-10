@@ -10,7 +10,5 @@ class Paket extends Model
       'id_materi',
       'jenis',
       'harga',
-    
-       
     ];
 }

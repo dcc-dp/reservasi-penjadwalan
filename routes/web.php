@@ -1,6 +1,6 @@
 <?php
-
 use App\Http\Controllers\admin\MateriController;
+use App\Http\Controllers\admin\PaketController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -93,4 +93,11 @@ Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.
 route::get('/materi/edit{id}', [MateriController::class, 'edit'])->name('materi.edit');
 route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
 
-Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
+// paket
+Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
+Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
+Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
+Route::post('/edit', [PaketController::class, 'store'])->name('paket.store');
+Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
+Route::put('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
+Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
