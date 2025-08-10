@@ -57,36 +57,35 @@
                                             </tr>
 
                                         </tbody>
-                                    @endforeach
 
-                                    <!-- Modal Hapus -->
-                                    <div class="modal fade" id="Hapusdata{{ $y->id }}" tabindex="-1"
-                                        aria-labelledby="modalLabel{{ $y->id }}" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <form action="{{ route('materi.destroy', $y->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalLabel{{ $y->id }}">
-                                                            Konfirmasi Hapus</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Tutup"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Apakah kamu yakin ingin menghapus materi:
-                                                        <strong>{{ $y->Judul }}</strong>?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Batal</button>
-                                                        <button type="submit" class="btn btn-danger">Ya, Hapus</button>
-                                                    </div>
-                                                </form>
+                                        <!-- Modal Hapus -->
+                                        <div class="modal fade" id="Hapusdata{{ $y->id }}" tabindex="-1"
+                                            aria-labelledby="modalLabel{{ $y->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form action="{{ route('materi.destroy', $y->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalLabel{{ $y->id }}">
+                                                                Konfirmasi Hapus</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Tutup"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah kamu yakin ingin menghapus materi:
+                                                            <strong>{{ $y->Judul }}</strong>?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
+                                    @endforeach
 
                                 </table>
                             </div>
