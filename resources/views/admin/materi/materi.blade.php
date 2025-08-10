@@ -57,6 +57,7 @@
                                             </tr>
 
                                         </tbody>
+
                                         <!-- Modal Hapus -->
                                         <div class="modal fade" id="Hapusdata{{ $y->id }}" tabindex="-1"
                                             aria-labelledby="modalLabel{{ $y->id }}" aria-hidden="true">
@@ -85,7 +86,7 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                </table>
+</table>
                             </div>
                         </div>
                     </div>
