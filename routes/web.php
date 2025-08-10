@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 
     Route::get('/', [HomeController::class, 'home']);
@@ -83,3 +85,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('session/login-session');
 })->name('login');
+
+Route::get('/materi',[MateriController::class,'index'])->name('materi');
+
+Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
+Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
+route::get('/materi/edit{id}', [MateriController::class, 'edit'])->name('materi.edit');
+route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
+
+Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
