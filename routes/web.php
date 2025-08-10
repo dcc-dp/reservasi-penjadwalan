@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\MateriController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -69,12 +70,21 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('sign-up');
 
+	//Manajemen Kursus
 	Route::get('/materi', [MateriController::class, 'index'])->name('materi');
 	Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
 	Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
 	route::get('/materi/edit{id}', [MateriController::class, 'edit'])->name('materi.edit');
 	route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
 	Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
+
+	//Manajemen User
+	Route::get('/user', [UserController::class, 'index'])->name('user');
+	Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+	Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+	route::get('/user/edit{id}', [UserController::class, 'edit'])->name('user.edit');
+	route::put('/user/update{id}', [UserController::class, 'update'])->name('user.update');
+	Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
 
