@@ -44,14 +44,12 @@
                                                 <td>
 
                                                     <a href="{{ route('materi.edit', $y->id) }}"
-                                                        class= "btn btn-sm btn-outline-secondary mx-1"
-                                                        data-bs-toggle="tooltip">edit
+                                                        class= "btn btn bg-gradient-secondary" data-bs-toggle="tooltip">edit
                                                     </a>
                                                     <!-- Tombol Hapus -->
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-outline-danger mx-1"data-bs-toggle="modal"
-                                                        data-bs-target="#Hapusdata{{ $y->id }}"> Hapus
-                                                    </button>
+                                                    <button type="button" class="btn btn bg-gradient-danger btn-block mb-3"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#Hapusdata{{ $y->id }}">Hapus</button>
 
                                                 </td>
                                             </tr>
@@ -59,34 +57,43 @@
                                         </tbody>
 
                                         <!-- Modal Hapus -->
-                                        <div class="modal fade" id="Hapusdata{{ $y->id }}" tabindex="-1"
-                                            aria-labelledby="modalLabel{{ $y->id }}" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <form action="{{ route('materi.destroy', $y->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="modalLabel{{ $y->id }}">
-                                                                Konfirmasi Hapus</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Tutup"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Apakah kamu yakin ingin menghapus materi:
-                                                            <strong>{{ $y->Judul }}</strong>?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
-                                                        </div>
-                                                    </form>
+                                        <div class="col-md-4">
+                                            <div class="modal fade" id="Hapusdata{{ $y->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                                                <div class="modal-dialog modal-danger modal-dialog-centered modal-"
+                                                    role="document">
+                                                    <div class="modal-content">
+                                                        <form action="{{ route('materi.destroy', $y->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <div class="modal-header">
+                                                                <h6 class="modal-title" id="modal-title-notification">Hapus Data</h6>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="py-3 text-center">
+                                                                    <i class="ni ni-bell-55 ni-3x"></i>
+                                                                    <h6 class="text-gradient text-danger mt-4">
+                                                                        Yakin ingin menghapus materi
+                                                                        <strong>{{ $y->Judul }}</strong>?
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-danger">Ya,
+                                                                    Hapus</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
-
                                 </table>
                             </div>
                         </div>
