@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Materi extends Model
 {
      protected $fillable = [
-            'judul',
+            'Judul',
             'deskripsi',
             
         ];

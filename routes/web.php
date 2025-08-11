@@ -82,10 +82,10 @@ use Illuminate\Support\Facades\Route;
 	// Kursus
 	Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
 	Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
-	Route::post('/kursus/update', [KursusController::class, 'store'])->name('kursus.store');
-	Route::get('/kursus/edit', [KursusController::class, 'edit'])->name('kursus.edit');
-	Route::put('/kursus/update', [KursusController::class, 'update'])->name('kursus.update');
-	Route::delete('/kursus/hapus', [KursusController::class, 'destroy'])->name('kursus.destroy');
+	Route::post('/kursus/store', [KursusController::class, 'store'])->name('kursus.store');
+	Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
+	Route::put('/kursus/edit/{kursus}', [KursusController::class, 'update'])->name('kursus.update');
+	Route::delete('/kursus/{kursus}', [KursusController::class, 'destroy'])->name('kursus.destroy');
 
 
 

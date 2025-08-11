@@ -21,7 +21,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Nama</th>
+                    <th>Kursus</th>
                     <th>Instruktur</th>
                     <th>Paket</th>
                     <th>Deskripsi</th>
@@ -31,12 +31,13 @@
             <tbody>
                 @foreach ($kursusList as $kursus)
                     <tr>
-                        <td>{{ $kursus->nama }}</td>
-                        <td>{{ $kursus->instruktur->nama ?? '-' }}</td>
-                        <td>{{ $kursus->paket->nama_paket ?? '-' }}</td>
+                        <td>{{ $kursus->name }}</td>
+                        <td>{{ $kursus->instruktur->user->name ?? '-' }}</td>
+                        <td>{{ $kursus->paket->materi->Judul ?? '-' }}</td>
                         <td>{{ $kursus->deskripsi }}</td>
                         <td>
-                            <a href="{{ route('kursus.edit', $kursus->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{{ route('kursus.edit', $kursus->id) }}" class="btn btn-warning">Edit</a>
+                            
                             <form action="{{ route('kursus.destroy', $kursus->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

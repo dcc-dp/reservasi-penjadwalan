@@ -13,4 +13,9 @@ class Paket extends Model
     
        
     ];
+
+    public function materi()
+    {
+        return $this->belongsTo(Materi::class, 'id_materi');
+    }
 }
