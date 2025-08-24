@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\admin\MateriController;
+use App\Http\Controllers\admin\PaketController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\InstrukturProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
@@ -85,9 +87,19 @@ Route::group(['middleware' => 'auth'], function () {
 	route::get('/user/edit{id}', [UserController::class, 'edit'])->name('user.edit');
 	route::put('/user/update{id}', [UserController::class, 'update'])->name('user.update');
 	Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+	// paket
+	Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
+	Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
+	Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
+	Route::post('/edit', [PaketController::class, 'store'])->name('paket.store');
+	Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
+	Route::put('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
+	Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+
+	// Profile Instruktur
+	Route::get('/profile-instuktur', [InstrukturProfileController::class, 'index'])->name('profile-instuktur.index');
 });
-
-
 
 
 
