@@ -12,7 +12,7 @@ class ReservasiController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.reservasi.index');
     }
 
     /**
