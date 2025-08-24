@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\PaketController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\KursusController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
@@ -23,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', [HomeController::class, 'home']);
+	Route::get('/', [HomeController::class, 'home']);
 	Route::get('dashboard', function () {
 		return view('dashboard');
 	})->name('dashboard');
@@ -49,55 +51,66 @@ use Illuminate\Support\Facades\Route;
 		return view('tables');
 	})->name('tables');
 
-    Route::get('virtual-reality', function () {
+	Route::get('virtual-reality', function () {
 		return view('virtual-reality');
 	})->name('virtual-reality');
 
-    Route::get('static-sign-in', function () {
+	Route::get('static-sign-in', function () {
 		return view('static-sign-in');
 	})->name('sign-in');
 
-    Route::get('static-sign-up', function () {
+	Route::get('static-sign-up', function () {
 		return view('static-sign-up');
 	})->name('sign-up');
 
-    Route::get('/logout', [SessionsController::class, 'destroy']);
+	Route::get('/logout', [SessionsController::class, 'destroy']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);
-    Route::get('/login', function () {
+	Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
 
-
-
-
-    Route::get('/register', [RegisterController::class, 'create']);
-    Route::post('/register', [RegisterController::class, 'store']);
-    Route::get('/login', [SessionsController::class, 'create']);
-    Route::post('/session', [SessionsController::class, 'store']);
-	Route::get('/login/forgot-password', [ResetController::class, 'create']);
-	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
-	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
-	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
-
-
-
-Route::get('/login', function () {
-    return view('session/login-session');
-})->name('login');
-
-Route::get('/materi',[MateriController::class,'index'])->name('materi');
-
-Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
-Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
-route::get('/materi/edit{id}', [MateriController::class, 'edit'])->name('materi.edit');
-route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
-
-// paket
-Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
+	Route::get('/materi', [MateriController::class, 'index'])->name('materi');
+	Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
+	Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
+	route::get('/materi/edit{id}', [MateriController::class, 'edit'])->name('materi.edit');
+	route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
+	Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
+  
+  Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
 Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
 Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
 Route::post('/edit', [PaketController::class, 'store'])->name('paket.store');
 Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
 Route::put('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
 Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+});
+
+
+
+
+
+Route::group(['middleware' => 'guest'], function () {
+	Route::get('/register', [RegisterController::class, 'create']);
+	Route::post('/register', [RegisterController::class, 'store']);
+	Route::get('/login', [SessionsController::class, 'create']);
+	Route::post('/session', [SessionsController::class, 'store']);
+	Route::get('/login/forgot-password', [ResetController::class, 'create']);
+	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
+	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
+	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+});
+
+	// Kursus
+	Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
+	Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
+	Route::post('/kursus/update', [KursusController::class, 'store'])->name('kursus.store');
+	Route::get('/kursus/edit', [KursusController::class, 'edit'])->name('kursus.edit');
+	Route::put('/kursus/update', [KursusController::class, 'update'])->name('kursus.update');
+	Route::delete('/kursus/hapus', [KursusController::class, 'destroy'])->name('kursus.destroy');
+
+
+
+Route::get('/login', function () {
+	return view('session/login-session');
+})->name('login');
