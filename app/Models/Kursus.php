@@ -12,4 +12,8 @@ class Kursus extends Model
         'id_paket',
         'deskripsi',
     ];
+    public function reservasi()
+    {
+        return $this->hasMany(Reservasi::class);
+    }
 }

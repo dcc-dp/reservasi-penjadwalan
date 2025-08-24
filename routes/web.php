@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\admin\ReservasiController;
+use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
@@ -80,10 +80,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
 	Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi');
-	Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
-	Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
-	route::get('/reservasi/edit{id}', [ReservasiController::class, 'edit'])->name('reservasi.edit');
-	route::put('/reservasi/update{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
+	// Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
+	// Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
+	// route::get('/reservasi/edit{id}', [ReservasiController::class, 'edit'])->name('reservasi.edit');
+	// route::put('/reservasi/update{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
 	Route::delete('/reservasi/{id}', [ReservasiController::class, 'destroy'])->name('reservasi.destroy');
 
 	//Manajemen User
@@ -94,9 +94,6 @@ Route::group(['middleware' => 'auth'], function () {
 	route::put('/user/update{id}', [UserController::class, 'update'])->name('user.update');
 	Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
-
-
-
 
 
 Route::group(['middleware' => 'guest'], function () {
