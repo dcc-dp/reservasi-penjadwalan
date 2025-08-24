@@ -56,6 +56,7 @@ class MateriController extends Controller
     public function edit(string $id)
     {
         $materi = Materi::findOrFail($id);
+        // dd($materi);
         return view('admin.materi.edit', compact('materi'));
     }
 

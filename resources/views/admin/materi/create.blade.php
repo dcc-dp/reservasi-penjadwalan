@@ -11,8 +11,6 @@
 
                 <form action="{{ route('paket.update', $paket->id) }}" method="POST">
                     @csrf
-                    @method('PUT')
-
                     <div class="form-group">
                         <label for="id_materi">ID Materi</label>
                         <input type="text" class="form-control @error('id_materi') is-invalid @enderror"

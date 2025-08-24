@@ -2,6 +2,7 @@
 use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\admin\PaketController;
+use App\Http\Controllers\admin\ReservasiController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -78,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
 	route::get('/materi/edit{id}', [MateriController::class, 'edit'])->name('materi.edit');
 	route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
 	Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
+	
   
   //Manajemen User
 	Route::get('/user', [UserController::class, 'index'])->name('user');
@@ -87,13 +89,22 @@ Route::group(['middleware' => 'auth'], function () {
 	route::put('/user/update{id}', [UserController::class, 'update'])->name('user.update');
 	Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
-Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
-Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
-Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
-Route::post('/edit', [PaketController::class, 'store'])->name('paket.store');
-Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
-Route::put('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
-Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+	Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
+	Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
+	Route::post('/paket/store', [PaketController::class, 'store'])->name('paket.store');
+	Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
+	Route::put('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
+	Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+
+	
+	//reservasi
+	Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
+	Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
+	Route::post('/index', [ReservasiController::class, 'store'])->name('reservasi.store');
+	Route::post('/reservasi/edit', [ReservasiController::class, 'store'])->name('reservasi.store');
+	Route::get('/edit/{id}', [ReservasiController::class, 'edit'])->name('reservasi.edit');
+	Route::put('/reservasi/{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
+	Route::delete('/reservasi/{id}', [ReservasiController::class, 'destroy'])->name('reservasi.destroy');
  
 });
 
