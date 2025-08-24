@@ -12,4 +12,9 @@ class Instruktur_Profile extends Model
             'pengalaman',
             'bio',
         ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

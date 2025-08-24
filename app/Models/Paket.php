@@ -11,4 +11,9 @@ class Paket extends Model
       'jenis',
       'harga',
     ];
+
+    public function materi()
+    {
+        return $this->belongsTo(Materi::class, 'id_materi');
+    }
 }

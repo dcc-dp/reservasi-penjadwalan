@@ -6,10 +6,12 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\KursusController;
 use App\Http\Controllers\InstrukturProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\UlasanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -71,7 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
-
+  
 	//Manajemen Kursus
 	Route::get('/materi', [MateriController::class, 'index'])->name('materi');
 	Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
@@ -113,6 +115,19 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
 	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 });
+
+	// Kursus
+	Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
+	Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
+	Route::post('/kursus/store', [KursusController::class, 'store'])->name('kursus.store');
+	Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
+	Route::put('/kursus/edit/{kursus}', [KursusController::class, 'update'])->name('kursus.update');
+	Route::delete('/kursus/{kursus}', [KursusController::class, 'destroy'])->name('kursus.destroy');
+
+	// ulasan
+	Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
+
+	
 
 
 
