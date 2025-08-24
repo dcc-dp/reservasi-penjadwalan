@@ -9,6 +9,5 @@ class Materi extends Model
      protected $fillable = [
             'Judul',
             'deskripsi',
-            
         ];
 }
