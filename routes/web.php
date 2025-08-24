@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\admin\MateriController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\admin\PaketController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
@@ -70,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('sign-up');
 
+	//Manajemen Kursus
 	Route::get('/materi', [MateriController::class, 'index'])->name('materi');
 	Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
 	Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
@@ -77,17 +79,23 @@ Route::group(['middleware' => 'auth'], function () {
 	route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
 	Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
   
-  Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
+  //Manajemen User
+	Route::get('/user', [UserController::class, 'index'])->name('user');
+	Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+	Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+	route::get('/user/edit{id}', [UserController::class, 'edit'])->name('user.edit');
+	route::put('/user/update{id}', [UserController::class, 'update'])->name('user.update');
+	Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
 Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
 Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
 Route::post('/edit', [PaketController::class, 'store'])->name('paket.store');
 Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
 Route::put('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
 Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+ 
 });
-
-
-
 
 
 Route::group(['middleware' => 'guest'], function () {
