@@ -1,10 +1,11 @@
 <?php
-
 use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\admin\PaketController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\KursusController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
@@ -77,18 +78,24 @@ Route::group(['middleware' => 'auth'], function () {
 	route::get('/materi/edit{id}', [MateriController::class, 'edit'])->name('materi.edit');
 	route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
 	Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
-
-	//Manajemen User
+  
+  //Manajemen User
 	Route::get('/user', [UserController::class, 'index'])->name('user');
 	Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 	Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 	route::get('/user/edit{id}', [UserController::class, 'edit'])->name('user.edit');
 	route::put('/user/update{id}', [UserController::class, 'update'])->name('user.update');
 	Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
+Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
+Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
+Route::post('/edit', [PaketController::class, 'store'])->name('paket.store');
+Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
+Route::put('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
+Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+ 
 });
-
-
-
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -101,6 +108,14 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
 	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 });
+
+	// Kursus
+	Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
+	Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
+	Route::post('/kursus/update', [KursusController::class, 'store'])->name('kursus.store');
+	Route::get('/kursus/edit', [KursusController::class, 'edit'])->name('kursus.edit');
+	Route::put('/kursus/update', [KursusController::class, 'update'])->name('kursus.update');
+	Route::delete('/kursus/hapus', [KursusController::class, 'destroy'])->name('kursus.destroy');
 
 
 
