@@ -18,7 +18,9 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="ps-3">ID Materi</th>
+                    <th class="ps-3">Nama 
+                        
+                        Materi</th>
                     <th>Jenis</th>
                     <th>Harga</th>
                     <th class="text-center">Aksi</th>
