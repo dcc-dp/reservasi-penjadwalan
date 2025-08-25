@@ -23,4 +23,10 @@ class Kursus extends Model
         return $this->belongsTo(Paket::class, 'id_paket');
     }
 
+    public function ulasan()
+    {
+        return $this->hasMany(Ulasan::class, 'id_kursus');
+    }
+
+
 }

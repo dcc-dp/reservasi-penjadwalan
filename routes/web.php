@@ -7,6 +7,7 @@ use App\Http\Controllers\KursusController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\UlasanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -68,8 +69,6 @@ use Illuminate\Support\Facades\Route;
 	})->name('sign-up');
 
 
-
-
     Route::get('/register', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'store']);
     Route::get('/login', [SessionsController::class, 'create']);
@@ -86,6 +85,11 @@ use Illuminate\Support\Facades\Route;
 	Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
 	Route::put('/kursus/edit/{kursus}', [KursusController::class, 'update'])->name('kursus.update');
 	Route::delete('/kursus/{kursus}', [KursusController::class, 'destroy'])->name('kursus.destroy');
+
+	// ulasan
+	Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
+
+	
 
 
 
