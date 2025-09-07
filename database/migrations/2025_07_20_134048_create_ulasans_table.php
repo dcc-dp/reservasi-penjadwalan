@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('ulasan')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_kursus')->references('id')->on('kursus')->onDelete('cascade');
+            $table->foreign('id_kursus')->references('id')->on('kursuses')->onDelete('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }

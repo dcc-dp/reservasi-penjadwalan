@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Paket;
+use App\Models\Materi;
 use Illuminate\Http\Request;
 
 class PaketController extends Controller
@@ -12,7 +13,7 @@ class PaketController extends Controller
      */
     public function index()
     {
-        $data = Paket::all();
+        $data = Paket::with('materi')->get();
         return view('admin.paket.index', compact('data'));
     }
 
@@ -21,7 +22,10 @@ class PaketController extends Controller
      */
     public function create()
     {
-            return view('admin.paket.create');
+           $materi = Materi::all();
+
+            return view('admin.paket.create', compact('materi'));
+
     }
 
     /**
@@ -30,7 +34,7 @@ class PaketController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_materi' => 'required|string|max:100',
+            'id_materi' => 'required|integer|exists:materis,id',
             'jenis'     => 'required|string|max:50',
             'harga'     => 'required|numeric|min:0',
         ]);
@@ -42,7 +46,7 @@ class PaketController extends Controller
             'harga'     => $request->harga,
         ]);
 
-        return redirect()->route('paket.index')->with('success', 'Paket berhasil ditambahkan!');
+        return redirect()->route('paket.index');
     }
 
     /**
@@ -50,7 +54,7 @@ class PaketController extends Controller
      */
     public function show(string $id)
     {
-        
+
     }
 
     /**
@@ -59,7 +63,8 @@ class PaketController extends Controller
     public function edit(string $id)
     {
         $paket = Paket::findOrFail($id);
-        return view('admin.paket.edit', compact('paket'));
+        $materi = Materi::all();
+        return view('admin.paket.edit', compact('paket','materi'));
     }
 
     /**
@@ -68,15 +73,19 @@ class PaketController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-        'id_materi' => 'required|string',
-        'jenis' => 'required|string',
-        'harga' => 'required|numeric',
+        'id_materi' => 'required|integer|exists:materis,id',
+        'jenis' => 'required|string|max:50',
+        'harga' => 'required|numeric|min:0',
     ]);
 
     $paket = Paket::findOrFail($id);
-    $paket->update($request->all());
+    $paket->update([
+        'id_materi' => $request->id_materi,
+        'jenis' => $request->jenis,
+        'harga' => $request->harga,
+    ]);
 
-    return redirect()->route('paket.index')->with('success', 'Paket berhasil diperbarui.');
+    return redirect()->route('paket.index');
     }
 
     /**
@@ -87,6 +96,6 @@ class PaketController extends Controller
                 $paket = Paket::findOrFail($id);
                 $paket->delete();
 
-            return redirect()->route('paket.index')->with('success', 'Paket berhasil dihapus');
+            return redirect()->route('paket.index');
     }
 }
