@@ -18,7 +18,13 @@
 
               <div class="mb-3">
                 <label for="id_materi" class="form-label">Materi</label>
-                <input type="text" name="id_materi" class="form-control" value="{{ $paket->id_materi }}" required>
+                <select name="id_materi" id="id_materi" class="form-control" required>
+                  @foreach ($materi as $m)
+                    <option value="{{ $m->id }}" {{ $paket->id_materi == $m->id ? 'selected' : '' }}>
+                      {{ $m->nama_materi }}
+                    </option>
+                  @endforeach
+                </select>
               </div>
 
               <div class="mb-3">
