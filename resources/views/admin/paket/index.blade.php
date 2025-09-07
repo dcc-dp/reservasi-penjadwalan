@@ -18,8 +18,8 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="ps-3">Nama 
-                        
+                    <th class="ps-3">Nama
+
                         Materi</th>
                     <th>Jenis</th>
                     <th>Harga</th>
@@ -29,7 +29,7 @@
                 <tbody>
                   @foreach ($data as $item)
                   <tr>
-                    <td class="ps-3">{{ $item->id_materi }}</td>
+                    <td class="ps-3">{{ optional($item->materi)->nama_materi ?? '-' }}</td>
                     <td>{{ $item->jenis }}</td>
                     <td>Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
                     <td class="text-center">
@@ -63,7 +63,6 @@
                                   </form>
                           </div>
                       </div>
-                  </div>
                   @endforeach
                 </tbody>
               </table>
