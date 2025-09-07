@@ -99,7 +99,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
     //paket
-      // paket
     Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
     Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
     Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
@@ -107,6 +106,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
     Route::put('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
     Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+
+    // Profile Instruktur
+    Route::resource('profile-instruktur', InstrukturProfileController::class);
 
 });
 

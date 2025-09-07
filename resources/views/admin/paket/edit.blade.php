@@ -21,7 +21,7 @@
                 <select name="id_materi" id="id_materi" class="form-control" required>
                   @foreach ($materi as $m)
                     <option value="{{ $m->id }}" {{ $paket->id_materi == $m->id ? 'selected' : '' }}>
-                      {{ $m->nama_materi }}
+                      {{ $m->Judul }}
                     </option>
                   @endforeach
                 </select>
