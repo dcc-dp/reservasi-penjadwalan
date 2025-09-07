@@ -12,8 +12,21 @@ class Kursus extends Model
         'id_paket',
         'deskripsi',
     ];
-    public function reservasi()
+
+    public function instruktur()
     {
-        return $this->hasMany(Reservasi::class);
+        return $this->belongsTo(Instruktur_Profile::class, 'id_instruktur','id');
     }
+
+    public function paket()
+    {
+        return $this->belongsTo(Paket::class, 'id_paket');
+    }
+
+    public function ulasan()
+    {
+        return $this->hasMany(Ulasan::class, 'id_kursus');
+    }
+
+
 }

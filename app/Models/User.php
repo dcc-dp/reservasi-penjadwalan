@@ -14,20 +14,15 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role',
-        'notelp',
-        'jk',
-        'alamat'
-    ];
-
-    public function reservasi()
-    {
-        return $this->hasMany(Reservasi::class);
-    }
+      protected $fillable = [
+          'name',
+          'email',
+          'password',
+          'role',
+          'notelp',
+          'jk',
+          'alamat'
+      ];
 
     protected $hidden = [
         'password',
@@ -61,6 +56,12 @@ class User extends Authenticatable
     public function ulasan()
     {
         return $this->hasMany(Ulasan::class, 'id_user');
+    }
+
+
+     public function instrukturProfile()
+    {
+        return $this->hasOne(Instruktur_Profile::class, 'user_id', 'id');
     }
 
 }

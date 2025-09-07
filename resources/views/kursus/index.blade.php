@@ -33,7 +33,7 @@
                     <tr>
                         <td>{{ $kursus->name }}</td>
                         <td>{{ $kursus->instruktur->user->name ?? '-' }}</td>
-                        <td>{{ $kursus->paket->materi->Judul ?? '-' }}</td>
+                        <td>{{ $kursus->paket->materi->Judul }}</td>
                         <td>{{ $kursus->deskripsi }}</td>
                         <td>
                             <a href="{{ route('kursus.edit', $kursus->id) }}" class="btn btn-warning">Edit</a>

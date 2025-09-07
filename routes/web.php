@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\ReservasiController;
 use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\admin\PaketController;
@@ -98,6 +99,14 @@ Route::group(['middleware' => 'auth'], function () {
     route::put('/user/update{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
+    //admin
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
+    Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
+    route::get('/admin/edit{id}', [AdminController::class, 'edit'])->name('admin.edit');
+    route::put('/admin/update{id}', [AdminController::class, 'update'])->name('admin.update');
+    Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
     //paket
     Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
     Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
@@ -109,7 +118,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Profile Instruktur
     Route::resource('profile-instruktur', InstrukturProfileController::class);
-
 });
 
 
