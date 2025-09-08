@@ -9,6 +9,7 @@
     @endpush
 
 <div class="container mt-5">
+    <div class="card">
     <h2>Daftar Kursus</h2>
 
     <a href="{{ route('kursus.create') }}" class="btn btn-primary mb-3">Tambah Kursus</a>
@@ -48,6 +49,7 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
     </div>
 </div>
 @endsection

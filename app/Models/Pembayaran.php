@@ -12,4 +12,9 @@ class Pembayaran extends Model
         'total',
         'status',
     ];
+
+    public function reservasi()
+    {
+        return $this->belongsTo(Reservasi::class, 'reservasi_id');
+    }
 }

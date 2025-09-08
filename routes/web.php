@@ -4,6 +4,7 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\KursusController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
@@ -85,6 +86,14 @@ use Illuminate\Support\Facades\Route;
 	Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
 	Route::put('/kursus/edit/{kursus}', [KursusController::class, 'update'])->name('kursus.update');
 	Route::delete('/kursus/{kursus}', [KursusController::class, 'destroy'])->name('kursus.destroy');
+
+	// pembayaran
+	Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+	Route::get('/pembayaran/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
+	Route::post('/pembayaran/store', [PembayaranController::class, 'store'])->name('pembayaran.store');
+	Route::get('/pembayaran/edit/{id}', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
+	Route::put('/pembayaran/edit/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
+	Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
 
 	// ulasan
 	Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');

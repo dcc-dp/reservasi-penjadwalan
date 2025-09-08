@@ -15,7 +15,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'notelp',
+        'notelp', 
         'jkl',
         'alamat'
     ];
