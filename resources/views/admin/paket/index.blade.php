@@ -9,7 +9,7 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h6>Daftar Paket</h6>
-                            <a href="{{ route('paket.create') }}" class="btn btn-sm btn-primary">+ Tambah Paket</a>
+                            <a href="{{ route('paket.create') }}" class="btn btn-sm btn-primary">ADD NEW</a>
                         </div>
 
                         <div class="card-body px-0 pt-0 pb-2">
@@ -17,23 +17,25 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="ps-3">Nama
-
-                                                Materi</th>
-                                            <th>Jenis</th>
-                                            <th>Harga</th>
-                                            <th class="text-center">Aksi</th>
+                                            <th width="500px"
+                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" >Nama Materi</th>
+                                            <th width="500px"
+                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" >Jenis</th>
+                                            <th width="500px"
+                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" >Harga</th>
+                                            <th width="700px"
+                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center" >Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $item)
-                                            <tr>
+                                            <tr class="text-sm">
                                                 <td class="ps-3">{{ optional($item->materi)->Judul ?? '-' }}</td>
                                                 <td>{{ $item->jenis }}</td>
                                                 <td>Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
                                                 <td class="text-center">
                                                     <a href="{{ route('paket.edit', $item->id) }}"
-                                                        class="btn btn-sm btn-warning me-1">Edit</a>
+                                                        class="btn btn-sm  bg-gradient-secondary me-1">Edit</a>
                                                     <button type="button" class="btn btn-sm btn-danger"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#hapusPaket{{ $item->id }}">
