@@ -15,6 +15,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\User\LandingPageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -154,6 +155,11 @@ Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])->nam
 
 // ulasan
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
+
+
+//USER:LANDING PAGE
+Route::get('/landingPage', [LandingPageController::class, 'index'])->name('landingPage');
+
 
 Route::get('/login', function () {
     return view('session/login-session');
