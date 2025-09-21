@@ -8,6 +8,9 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @endpush
 
+<div class="container mt-5">
+    <div class="card">
+    <h2>Daftar Kursus</h2>
     <div class="container mt-5">
 
         <div class="d-flex justify-content-between align-items-center">
@@ -61,4 +64,6 @@
             </table>
         </div>
     </div>
+    </div>
+</div>
 @endsection
