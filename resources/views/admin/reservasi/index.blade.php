@@ -8,34 +8,38 @@
 
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <h6>Daftar Paket</h6>
-                            <a href="{{ route('paket.create') }}" class="btn btn-sm btn-primary">ADD NEW</a>
+                            <h6>Reservasi kursus</h6>
+                            {{-- <a href="{{ ('/reservasi') }}" class="btn btn-sm btn-primary">+ Tambah Paket</a> --}}
                         </div>
 
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th width="500px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" >Nama Materi</th>
-                                            <th width="500px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" >Jenis</th>
-                                            <th width="500px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" >Harga</th>
-                                            <th width="700px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center" >Aksi</th>
+                                    <thead class="thead-light">
+                                        <tr width="500px"
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                            <th>Nama Pengguna</th>
+                                            <th>Nama Kursus</th>
+                                            <th>Hari ke-1</th>
+                                            <th>Waktu</th>
+                                            <th>Hari ke-2</th>
+                                            <th>Waktu ke -2</th>
+                                            <th class="text-center">action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $item)
+                                        @foreach ($reserv as $item)
                                             <tr class="text-sm">
-                                                <td class="ps-3">{{ optional($item->materi)->Judul ?? '-' }}</td>
-                                                <td>{{ $item->jenis }}</td>
-                                                <td>Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
+                                                <td class="ps-3">{{ $item->user->name }}</td>
+                                                <td>{{ $item->kursus->name }}</td>
+                                                <td>{{ Carbon\Carbon::parse($item->hari1)->format('l, d-m-Y') }}</td>
+                                                <td>{{ Carbon\Carbon::parse($item->hari2)->format('l, d-m-Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->jam1)->format('H:i') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->jam2)->format('H:i') }}</td>
+
+
                                                 <td class="text-center">
-                                                    <a href="{{ route('paket.edit', $item->id) }}"
-                                                        class="btn btn-sm  bg-gradient-secondary me-1">Edit</a>
+                                                    {{-- <a href="{{ route('reservasi.edit', $item->id) }}" class="btn btn-sm btn-warning me-1">Edit</a> --}}
                                                     <button type="button" class="btn btn-sm btn-danger"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#hapusPaket{{ $item->id }}">
@@ -56,13 +60,12 @@
                                                                 aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{ route('paket.destroy', $item->id) }}"
+                                                            <form action="{{ route('reservasi.destroy', $item->id) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <h5 class="text-primary text-center">
-                                                                    Yakin ingin menghapus paket jenis
-                                                                    <strong>{{ $item->jenis }}</strong>?
+                                                                    Yakin ingin menghapus paket data ini?
                                                                 </h5>
                                                         </div>
                                                         <div class="modal-footer">
@@ -73,6 +76,7 @@
                                                         </form>
                                                     </div>
                                                 </div>
+                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>

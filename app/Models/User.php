@@ -58,4 +58,10 @@ class User extends Authenticatable
         return $this->hasMany(Ulasan::class, 'id_user');
     }
 
+
+     public function instrukturProfile()
+    {
+        return $this->hasOne(Instruktur_Profile::class, 'user_id', 'id');
+    }
+
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\ReservasiController;
 use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\admin\PaketController;
 use App\Http\Controllers\Admin\UserController;
@@ -82,6 +84,13 @@ Route::group(['middleware' => 'auth'], function () {
     route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
     Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
+    Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi');
+    // Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
+    // Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
+    // route::get('/reservasi/edit{id}', [ReservasiController::class, 'edit'])->name('reservasi.edit');
+    // route::put('/reservasi/update{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
+    Route::delete('/reservasi/{id}', [ReservasiController::class, 'destroy'])->name('reservasi.destroy');
+
     //Manajemen User
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
@@ -90,7 +99,15 @@ Route::group(['middleware' => 'auth'], function () {
     route::put('/user/update{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
-    // paket
+    //admin
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
+    Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
+    route::get('/admin/edit{id}', [AdminController::class, 'edit'])->name('admin.edit');
+    route::put('/admin/update{id}', [AdminController::class, 'update'])->name('admin.update');
+    Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+    //paket
     Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
     Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
     Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
@@ -102,7 +119,6 @@ Route::group(['middleware' => 'auth'], function () {
     // Profile Instruktur
     Route::resource('profile-instruktur', InstrukturProfileController::class);
 });
-
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -126,6 +142,7 @@ Route::delete('/kursus/{kursus}', [KursusController::class, 'destroy'])->name('k
 
 // ulasan
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
+
 
 
 
