@@ -8,10 +8,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\KursusController;
 use App\Http\Controllers\InstrukturProfileController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UlasanController;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -92,7 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // paket
     Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
-    Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
+    Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
     Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
     Route::post('/edit', [PaketController::class, 'store'])->name('paket.store');
     Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
@@ -126,6 +128,17 @@ Route::delete('/kursus/{kursus}', [KursusController::class, 'destroy'])->name('k
 
 // ulasan
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
+
+
+
+// Jadwal
+
+Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+Route::get('/jadwal/create', [JadwalController::class, 'create'])->name('jadwal.create');
+Route::post('/jadwal', [JadwalController::class, 'store'])->name('jadwal.store');
+Route::get('/jadwal/{id}/edit', [JadwalController::class, 'edit'])->name('jadwal.edit');
+Route::put('/jadwal/{id}', [JadwalController::class, 'update'])->name('jadwal.update');
+Route::delete('/jadwal/{id}', [JadwalController::class, 'destroy'])->name('jadwal.destroy');
 
 
 

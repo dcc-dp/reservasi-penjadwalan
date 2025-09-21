@@ -23,7 +23,6 @@ class PaketController extends Controller
     public function create()
     {
            $materi = Materi::all();
-
             return view('admin.paket.create', compact('materi'));
 
     }

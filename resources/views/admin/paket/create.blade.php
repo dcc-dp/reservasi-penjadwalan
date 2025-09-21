@@ -21,13 +21,11 @@
                                         <option value="">-- Pilih Materi --</option>
                                         @foreach($materi as $m)
                                             <option value="{{ $m->id }}" {{ old('id_materi') == $m->id ? 'selected' : '' }}>
-                                                {{ $m->nama_materi }}
+                                                {{ $m->Judul }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
-
-
 
                                 <div class="mb-3">
                                     <label for="jenis" class="form-label">Jenis</label>
