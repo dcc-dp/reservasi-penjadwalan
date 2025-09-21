@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_kursus');
             $table->date('tanggal');
-            $table->dateTime('hari');
-            $table->dateTime('jam');
+            $table->string('hari');
+            $table->time('jam');
             $table->string('ruangan');
             $table->string('pertemuan');
             $table->timestamps();
