@@ -11,5 +11,11 @@ class Pembayaran extends Model
         'metode_bayar',
         'total',
         'status',
+        
     ];
+
+    public function reservasi()
+    {
+        return $this->belongsTo(Reservasi::class, 'reservasi_id');
+    }
 }

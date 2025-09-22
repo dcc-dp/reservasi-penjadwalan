@@ -15,7 +15,7 @@ class Kursus extends Model
 
     public function instruktur()
     {
-        return $this->belongsTo(Instruktur_Profile::class, 'id_instruktur');
+        return $this->belongsTo(Instruktur_Profile::class, 'id_instruktur','id');
     }
 
     public function paket()

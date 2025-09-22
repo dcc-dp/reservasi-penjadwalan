@@ -9,20 +9,15 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-      protected $fillable = [
-          'name',
-          'email',
-          'password',
-          'role',
-          'notelp',
-          'jk',
-          'alamat'
-      ];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'role',
+        'notelp', 
+        'jkl',
+        'alamat'
+    ];
 
     protected $hidden = [
         'password',
@@ -56,6 +51,12 @@ class User extends Authenticatable
     public function ulasan()
     {
         return $this->hasMany(Ulasan::class, 'id_user');
+    }
+
+
+     public function instrukturProfile()
+    {
+        return $this->hasOne(Instruktur_Profile::class, 'user_id', 'id');
     }
 
 }

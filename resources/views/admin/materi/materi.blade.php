@@ -28,7 +28,7 @@
                                                 class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                                 Deskripsi</th>
                                             <th width="200px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-end">
+                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
                                                 Action</th>
                                         </tr>
                                     </thead>

@@ -8,8 +8,9 @@
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="mb-0">Daftar User</h6>
-                                <a href="{{ route('user.create') }}" class="btn btn-primary btn-sm ms-2 justify-content-end">
+                                <h6 class="mb-0">Daftar Admin</h6>
+                                <a href="{{ route('admin.create') }}"
+                                    class="btn btn-primary btn-sm ms-2 justify-content-end">
                                     <i class="fas fa-plus me-1"></i> Add New
                                 </a>
 
@@ -44,11 +45,11 @@
                                         </tr>
                                     </thead>
 
-                                    @foreach ($user as $index => $y)
+                                    @foreach ($admin as $index => $y)
                                         <tbody>
 
                                             <tr class="text-sm">
-
+                                        
                                                 <td class="px-4">{{ $y->name }}</td>
                                                 <td class="px-4">{{ $y->email }}</td>
                                                 <td class="px-4">{{ $y->role }}</td>
@@ -61,7 +62,7 @@
                                                     <a href="{{ route('user.edit', $y->id) }}"
                                                         class= "btn btn bg-gradient-secondary" data-bs-toggle="tooltip">edit
                                                     </a>
-                                                    {{-- Tombol Hapus --}}
+                                                     {{-- Tombol Hapus --}}
                                                     <button type="button" class="btn btn bg-gradient-danger btn-block mb-3"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#Hapusdata{{ $y->id }}">Hapus</button>
@@ -71,7 +72,7 @@
 
                                         </tbody>
 
-                                        {{-- Modal Hapus --}}
+                                     {{-- Modal Hapus --}}
                                         <div class="col-md-4">
                                             <div class="modal fade" id="Hapusdata{{ $y->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
@@ -82,8 +83,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <div class="modal-header">
-                                                                <h6 class="modal-title" id="modal-title-notification">Hapus
-                                                                    Data</h6>
+                                                                <h6 class="modal-title" id="modal-title-notification">Hapus Data</h6>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
