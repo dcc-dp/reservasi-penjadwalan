@@ -13,4 +13,12 @@ class Reservasi extends Model
         'hari2',
         'jam2',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+    public function kursus()
+    {
+        return $this->belongsTo(Kursus::class, 'id_kursus');
+    }
 }

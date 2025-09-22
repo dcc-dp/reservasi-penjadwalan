@@ -11,6 +11,7 @@ class Pembayaran extends Model
         'metode_bayar',
         'total',
         'status',
+        
     ];
 
     public function reservasi()

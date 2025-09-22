@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-
     protected $fillable = [
         'name',
         'email',
@@ -52,6 +51,12 @@ class User extends Authenticatable
     public function ulasan()
     {
         return $this->hasMany(Ulasan::class, 'id_user');
+    }
+
+
+     public function instrukturProfile()
+    {
+        return $this->hasOne(Instruktur_Profile::class, 'user_id', 'id');
     }
 
 }

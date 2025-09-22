@@ -17,4 +17,8 @@ class Instruktur_Profile extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+     public function kursus()
+    {
+        return $this->hasMany(Kursus::class, 'instruktur_id', 'id');
+    }
 }
