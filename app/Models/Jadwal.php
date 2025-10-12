@@ -16,4 +16,15 @@ class Jadwal extends Model
         'pertemuan',
     ];
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+
+    public function kursus()
+    {
+        return $this->belongsTo(Kursus::class, 'id_kursus');
+    }
 }
