@@ -14,12 +14,6 @@
                 </div>
             @endif
 
-            <div class="mb-3">
-                <a href="{{ route('pembayaran.create') }}" class="btn btn-primary">
-                    Tambah Pembayaran
-                </a>
-            </div>
-
             <div class="card shadow">
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
@@ -40,24 +34,14 @@
                                 <td>{{ $pembayaran->reservasi->kode_reservasi ?? '-' }}</td>
                                 <td>{{ $pembayaran->metode_bayar }}</td>
                                 <td>Rp {{ number_format($pembayaran->total, 0, ',', '.') }}</td>
+                                <td>{{ ucfirst($pembayaran->status) }}</td>
                                 <td>
-                                    @php
-                                        $badge = [
-                                            'proses' => 'warning',
-                                            'selesai' => 'success',
-                                            'gagal' => 'danger',
-                                        ];
-                                    @endphp
-                                    <span class="badge badge-{{ $badge[$pembayaran->status] ?? 'secondary' }}">
-                                        {{ ucfirst($pembayaran->status) }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <a href="{{ route('pembayaran.edit', $pembayaran->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                     <form action="{{ route('pembayaran.destroy', $pembayaran->id) }}" method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Yakin hapus pembayaran ini?')" class="btn btn-sm btn-danger">Hapus</button>
+                                        <button type="submit" onclick="return confirm('Yakin hapus pembayaran ini?')" class="btn btn-sm btn-danger">
+                                            Hapus
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

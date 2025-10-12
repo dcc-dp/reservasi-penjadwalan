@@ -73,7 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('static-sign-up');
     })->name('sign-up');
 
-    Route::get('/logout', [SessionsController::class, 'destroy']);
+    Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
     Route::get('/user-profile', [InfoUserController::class, 'create']);
     Route::post('/user-profile', [InfoUserController::class, 'store']);
     Route::get('/login', function () {
@@ -171,6 +171,7 @@ Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
 //USER:LANDING PAGE
 Route::get('/landingPage', [LandingPageController::class, 'index'])->name('landingPage');
 Route::get('/about', [LandingPageController::class, 'about'])->name('about');
+Route::get('/benefit', [LandingPageController::class, 'benefit'])->name('benefit');
 
 
 Route::get('/login', function () {

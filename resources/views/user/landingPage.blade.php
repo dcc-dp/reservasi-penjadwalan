@@ -1,74 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.landingpage.landingPage')
 
-<head>
-    <meta charset="utf-8">
-    <title>Reservasi</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+@section('title', 'Beranda')
 
-    <!-- Favicon -->
-    <link href="{{ asset('assets/user/img/favicon.ico') }}" rel="icon">
+@section('content')
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Space+Grotesk&display=swap" rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="{{ asset('assets/user/lib/animate/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/user/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('assets/user/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="{{ asset('assets/user/css/style.css') }}" rel="stylesheet">
-</head>
 
 <body>
 
-    <!-- Navbar Start -->
-    <div class="container-fluid sticky-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light border-bottom border-2 border-white">
-                <a href="{{ route('landingPage') }}" class="navbar-brand">
-                    <h1>Belajar Program</h1>
-                </a>
-                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="{{ route('landingPage') }}" class="nav-item nav-link active">Beranda</a>
-                        <a href="{{ route('about') }}" class="nav-item nav-link">Tentang Kami</a>
-                        <a href="service.html" class="nav-item nav-link">Paket Kursus</a>
-                        <a href="project.html" class="nav-item nav-link"></a>
-                        {{-- <div class="nav-item dropdown">
-                            <a href="#!" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu bg-light mt-2">
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div> --}}
+    
 
-                    </div>
-                    <div class="ms-lg-3">
-                        <a href="login.html" class="btn btn-success fw-sm">Daftar/Masuk</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- Navbar End -->
+    {{-- Konten Halaman --}}
 
 
     <!-- Hero Start -->
@@ -680,4 +621,4 @@
     <script src="js/main.js"></script>
 </body>
 
-</html>
+@endsection
