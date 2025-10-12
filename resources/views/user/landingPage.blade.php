@@ -37,7 +37,7 @@
     <div class="container-fluid sticky-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light border-bottom border-2 border-white">
-                <a href="index.html" class="navbar-brand">
+                <a href="{{ route('landingPage') }}" class="navbar-brand">
                     <h1>Belajar Program</h1>
                 </a>
                 <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
@@ -46,8 +46,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Beranda</a>
-                        <a href="about.html" class="nav-item nav-link">Tentang Kami</a>
+                        <a href="{{ route('landingPage') }}" class="nav-item nav-link active">Beranda</a>
+                        <a href="{{ route('about') }}" class="nav-item nav-link">Tentang Kami</a>
                         <a href="service.html" class="nav-item nav-link">Paket Kursus</a>
                         <a href="project.html" class="nav-item nav-link"></a>
                         {{-- <div class="nav-item dropdown">
@@ -323,7 +323,8 @@
                             class="text-uppercase text-primary bg-light px-2">Pembelajaran</span></h1>
                     <p>Temukan kursus yang sesuai dengan levelmu, dari pemula hingga mahir. Setiap materi dirancang
                         oleh expert untuk membantumu memahami konsep coding dengan cepat dan jelas.</p>
-                    <p class="mb-5">Belajar kapan saja dan di mana saja. Dengan panduan step-by-step dan dukungan tim kami, kamu bisa belajar coding tanpa bingung.
+                    <p class="mb-5">Belajar kapan saja dan di mana saja. Dengan panduan step-by-step dan dukungan tim
+                        kami, kamu bisa belajar coding tanpa bingung.
                         Instruktur siap membantu 24/7, memastikan pengalaman belajarmu menyenangkan dan efektif.
                     </p>
                     <div class="d-flex align-items-center bg-light">
@@ -601,7 +602,7 @@
             <div class="row g-5">
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
                     <a href="index.html" class="d-inline-block mb-3">
-                        <h1 class="text-white">iSTUDIO</h1>
+                        <h1 class="text-white">Belajar Program</h1>
                     </a>
                     <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
                         amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
@@ -632,14 +633,6 @@
                     <a class="btn btn-link" href="#!">Privacy Policy</a>
                     <a class="btn btn-link" href="#!">Terms & Condition</a>
                     <a class="btn btn-link" href="#!">Career</a>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                    <h5 class="text-white mb-4">Our Services</h5>
-                    <a class="btn btn-link" href="#!">Interior Design</a>
-                    <a class="btn btn-link" href="#!">Project Planning</a>
-                    <a class="btn btn-link" href="#!">Renovation</a>
-                    <a class="btn btn-link" href="#!">Implement</a>
-                    <a class="btn btn-link" href="#!">Landscape Design</a>
                 </div>
             </div>
         </div>
