@@ -13,4 +13,9 @@ class LandingPageController extends Controller
       
         return view('user.landingPage');
     }
+    public function about()
+    {
+      
+        return view('user.about');
+    }
 }
