@@ -46,11 +46,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
-                        <a href="project.html" class="nav-item nav-link">Projects</a>
-                        <div class="nav-item dropdown">
+                        <a href="index.html" class="nav-item nav-link active">Beranda</a>
+                        <a href="about.html" class="nav-item nav-link">Tentang Kami</a>
+                        <a href="service.html" class="nav-item nav-link">Paket Kursus</a>
+                        <a href="project.html" class="nav-item nav-link"></a>
+                        {{-- <div class="nav-item dropdown">
                             <a href="#!" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu bg-light mt-2">
                                 <a href="feature.html" class="dropdown-item">Features</a>
@@ -58,7 +58,7 @@
                                 <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                                 <a href="404.html" class="dropdown-item">404 Page</a>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                     <div class="ms-lg-3">
@@ -103,7 +103,7 @@
                         <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
                             <i class="fa fa-robot text-primary"></i>
                         </div>
-                        <h5 class="lh-base mb-0">Algoritma Pemrograman</h5>
+                        <h5 class="lh-base mb-0">Web Fundamental</h5>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -111,7 +111,7 @@
                         <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
                             <i class="fa fa-robot text-primary"></i>
                         </div>
-                        <h5 class="lh-base mb-0">Algoritma Pemrograman</h5>
+                        <h5 class="lh-base mb-0">Framework</h5>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -119,7 +119,7 @@
                         <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
                             <i class="fa fa-robot text-primary"></i>
                         </div>
-                        <h5 class="lh-base mb-0">Algoritma Pemrograman</h5>
+                        <h5 class="lh-base mb-0">Database</h5>
                     </div>
                 </div>
             </div>
@@ -135,10 +135,10 @@
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-6 wow fadeIn" data-wow-delay="0.1s">
-                            <img class="img-fluid" src="{{ asset('assets/user/img/about-1.jpg') }}" alt="">
+                            <img class="img-fluid" src="{{ asset('assets/user/img/image2.png') }}" alt="">
                         </div>
                         <div class="col-6 wow fadeIn" data-wow-delay="0.3s">
-                            <img class="img-fluid h-75" src="{{ asset('assets/user/img/about-2.jpg') }}"
+                            <img class="img-fluid h-75" src="{{ asset('assets/user/img/image.png') }}"
                                 alt="">
                             <div class="h-25 d-flex align-items-center text-center bg-primary px-4">
                                 <h4 class="text-white lh-base mb-0">Award Winning Studio Since 1990</h4>
