@@ -11,10 +11,13 @@ use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\KursusController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\InstrukturProfileController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\User\LandingPageController;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -110,7 +113,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //paket
     Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
-    Route::get('/create', [PaketController::class, 'create'])->name('paket.create');
+    Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
     Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
     Route::post('/edit', [PaketController::class, 'store'])->name('paket.store');
     Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
@@ -152,8 +155,22 @@ Route::get('/pembayaran/edit/{id}', [PembayaranController::class, 'edit'])->name
 Route::put('/pembayaran/edit/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
 Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
 
+// Jadwal
+
+Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+Route::get('/jadwal/create', [JadwalController::class, 'create'])->name('jadwal.create');
+Route::post('/jadwal', [JadwalController::class, 'store'])->name('jadwal.store');
+Route::get('/jadwal/{id}/edit', [JadwalController::class, 'edit'])->name('jadwal.edit');
+Route::put('/jadwal/{id}', [JadwalController::class, 'update'])->name('jadwal.update');
+Route::delete('/jadwal/{id}', [JadwalController::class, 'destroy'])->name('jadwal.destroy');
+
 // ulasan
 Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
+
+
+//USER:LANDING PAGE
+Route::get('/landingPage', [LandingPageController::class, 'index'])->name('landingPage');
+
 
 Route::get('/login', function () {
     return view('session/login-session');
