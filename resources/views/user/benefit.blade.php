@@ -3,92 +3,91 @@
 @section('title', 'Benefit')
 
 @section('content')
-<div class="container-fluid pb-0 hero-header bg-light mb-3">
-    <div class="container">
-        <div class="row g-5 align-items-center mb-2">
+<div class="container-fluid bg-light py-5">
+    <div class="container text-center">
+        <span class="border border-warning rounded-pill px-3 py-1 text-warning fw-semibold">
+            Kenapa Memilih Kami?
+        </span>
+        <h1 class="fw-bold mt-3 mb-4">Benefit Belajar Bersama Kami</h1>
+        <p class="text-muted mb-5">
+            Dapatkan pengalaman belajar terbaik dengan berbagai keuntungan yang kami tawarkan. 
+            Program kami dirancang agar kamu bisa menguasai skill pemrograman secara praktis dan menyenangkan.
+        </p>
 
-            <!-- Teks -->
-            <div class="col-lg-7 mb-2">
-                <span class="border border-success rounded-pill px-3 py-1 text-success fw-semibold">
-                    Keuntungan Bergabung
-                </span>
-
-                <h1 class="fw-bold mt-3">
-                    Mengapa Harus <br> Belajar Bersama Kami?
-                </h1>
-
-                <p class="mt-3">
-                    Kami tidak hanya mengajarkan <strong>kode</strong>, tetapi juga <strong>cara berpikir sebagai programmer</strong>.
-                    Dengan metode pembelajaran interaktif dan dukungan mentor berpengalaman, kamu bisa berkembang lebih cepat!
-                </p>
-
-                <ul class="list-unstyled mt-3">
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Belajar langsung dari praktisi berpengalaman</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Materi pembelajaran berbasis proyek nyata</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Konsultasi dan mentoring gratis seumur hidup</li>
-                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Sertifikat resmi setelah menyelesaikan kursus</li>
-                </ul>
-
-                <a href="#" class="btn btn-success fw-semibold rounded-pill px-4 mt-3">
-                    Daftar Sekarang →
-                </a>
-            </div>
-
-            <!-- Gambar -->
-            <div class="col-lg-5 text-center">
-                <div class="position-relative d-inline-block">
-                    <img src="{{ asset('assets/img/benefit.png') }}" class="img-fluid rounded-4 border-0 w-75"
-                        alt="Benefit Belajar">
-
-                    <div class="position-absolute top-0 start-0 bg-white px-2 py-1 rounded-3 text-start small shadow-sm">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <strong>Top Rated</strong><br>
-                        98% siswa puas dengan hasil belajar
-                    </div>
-
-                    <div class="position-absolute bottom-0 end-0 bg-white p-2 rounded-3 text-start small shadow-sm">
-                        <i class="bi bi-award text-primary"></i>
-                        <strong>Sertifikasi</strong><br>
-                        Diakui oleh industri teknologi
-                    </div>
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <img src="{{ asset('assets/img/young-analysts.jpg') }}" class="mx-auto mb-3" width="80" alt="Mentor Berpengalaman">
+                    <h5 class="fw-bold mb-2">Mentor Berpengalaman</h5>
+                    <p class="text-muted">
+                        Belajar langsung dari mentor profesional yang sudah berpengalaman di industri teknologi.
+                    </p>
                 </div>
             </div>
 
+            <!-- Card 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <img src="{{ asset('assets/img/close-up-still-life-hard-exams.jpg') }}" class="mx-auto mb-3" width="80" alt="Materi Terstruktur">
+                    <h5 class="fw-bold mb-2">Materi Terstruktur</h5>
+                    <p class="text-muted">
+                        Materi disusun dari dasar hingga mahir, lengkap dengan proyek nyata agar mudah dipahami.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <img src="{{ asset('assets/img/young-asian-woman-smile-with-clock-isolated-gray-background.jpg') }}" class="mx-auto mb-3" width="80" alt="Waktu Fleksibel">
+                    <h5 class="fw-bold mb-2">Waktu Fleksibel</h5>
+                    <p class="text-muted">
+                        Belajar kapan saja dan di mana saja dengan sistem online yang fleksibel.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <img src="{{ asset('assets/img/young-asian-woman-smile-with-clock-isolated-gray-background.jpg') }}" class="mx-auto mb-3" width="80" alt="Sertifikat Resmi">
+                    <h5 class="fw-bold mb-2">Sertifikat Resmi</h5>
+                    <p class="text-muted">
+                        Dapatkan sertifikat resmi setelah menyelesaikan kursus sebagai bukti kemampuanmu.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <img src="{{ asset('assets/img/young-asian-woman-smile-with-clock-isolated-gray-background.jpg') }}" class="mx-auto mb-3" width="80" alt="Komunitas Belajar">
+                    <h5 class="fw-bold mb-2">Komunitas Belajar</h5>
+                    <p class="text-muted">
+                        Gabung ke komunitas programmer dan saling berbagi pengalaman serta project.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <img src="{{ asset('assets/img/young-asian-woman-smile-with-clock-isolated-gray-background.jpg') }}" class="mx-auto mb-3" width="80" alt="Dukungan Penuh">
+                    <h5 class="fw-bold mb-2">Dukungan Penuh</h5>
+                    <p class="text-muted">
+                        Tim support kami siap membantu jika kamu mengalami kendala selama proses belajar.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Section tambahan: highlight 3 benefit utama -->
-<div class="container py-5">
-    <div class="text-center mb-5">
-        <h2 class="fw-bold">Benefit Utama Kami</h2>
-        <p class="text-muted">Kami berkomitmen memberikan pengalaman belajar terbaik bagi setiap peserta.</p>
-    </div>
-
-    <div class="row g-4">
-        <div class="col-lg-4 col-md-6">
-            <div class="card border-0 shadow-sm h-100 text-center p-4">
-                <div class="text-success fs-1 mb-3"><i class="bi bi-laptop"></i></div>
-                <h5 class="fw-bold">Belajar Online & Offline</h5>
-                <p>Fleksibilitas penuh — kamu bisa belajar di mana saja, kapan saja sesuai waktu kamu sendiri.</p>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="card border-0 shadow-sm h-100 text-center p-4">
-                <div class="text-primary fs-1 mb-3"><i class="bi bi-people"></i></div>
-                <h5 class="fw-bold">Mentor Berpengalaman</h5>
-                <p>Dapatkan bimbingan langsung dari pengajar profesional yang sudah terjun di dunia kerja nyata.</p>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="card border-0 shadow-sm h-100 text-center p-4">
-                <div class="text-warning fs-1 mb-3"><i class="bi bi-trophy"></i></div>
-                <h5 class="fw-bold">Portofolio & Sertifikat</h5>
-                <p>Bangun portofolio proyek nyata dan dapatkan sertifikat yang bisa meningkatkan kariermu.</p>
-            </div>
-        </div>
-    </div>
+<!-- CTA -->
+<div class="container text-center py-5">
+    <h2 class="fw-bold mb-3">Siap Mulai Perjalanan Belajarmu?</h2>
+    <p class="text-muted mb-4">Gabung sekarang dan rasakan pengalaman belajar yang menyenangkan dan bermanfaat!</p>
+    <a href="#" class="btn btn-warning fw-semibold rounded-pill px-4 py-2">Daftar Sekarang</a>
 </div>
 @endsection

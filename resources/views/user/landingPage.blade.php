@@ -12,7 +12,7 @@
     {{-- Konten Halaman --}}
 
 
-    <!-- Hero Start -->
+     <!-- Hero Start -->
     <div class="container-fluid pb-5 hero-header bg-light mb-5">
         <div class="container py-5">
             <div class="row g-5 align-items-center mb-5">
