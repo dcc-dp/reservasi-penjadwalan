@@ -1,75 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.landingpage.landingPage')
 
-<head>
-    <meta charset="utf-8">
-    <title>Reservasi</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+@section('title', 'Beranda')
 
-    <!-- Favicon -->
-    <link href="{{ asset('assets/user/img/favicon.ico') }}" rel="icon">
+@section('content')
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Space+Grotesk&display=swap" rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="{{ asset('assets/user/lib/animate/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/user/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('assets/user/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="{{ asset('assets/user/css/style.css') }}" rel="stylesheet">
-</head>
 
 <body>
 
-    <!-- Navbar Start -->
-    <div class="container-fluid sticky-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light border-bottom border-2 border-white">
-                <a href="index.html" class="navbar-brand">
-                    <h1>Belajar Program</h1>
-                </a>
-                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="index.html" class="nav-item nav-link">Benefit</a>
-                        <a href="about.html" class="nav-item nav-link">Tentang Kami</a>
-                        <a href="service.html" class="nav-item nav-link">Paket Kursus</a>
-                        <a href="project.html" class="nav-item nav-link"></a>
-                        {{-- <div class="nav-item dropdown">
-                            <a href="#!" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu bg-light mt-2">
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div> --}}
+    
 
-                    </div>
-                    <div class="ms-lg-3">
-                        <a href="login.html" class="btn btn-success fw-sm">Daftar/Masuk</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- Navbar End -->
+    {{-- Konten Halaman --}}
 
 
     <!-- Hero Start -->
@@ -324,7 +264,8 @@
                             class="text-uppercase text-primary bg-light px-2">Pembelajaran</span></h1>
                     <p>Temukan kursus yang sesuai dengan levelmu, dari pemula hingga mahir. Setiap materi dirancang
                         oleh expert untuk membantumu memahami konsep coding dengan cepat dan jelas.</p>
-                    <p class="mb-5">Belajar kapan saja dan di mana saja. Dengan panduan step-by-step dan dukungan tim kami, kamu bisa belajar coding tanpa bingung.
+                    <p class="mb-5">Belajar kapan saja dan di mana saja. Dengan panduan step-by-step dan dukungan tim
+                        kami, kamu bisa belajar coding tanpa bingung.
                         Instruktur siap membantu 24/7, memastikan pengalaman belajarmu menyenangkan dan efektif.
                     </p>
                     <div class="d-flex align-items-center bg-light">
@@ -602,7 +543,7 @@
             <div class="row g-5">
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
                     <a href="index.html" class="d-inline-block mb-3">
-                        <h1 class="text-white">iSTUDIO</h1>
+                        <h1 class="text-white">Belajar Program</h1>
                     </a>
                     <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
                         amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
@@ -633,14 +574,6 @@
                     <a class="btn btn-link" href="#!">Privacy Policy</a>
                     <a class="btn btn-link" href="#!">Terms & Condition</a>
                     <a class="btn btn-link" href="#!">Career</a>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                    <h5 class="text-white mb-4">Our Services</h5>
-                    <a class="btn btn-link" href="#!">Interior Design</a>
-                    <a class="btn btn-link" href="#!">Project Planning</a>
-                    <a class="btn btn-link" href="#!">Renovation</a>
-                    <a class="btn btn-link" href="#!">Implement</a>
-                    <a class="btn btn-link" href="#!">Landscape Design</a>
                 </div>
             </div>
         </div>
@@ -688,4 +621,4 @@
     <script src="js/main.js"></script>
 </body>
 
-</html>
+@endsection
