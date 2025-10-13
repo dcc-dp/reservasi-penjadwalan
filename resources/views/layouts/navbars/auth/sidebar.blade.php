@@ -438,18 +438,19 @@
       </li> --}}
       <form method="POST" action="{{ route('logout') }}" class="m-0 p-0">
     @csrf
-    <button type="submit" class="nav-link btn w-100 text-start text-white border-0 bg-transparent">
-      <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-        <svg width="12px" height="12px" viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg">
-          <title>logout</title>
-          <g fill="none" fill-rule="evenodd">
-            <path class="color-background opacity-6" d="M29 0H4C1.79 0 0 1.79 0 4v34c0 2.21 1.79 4 4 4h25c2.21 0 4-1.79 4-4V27h-4v11H4V4h25v11h4V4c0-2.21-1.79-4-4-4z" fill="#FFFFFF"/>
-            <path class="color-background" d="M33 14l-2.83 2.83L35.34 22H16v4h19.34l-5.17 5.17L33 34l9-9z" fill="#FFFFFF"/>
-          </g>
-        </svg>
-      </div>
-      <span class="nav-link-text ms-1">Logout</span>
-    </button>
+    <button type="submit" class="nav-link btn w-100 text-start text-dark border-0 bg-transparent">
+  <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+    <svg width="12px" height="12px" viewBox="0 0 46 42" xmlns="http://www.w3.org/2000/svg">
+      <title>logout</title>
+      <g fill="none" fill-rule="evenodd">
+        <path class="color-background opacity-6" d="M29 0H4C1.79 0 0 1.79 0 4v34c0 2.21 1.79 4 4 4h25c2.21 0 4-1.79 4-4V27h-4v11H4V4h25v11h4V4c0-2.21-1.79-4-4-4z" fill="#000000"/>
+        <path class="color-background" d="M33 14l-2.83 2.83L35.34 22H16v4h19.34l-5.17 5.17L33 34l9-9z" fill="#000000"/>
+      </g>
+    </svg>
+  </div>
+  <span class="nav-link-text ms-1">Logout</span>
+</button>
+
   </form>
       <li class="nav-link mb-0">
         <a href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-laravel" class="btn btn-primary btn-md active px-5 text-white" target="_blank" role="button" aria-pressed="true">
