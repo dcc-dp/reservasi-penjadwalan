@@ -172,6 +172,7 @@ Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
 Route::get('/landingPage', [LandingPageController::class, 'index'])->name('landingPage');
 Route::get('/about', [LandingPageController::class, 'about'])->name('about');
 Route::get('/benefit', [LandingPageController::class, 'benefit'])->name('benefit');
+Route::get('/pakets', [LandingPageController::class, 'pakets'])->name('pakets');
 
 
 Route::get('/login', function () {
