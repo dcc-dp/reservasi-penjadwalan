@@ -57,7 +57,7 @@
     </div>
 
     {{-- Konten Halaman --}}
-  <main class="container my-4">
+  <main>
     @yield('content')
   </main>
 
