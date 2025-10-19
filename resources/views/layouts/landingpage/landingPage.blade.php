@@ -46,7 +46,7 @@
                         <a href="{{ route('landingPage') }}" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Beranda</a>
                         <a href="{{ route('about') }}" class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">Tentang Kami</a>
                         <a href="{{ route('benefit') }}" class="nav-item nav-link {{ Request::is('benefit') ? 'active' : '' }}">Benefit</a>
-                        <a href="{{ url('/paket') }}" class="nav-item nav-link">Paket Kursus</a>
+                        <a href="{{ route('pakets')}}" class="nav-item nav-link {{ Request::is('pakets') ? 'active' : '' }}">Paket Kursus</a>
                     </div>
                     <div class="ms-lg-3">
                         <a href="{{ url('/login') }}" class="btn btn-success fw-sm">Daftar/Masuk</a>
