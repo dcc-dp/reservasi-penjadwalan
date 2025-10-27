@@ -4,81 +4,104 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reservasi;
+use App\Models\Kursus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservasiController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar semua reservasi (khusus admin)
      */
     public function index()
-    {
-        $reserv = Reservasi::all();
-        return view('admin.reservasi.index',compact('reserv'));
-    }
+{
+    $reserv = Reservasi::with(['user', 'kursus'])->get();
+    return view('admin.reservasi.index', compact('reserv'));
+}
+
+public function create()
+{
+    $kursusList = Kursus::all();
+    return view('admin.reservasi.create', compact('kursusList'));
+}
+
+
+
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Simpan data reservasi baru
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit(string $id)
-    // {
-    //     $reserv = Reservasi::findOrFail($id);
-    //     return view('admin.reservasi.edit', compact('reserv'));
-    // }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
         $request->validate([
-            'hari1' => 'required',
-            'jam1' => 'required',
-            'hari2' => 'required',
-            'jam2' => 'required',
+            'id_kursus' => 'required|exists:kursuses,id',
+            'hari1' => 'required|string|max:50',
+            'jam1' => 'required|string|max:50',
+            'hari2' => 'nullable|string|max:50',
+            'jam2' => 'nullable|string|max:50',
         ]);
-        $reserv = Reservasi::findorfail($id);
-        $reserv->update([
+
+        Reservasi::create([
+            'id_user' => Auth::id(),
+            'id_kursus' => $request->id_kursus,
             'hari1' => $request->hari1,
-            'hari1' => $request->hari1,
+            'jam1' => $request->jam1,
             'hari2' => $request->hari2,
             'jam2' => $request->jam2,
         ]);
-        return redirect()->route('reservasi');
+
+        return redirect()->back()->with('success', 'Reservasi berhasil dibuat!');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Tampilkan detail reservasi
      */
-    public function destroy(string $id)
+    public function show($id)
+    {
+        $reserv = Reservasi::with(['user', 'kursus'])->findOrFail($id);
+        return view('admin.reservasi.show', compact('reserv'));
+    }
+
+    /**
+     * Form edit reservasi
+     */
+    public function edit($id)
+    {
+        $reserv = Reservasi::findOrFail($id);
+        return view('admin.reservasi.edit', compact('reserv'));
+    }
+
+    /**
+     * Update data reservasi
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'hari1' => 'required|string|max:50',
+            'jam1' => 'required|string|max:50',
+            'hari2' => 'nullable|string|max:50',
+            'jam2' => 'nullable|string|max:50',
+        ]);
+
+        $reserv = Reservasi::findOrFail($id);
+        $reserv->update([
+            'hari1' => $request->hari1,
+            'jam1' => $request->jam1,
+            'hari2' => $request->hari2,
+            'jam2' => $request->jam2,
+        ]);
+
+        return redirect()->route('reservasi.index')->with('success', 'Data reservasi berhasil diperbarui!');
+    }
+
+    /**
+     * Hapus data reservasi
+     */
+    public function destroy($id)
     {
         $reserv = Reservasi::findOrFail($id);
         $reserv->delete();
 
-        return redirect()->route('reservasi');
+        return redirect()->route('reservasi.index')->with('success', 'Reservasi berhasil dihapus!');
     }
 }

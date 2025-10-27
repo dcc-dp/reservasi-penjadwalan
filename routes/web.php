@@ -89,8 +89,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
     Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi');
-    // Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
-    // Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
+    Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
+    Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
     // route::get('/reservasi/edit{id}', [ReservasiController::class, 'edit'])->name('reservasi.edit');
     // route::put('/reservasi/update{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
     Route::delete('/reservasi/{id}', [ReservasiController::class, 'destroy'])->name('reservasi.destroy');
