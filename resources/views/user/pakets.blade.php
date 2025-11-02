@@ -85,7 +85,7 @@
                         <li><i class="bi bi-check-circle text-success me-2"></i>Sertifikat Kelulusan</li>
                     </ul>
                     <a href="#!" class="btn btn-gradient fw-semibold rounded-pill px-4 py-2">
-                        Daftar Sekarang
+                        Daftar Sekarang 
                     </a>
                 </div>
             </div>
@@ -134,9 +134,22 @@
                         Daftar Sekarang
                     </a>
                 </div>
-            </div> 
+            </div>
 
+        <!-- Tombol Daftar -->
+        <div class="text-center mt-5">
+            <a href="{{ route('reservasi.create') }}" class="btn btn-daftar fw-semibold rounded-pill px-5 py-3 shadow-lg fs-5">
+                🚀 Daftar Sekarang
+            </a>
+            <p class="mt-3 text-muted small">
+                Jangan lewatkan promo & tempat terbatas — daftar hari ini untuk mulai perjalanan suksesmu!
+            </p>
         </div>
+
+        <!-- Tombol Daftar Satu Saja -->
+        <div class="text-center mt-5">
+            <a href="{{ route('reservasi.create') }}" class="btn btn-modern">Daftar Sekarang</a>
+        </div>=
     </div>
 </div>
 @endsection

@@ -24,6 +24,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   @if (env('IS_DEMO'))
       <x-demo-metas></x-demo-metas>
@@ -78,6 +79,30 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if(session('success'))
+<script>
+Swal.fire({
+  title: 'Berhasil!',
+  text: "{{ session('success') }}",
+  icon: 'success',
+  confirmButtonText: 'OK'
+});
+</script>
+@endif
+
+@if(session('error'))
+<script>
+Swal.fire({
+  title: 'Oops...',
+  text: "{{ session('error') }}",
+  icon: 'error',
+  confirmButtonText: 'Coba Lagi'
+});
+</script>
+@endif
+
   <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
