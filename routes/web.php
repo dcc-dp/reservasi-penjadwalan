@@ -12,11 +12,13 @@ use App\Http\Controllers\KursusController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\InstrukturProfileController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\User\LandingPageController;
+use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -124,7 +126,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('profile-instruktur', InstrukturProfileController::class);
 });
 
-
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'store']);
@@ -135,6 +136,12 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
     Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 });
+
+
+//LOGIN USER
+Route::get('/User',[UserLoginController::class,'index'])->name('loginUser');
+Route::post('/User/store', [UserLoginController::class, 'store'])->name('loginUser.store');
+
 
 // Kursus
 Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
