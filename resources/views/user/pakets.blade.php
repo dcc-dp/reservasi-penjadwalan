@@ -3,82 +3,138 @@
 @section('title', 'Paket Kursus')
 
 @section('content')
-<div class="container-fluid pb-0 hero-header bg-light mb-3">
-    <div class="container">
+<style>
+    .course-card {
+        border: none;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .course-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .course-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 32px;
+        color: white;
+    }
+
+    .price-old {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 14px;
+    }
+
+    .price-new {
+        font-size: 28px;
+        font-weight: bold;
+        color: #222;
+    }
+
+    .btn-gradient {
+        background: linear-gradient(90deg, #0072ff, #00c6ff);
+        border: none;
+        color: #fff;
+        transition: all 0.3s;
+    }
+
+    .btn-gradient:hover {
+        opacity: 0.9;
+        transform: scale(1.03);
+    }
+</style>
+
+<div class="container-fluid pb-0 hero-header bg-light mb-5">
+    <div class="container py-5">
         <div class="text-center mb-5">
             <span class="border border-info rounded-pill px-3 py-1 text-info fw-semibold">
-                Paket Belajar
+                Belajar Coding Seru 🚀
             </span>
-            <h1 class="fw-bold mt-3">Pilih Program Belajar Terbaik</h1>
-            <p class="text-muted">Tentukan jalur suksesmu bersama Belajar Program 🚀</p>
+            <h1 class="fw-bold mt-3">Upgrade Skill Coding-mu Sekarang!</h1>
+            <p class="text-muted">Mulai dari dasar logika pemrograman hingga membuat aplikasi profesional.</p>
         </div>
 
         <div class="row g-4 justify-content-center">
 
-            <!-- Paket 1 -->
+            {{-- Paket 1: Algoritma --}}
             <div class="col-lg-4 col-md-6">
-                <div class="card shadow-lg border-0 rounded-4 h-100 text-center position-relative">
-                    <div class="position-absolute top-0 start-50 translate-middle mt-3">
-                        <span class="badge bg-secondary text-white px-3 py-2 rounded-pill">Kuota Terbatas</span>
+                <div class="card course-card text-center p-4 h-100">
+                    <div class="course-icon" style="background: linear-gradient(135deg, #0072ff, #00c6ff);">
+                        <i class="bi bi-cpu"></i>
                     </div>
-                    <div class="card-body p-4 mt-4">
-                        <h5 class="fw-bold text-primary mb-2">Bimbel Intensif SNBT 2026</h5>
-                        <p class="text-decoration-line-through text-muted mb-1">Rp 7.100.000</p>
-                        <h3 class="fw-bold text-dark mb-3">Rp 5.000.000</h3>
-                        <p class="small text-muted mb-4">Belajar intensif 30 hari tanpa menginap, siap hadapi ujian SNBT!</p>
-                        <a href="#!" class="btn btn-info fw-semibold rounded-pill px-4 py-2">Daftar Sekarang</a>
-                    </div>
+                    <h5 class="fw-bold text-primary mb-2">Algoritma & Logika Pemrograman</h5>
+                    <p class="price-old">Rp 1.500.000</p>
+                    <p class="price-new">Rp 900.000</p>
+                    <p class="text-muted small mb-4">
+                        Pelajari dasar berpikir logis dan algoritmik menggunakan bahasa Python & C++.
+                    </p>
+                    <ul class="list-unstyled small text-start d-inline-block mb-4">
+                        <li><i class="bi bi-check-circle text-success me-2"></i>40+ Video Interaktif</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Latihan Soal & Quiz</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Sertifikat Kelulusan</li>
+                    </ul>
+                    <a href="#!" class="btn btn-gradient fw-semibold rounded-pill px-4 py-2">
+                        Daftar Sekarang
+                    </a>
                 </div>
             </div>
 
-            <!-- Paket 2 -->
+            {{-- Paket 2: Website --}}
             <div class="col-lg-4 col-md-6">
-                <div class="card shadow-lg border-0 rounded-4 h-100 text-center position-relative" style="border-top: 5px solid gold;">
-                    <div class="position-absolute top-0 start-50 translate-middle mt-3">
-                        <span class="badge bg-danger text-white px-3 py-2 rounded-pill">Paling Populer</span>
+                <div class="card course-card text-center p-4 h-100 border-top border-warning border-4">
+                    <div class="course-icon" style="background: linear-gradient(135deg, #ffb347, #ffcc33);">
+                        <i class="bi bi-globe2"></i>
                     </div>
-                    <div class="card-body p-4 mt-4">
-                        <h5 class="fw-bold text-primary mb-2">Supercamp Karantina</h5>
-                        <p class="text-decoration-line-through text-muted mb-1">Rp 52.663.000</p>
-                        <h3 class="fw-bold text-dark mb-3">Rp 40.510.000</h3>
-                        <p class="small text-muted mb-4">
-                            Menginap 30 hari di apartemen premium, sistem belajar super intensif.
-                        </p>
-                        <ul class="list-unstyled small text-start d-inline-block mb-3">
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Garansi Lolos PTN</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Garansi Uang Kembali</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Gratis Belajar Ulang</li>
-                        </ul>
-                        <a href="#!" class="btn btn-warning fw-semibold rounded-pill px-4 py-2 text-white">Daftar Sekarang</a>
-                    </div>
+                    <h5 class="fw-bold text-primary mb-2">Fullstack Web Development</h5>
+                    <p class="price-old">Rp 3.000.000</p>
+                    <p class="price-new">Rp 2.100.000</p>
+                    <p class="text-muted small mb-4">
+                        Bangun website dari nol hingga online dengan HTML, CSS, JavaScript, dan PHP.
+                    </p>
+                    <ul class="list-unstyled small text-start d-inline-block mb-4">
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Proyek Nyata</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Domain & Hosting Gratis</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Garansi Belajar Sampai Bisa</li>
+                    </ul>
+                    <a href="#!" class="btn btn-gradient fw-semibold rounded-pill px-4 py-2" style="background: linear-gradient(90deg,#ffb347,#ffcc33);">
+                        Daftar Sekarang
+                    </a>
                 </div>
             </div>
 
-            <!-- Paket 3 -->
+            {{-- Paket 3: Framework --}}
             <div class="col-lg-4 col-md-6">
-                <div class="card shadow-lg border-0 rounded-4 h-100 text-center position-relative">
-                    <div class="position-absolute top-0 start-50 translate-middle mt-3">
-                        <span class="badge bg-danger text-white px-3 py-2 rounded-pill">Diskon Spesial</span>
+                <div class="card course-card text-center p-4 h-100">
+                    <div class="course-icon" style="background: linear-gradient(135deg, #ff416c, #ff4b2b);">
+                        <i class="bi bi-code-slash"></i>
                     </div>
-                    <div class="card-body p-4 mt-4">
-                        <h5 class="fw-bold text-primary mb-2">Privat SNBT 2026</h5>
-                        <p class="text-decoration-line-through text-muted mb-1">Rp 60.754.000</p>
-                        <h3 class="fw-bold text-dark mb-3">Rp 41.675.000</h3>
-                        <p class="small text-muted mb-4">
-                            Program 1 guru 1 siswa, guru datang ke rumah siswa.
-                        </p>
-                        <ul class="list-unstyled small text-start d-inline-block mb-3">
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Garansi Lolos PTN</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Garansi Guru Sampai Cocok</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Garansi Uang Kembali</li>
-                        </ul>
-                        <a href="#!" class="btn fw-semibold rounded-pill px-4 py-2 text-white"
-                            style="background: linear-gradient(90deg, #ff4b2b, #ff416c);">
-                            Daftar Sekarang
-                        </a>
-                    </div>
+                    <h5 class="fw-bold text-primary mb-2">Framework Mastery (Laravel & React)</h5>
+                    <p class="price-old">Rp 4.200.000</p>
+                    <p class="price-new">Rp 3.000.000</p>
+                    <p class="text-muted small mb-4">
+                        Kuasai framework modern Laravel & React.js untuk membangun aplikasi profesional.
+                    </p>
+                    <ul class="list-unstyled small text-start d-inline-block mb-4">
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Mentoring Langsung</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Proyek Akhir Portofolio</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Sertifikat Profesional</li>
+                    </ul>
+                    <a href="#!" class="btn btn-gradient fw-semibold rounded-pill px-4 py-2" style="background: linear-gradient(90deg, #ff416c, #ff4b2b);">
+                        Daftar Sekarang
+                    </a>
                 </div>
-            </div>
+            </div> 
 
         </div>
     </div>

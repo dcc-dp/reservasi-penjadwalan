@@ -12,7 +12,7 @@
     {{-- Konten Halaman --}}
 
 
-    <!-- Hero Start -->
+     <!-- Hero Start -->
     <div class="container-fluid pb-5 hero-header bg-light mb-5">
         <div class="container py-5">
             <div class="row g-5 align-items-center mb-5">
@@ -123,7 +123,7 @@
 
 
     <!-- Feature Start -->
-    {{-- <div class="container-fluid py-5">
+    <div class="container-fluid py-5">
         <div class="container">
             <div class="text-center wow fadeIn" data-wow-delay="0.1s">
                 <h1 class="mb-5">Why People <span class="text-uppercase text-primary bg-light px-2">Choose Us</span>
@@ -168,7 +168,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- Feature End -->
 
 
