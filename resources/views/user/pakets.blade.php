@@ -39,6 +39,81 @@
 
 <div class="container-fluid pb-0 hero-header bg-light mb-5">
     <div class="container">
+    
+    /* === Modern Card Styling === */
+    .pricing-card {
+        border: none;
+        border-radius: 1.5rem;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+    }
+
+    .pricing-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    }
+
+    .pricing-badge {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.85rem;
+        font-weight: 600;
+        border-radius: 50px;
+        padding: 6px 14px;
+        letter-spacing: 0.3px;
+    }
+
+    .card-price {
+        font-size: 1.8rem;
+        color: #111;
+    }
+
+    .old-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 0.9rem;
+    }
+
+    .btn-modern {
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        padding: 12px 36px;
+        transition: all 0.3s ease;
+        background: linear-gradient(90deg, #0066ff, #00ccff);
+        color: white;
+    }
+
+    .btn-modern:hover {
+        transform: scale(1.05);
+        background: linear-gradient(90deg, #0055dd, #00bbee);
+    }
+
+    .popular-card {
+        border-top: 6px solid gold;
+    }
+
+    .feature-list li {
+        margin-bottom: 6px;
+    }
+
+    /* Responsive header */
+    .hero-header h1 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+    }
+
+    .hero-header p {
+        font-size: clamp(1rem, 2vw, 1.1rem);
+    }
+
+</style>
+
+<div class="container-fluid pb-0 hero-header bg-light mb-5">
+    <div class="container py-5">
         <div class="text-center mb-5">
             <span class="border border-info rounded-pill px-3 py-1 text-info fw-semibold">
                 Paket Belajar
@@ -121,6 +196,10 @@
             </p>
         </div>
 
+        <!-- Tombol Daftar Satu Saja -->
+        <div class="text-center mt-5">
+            <a href="{{ route('reservasi.create') }}" class="btn btn-modern">Daftar Sekarang</a>
+        </div>=
     </div>
 </div>
 @endsection

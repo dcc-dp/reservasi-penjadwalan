@@ -26,7 +26,14 @@ public function create()
 }
 
 
-
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $kursusList = Reservasi::all();
+        return view('admin.reservasi.create',compact('kursusList'));
+    }
 
     /**
      * Simpan data reservasi baru
@@ -49,6 +56,7 @@ public function create()
             'hari2' => $request->hari2,
             'jam2' => $request->jam2,
         ]);
+
 
         return redirect()->back()->with('success', 'Reservasi berhasil dibuat!');
     }
