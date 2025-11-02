@@ -29,5 +29,11 @@ class Kursus extends Model
     }
     
 
+    public function reservasi()
+    {
+        return $this->hasMany(Reservasi::class, 'id_kursus');
+    }
+
+
 
 }

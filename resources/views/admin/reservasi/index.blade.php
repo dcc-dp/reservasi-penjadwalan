@@ -30,14 +30,12 @@
                                     <tbody>
                                         @foreach ($reserv as $item)
                                             <tr class="text-sm">
-                                                <td class="ps-3">{{ $item->user->name }}</td>
-                                                <td>{{ $item->kursus->name }}</td>
-                                                <td>{{ Carbon\Carbon::parse($item->hari1)->format('l, d-m-Y') }}</td>
-                                                <td>{{ Carbon\Carbon::parse($item->hari2)->format('l, d-m-Y') }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($item->jam1)->format('H:i') }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($item->jam2)->format('H:i') }}</td>
-
-
+                                                <td>{{ $item->user->name ?? '-' }}</td>
+                                                <td>{{ $item->kursus->name ?? '-' }}</td>
+                                                <td>{{ $item->hari1 }}</td>
+                                                <td>{{ $item->jam1 }}</td>
+                                                <td>{{ $item->hari2 ?? '-' }}</td>
+                                                <td>{{ $item->jam2 ?? '-' }}</td>
                                                 <td class="text-center">
                                                     {{-- <a href="{{ route('reservasi.edit', $item->id) }}" class="btn btn-sm btn-warning me-1">Edit</a> --}}
                                                     <button type="button" class="btn btn-sm btn-danger"

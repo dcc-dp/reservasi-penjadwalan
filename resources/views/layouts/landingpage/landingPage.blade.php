@@ -49,7 +49,7 @@
                         <a href="{{ route('pakets')}}" class="nav-item nav-link {{ Request::is('pakets') ? 'active' : '' }}">Paket Kursus</a>
                     </div>
                     <div class="ms-lg-3">
-                        <a href="{{ url('/login') }}" class="btn btn-success fw-sm">Daftar/Masuk</a>
+                        <a href="{{ route('reservasi.create') }}" class="btn btn-success fw-sm">Daftar/Masuk</a>
                     </div>
                 </div>
             </nav>

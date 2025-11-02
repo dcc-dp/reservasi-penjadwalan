@@ -17,6 +17,26 @@ class PembayaranController extends Controller
         return view('pembayaran.index', compact('pembayarans'));
     }
 
+    public function store(Request $request)
+{
+    $validated = $request->validate([
+        'reservasi_id' => 'required|exists:reservasis,id',
+        'total' => 'required|numeric',
+    ]);
+
+    Pembayaran::create([
+        'reservasi_id' => $validated['reservasi_id'],
+        'total' => $validated['total'],
+        'status' => 'pending',
+    ]);
+
+    return redirect()
+        ->route('pembayaran.index')
+        ->with('success', 'Pendaftaran berhasil disimpan dan menunggu konfirmasi pembayaran.');
+}
+
+
+
     public function destroy($id)
     {
         $pembayaran = Pembayaran::findOrFail($id);

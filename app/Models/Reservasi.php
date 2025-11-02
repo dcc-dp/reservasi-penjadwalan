@@ -14,10 +14,14 @@ class Reservasi extends Model
         'hari2',
         'jam2',
     ];
+
+    // Relasi ke tabel users
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    // Relasi ke tabel kursus
     public function kursus()
     {
         return $this->belongsTo(Kursus::class, 'id_kursus');

@@ -134,7 +134,7 @@
               <select name="id_kursus" id="id_kursus" class="form-control" required>
                 <option value="">-- Pilih Kursus --</option>
                 @foreach ($kursusList as $k)
-                  <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                  <option value="{{ $k->id }}">{{ $k->id_kursus }} - {{ $k->name }}</option>
                 @endforeach
               </select>
             </div>
