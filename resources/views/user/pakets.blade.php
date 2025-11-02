@@ -53,6 +53,18 @@
         opacity: 0.9;
         transform: scale(1.03);
     }
+
+    .btn-daftar {
+        background: linear-gradient(90deg, #0072ff, #00c6ff);
+        color: #fff;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-daftar:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
 </style>
 
 <div class="container-fluid pb-0 hero-header bg-light mb-5">
@@ -85,7 +97,7 @@
                         <li><i class="bi bi-check-circle text-success me-2"></i>Sertifikat Kelulusan</li>
                     </ul>
                     <a href="#!" class="btn btn-gradient fw-semibold rounded-pill px-4 py-2">
-                        Daftar Sekarang 
+                        Daftar Sekarang
                     </a>
                 </div>
             </div>
@@ -136,6 +148,8 @@
                 </div>
             </div>
 
+        </div> <!-- end row -->
+
         <!-- Tombol Daftar -->
         <div class="text-center mt-5">
             <a href="{{ route('reservasi.create') }}" class="btn btn-daftar fw-semibold rounded-pill px-5 py-3 shadow-lg fs-5">
@@ -145,11 +159,6 @@
                 Jangan lewatkan promo & tempat terbatas — daftar hari ini untuk mulai perjalanan suksesmu!
             </p>
         </div>
-
-        <!-- Tombol Daftar Satu Saja -->
-        <div class="text-center mt-5">
-            <a href="{{ route('reservasi.create') }}" class="btn btn-modern">Daftar Sekarang</a>
-        </div>=
     </div>
 </div>
 @endsection
