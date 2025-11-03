@@ -10,6 +10,7 @@ class Reservasi extends Model
         'id_user',
         'id_kursus',
         'hari1',
+        'jam1',
         'hari2',
         'jam2',
     ];

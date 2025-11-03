@@ -37,7 +37,7 @@
                                         <tbody>
 
                                             <tr class="text-sm">
-                                                {{-- <td>{{ $index+1  }}</td> --}}
+                                                <td>{{ $index+1  }}</td>
                                                 <td class="px-4">{{ $y->Judul }}</td>
                                                 <td class="px-4">{{ $y->deskripsi }}</td>
 

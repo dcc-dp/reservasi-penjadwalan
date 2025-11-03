@@ -22,7 +22,8 @@ class ReservasiController extends Controller
      */
     public function create()
     {
-        //
+        $kursusList = Reservasi::all();
+        return view('admin.reservasi.create',compact('kursusList'));
     }
 
     /**
@@ -30,7 +31,26 @@ class ReservasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'paket' => 'required',
+            'hari1' => 'required',
+            'jam1' => 'required',
+            'hari2' => 'required',
+            'jam2' => 'required',
+        ]);
+
+        Reservasi::create([
+            'nama' => $request->nama,
+            'paket' => $request->paket,
+            'hari1' => $request->hari1,
+            'jam1' => $request->jam1,
+            'hari2' => $request->hari2,
+            'jam2' => $request->jam2,
+        ]);
+
+        return redirect()->route('reservasi');
+        
     }
 
     /**
