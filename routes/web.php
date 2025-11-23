@@ -35,10 +35,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// landing page
+Route::get('/', [LandingPageController::class, 'index'])->name('landingPage');
+
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', [HomeController::class, 'home']);
+    // Route::get('/', [HomeController::class, 'home']);
     Route::get('dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -78,9 +81,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
     Route::get('/user-profile', [InfoUserController::class, 'create']);
     Route::post('/user-profile', [InfoUserController::class, 'store']);
-    Route::get('/login', function () {
-        return view('dashboard');
-    })->name('sign-up');
+
+    // Route::get('/login', function () {
+    //     return view('dashboard');
+    // })->name('sign-up');
 
     //Manajemen Kursus
     Route::get('/materi', [MateriController::class, 'index'])->name('materi');
@@ -127,21 +131,26 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'guest'], function () {
+
     Route::get('/register', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'store']);
-    Route::get('/login', [SessionsController::class, 'create']);
-    Route::post('/session', [SessionsController::class, 'store']);
+
     Route::get('/login/forgot-password', [ResetController::class, 'create']);
     Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
+
     Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
     Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+
+    Route::get('/login', [SessionsController::class, 'create']);
+    Route::post('/session', [SessionsController::class, 'store']);
+ 
 });
 
 //LOGIN USER
-Route::get('/User',[UserLoginController::class,'index'])->name('loginUser');
+Route::get('/User', [UserLoginController::class, 'index'])->name('loginUser');
 Route::post('/User/store', [UserLoginController::class, 'store'])->name('loginUser.store');
 
-Route::get('/Regsiter',[UserLoginController::class,'registerIndex'])->name('registerUser');
+Route::get('/Regsiter', [UserLoginController::class, 'registerIndex'])->name('registerUser');
 Route::post('/Register/store', [UserLoginController::class, 'register'])->name('register.store');
 
 // Kursus
@@ -177,12 +186,12 @@ Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
 
 
 //USER:LANDING PAGE
-Route::get('/landingPage', [LandingPageController::class, 'index'])->name('landingPage');
+// Route::get('/landingPage', [LandingPageController::class, 'index'])->name('landingPage');
 Route::get('/about', [LandingPageController::class, 'about'])->name('about');
 Route::get('/benefit', [LandingPageController::class, 'benefit'])->name('benefit');
 Route::get('/pakets', [LandingPageController::class, 'pakets'])->name('pakets');
 
 
-Route::get('/login', function () {
-    return view('session/login-session');
-})->name('login');
+// Route::get('/login', function () {
+//     return view('session/login-session');
+// })->name('login');
