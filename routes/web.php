@@ -137,11 +137,12 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 });
 
-
 //LOGIN USER
 Route::get('/User',[UserLoginController::class,'index'])->name('loginUser');
 Route::post('/User/store', [UserLoginController::class, 'store'])->name('loginUser.store');
 
+Route::get('/Regsiter',[UserLoginController::class,'registerIndex'])->name('registerUser');
+Route::post('/Register/store', [UserLoginController::class, 'register'])->name('register.store');
 
 // Kursus
 Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');

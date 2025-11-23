@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -14,6 +15,10 @@ class LoginController extends Controller
     public function index()
     {
         return view('user.loginUser');
+    }
+    public function registerIndex()
+    {
+        return view('user.registerUser');
     }
 
    
@@ -31,36 +36,23 @@ class LoginController extends Controller
         $user->save();
         return redirect()->route('reservasi');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function register(Request $request)
     {
-        //
+         $request->validate([
+            'name'=>'required',
+            'email'=>'required | email ',
+            'notelp'=>'required | numeric',
+            'password'=>'required',
+        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->notelp = $request->notelp;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect()->route('loginUser')->with('success', 'Registrasi berhasil!');
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+   
 }
