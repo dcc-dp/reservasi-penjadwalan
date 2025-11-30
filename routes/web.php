@@ -12,13 +12,12 @@ use App\Http\Controllers\KursusController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\InstrukturProfileController;
 use App\Http\Controllers\JadwalController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\User\LandingPageController;
-use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -143,15 +142,17 @@ Route::group(['middleware' => 'guest'], function () {
 
     Route::get('/login', [SessionsController::class, 'create']);
     Route::post('/session', [SessionsController::class, 'store']);
- 
+
+    Route::get('/Register', [LoginController::class, 'registerIndex'])->name('registerUser');
+    Route::post('/register/store', [LoginController::class, 'register'])->name('registerStore');
 });
 
-//LOGIN USER
-Route::get('/User', [UserLoginController::class, 'index'])->name('loginUser');
-Route::post('/User/store', [UserLoginController::class, 'store'])->name('loginUser.store');
 
-Route::get('/Regsiter', [UserLoginController::class, 'registerIndex'])->name('registerUser');
-Route::post('/Register/store', [UserLoginController::class, 'register'])->name('register.store');
+Route::get('/User', [LoginController::class, 'index'])->name('loginUser');
+Route::post('/User/store', [LoginController::class, 'login'])->name('loginUser.store');
+
+
+
 
 // Kursus
 Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+
 
 class LoginController extends Controller
 {
@@ -21,38 +24,49 @@ class LoginController extends Controller
         return view('user.registerUser');
     }
 
-   
-    public function store(Request $request)
+
+    public function login(Request $request)
     {
-         $request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'password'=>'required',
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('reservasi');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email atau password salah',
         ]);
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
-        return redirect()->route('reservasi');
     }
+
     public function register(Request $request)
     {
-         $request->validate([
-            'name'=>'required',
-            'email'=>'required | email ',
-            'notelp'=>'required | numeric',
-            'password'=>'required',
-        ]);
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->notelp = $request->notelp;
-        $user->password = Hash::make($request->password);
-        $user->save();
-        return redirect()->route('loginUser')->with('success', 'Registrasi berhasil!');
+        try {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'notelp' => 'required|numeric',
+                'password' => 'required|min:6',
+            ]);
 
+            $data = $request->all();
+
+
+            // Simpan user ke database
+            User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'notelp' => $data['notelp'],
+                'alamat' => null,
+                'jk' => $data['jk'] ?? null, // optional
+                'role' => 'user', // tambahkan default role
+                'password' => Hash::make($data['password']),
+            ]);
+            // Redirect ke login
+            return redirect()->route('loginUser')->with('success', 'Registrasi berhasil! Silakan login.');
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
     }
-
-   
 }

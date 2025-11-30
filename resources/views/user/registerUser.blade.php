@@ -4,8 +4,8 @@
 
 @section('content')
 
-<div class="container-fluid py-5  hero-header">
-</div>
+    <div class="container-fluid py-5  hero-header">
+    </div>
     <div class="d-flex justify-content-center align-items-center   hero-header min-vh-100 bg-light">
         <div class="card shadow-lg p-5 rounded-4" style="max-width: 600px; width: 100%; min-height: 550px;margin-bottom:50px">
 
@@ -17,10 +17,8 @@
                 <div class="alert alert-danger text-center py-2">{{ session('error') }}</div>
             @endif
 
-            <form action="{{ route('register.store') }}" method="GET" class="mt-4">
-                @csrf @method('POST')
-
-
+            <form action="{{ route('registerStore') }}" method="POST" class="mt-4">
+                @csrf
                 <div class="mb-4">
                     <label class="fw-semibold mb-2">Nama Lengkap</label>
                     <div class="input-group">
@@ -54,7 +52,6 @@
                     </div>
                 </div>
 
-
                 <div class="mb-2">
                     <label class="fw-semibold mb-2">Password</label>
                     <div class="input-group">
@@ -67,16 +64,15 @@
                 </div>
 
 
-                <a type="submit" href="{{ route('registerUser') }}" class="btn btn-success w-100 rounded-pill fw-semibold mt-3 py-2 shadow-sm">
-                    <i class="bi bi-box-arrow-in-right me-2"></i> Register
-                </a>
+                <button type="submit" class="btn btn-success w-100 rounded-pill fw-semibold mt-3 py-2 shadow-sm">
+                    Register
+                </button>
+
                 <div class="mt-2 text-center">
                     <p>Sudah Memiliki akun?<a href="{{ route('loginUser') }}">Login</a></p>
                 </div>
-
-
-    
             </form>
+
         </div>
     </div>
 
