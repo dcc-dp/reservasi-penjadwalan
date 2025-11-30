@@ -14,25 +14,18 @@ class ReservasiController extends Controller
      * Menampilkan daftar semua reservasi (khusus admin)
      */
     public function index()
-{
-    $reserv = Reservasi::with(['user', 'kursus'])->get();
-    return view('admin.reservasi.index', compact('reserv'));
-}
-
-public function create()
-{
-    $kursusList = Kursus::all();
-    return view('admin.reservasi.create', compact('kursusList'));
-}
-
+    {
+        $reserv = Reservasi::with(['user', 'kursus'])->get();
+        return view('admin.reservasi.index', compact('reserv'));
+    }
 
     /**
-     * Show the form for creating a new resource.
+     * Form tambah reservasi
      */
     public function create()
     {
-        $kursusList = Reservasi::all();
-        return view('admin.reservasi.create',compact('kursusList'));
+        $kursusList = Kursus::all();
+        return view('admin.reservasi.create', compact('kursusList'));
     }
 
     /**
@@ -56,7 +49,6 @@ public function create()
             'hari2' => $request->hari2,
             'jam2' => $request->jam2,
         ]);
-
 
         return redirect()->back()->with('success', 'Reservasi berhasil dibuat!');
     }

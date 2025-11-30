@@ -21,6 +21,7 @@ use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -173,6 +174,22 @@ Route::get('/landingPage', [LandingPageController::class, 'index'])->name('landi
 Route::get('/about', [LandingPageController::class, 'about'])->name('about');
 Route::get('/benefit', [LandingPageController::class, 'benefit'])->name('benefit');
 Route::get('/pakets', [LandingPageController::class, 'pakets'])->name('pakets');
+
+// USER ROUTES
+Route::prefix('user')->name('user.')->group(function () {
+    Route::middleware('guest:user')->group(function () {
+        Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login');
+        Route::post('/login', [UserAuthController::class, 'login'])->name('login.submit');
+        Route::get('/register', [UserAuthController::class, 'showRegisterForm'])->name('register');
+        Route::post('/register', [UserAuthController::class, 'register'])->name('register.submit');
+    });
+
+    Route::middleware('auth:user')->group(function () {
+        Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('dashboard');
+        Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
+    });
+});
+
 
 
 Route::get('/login', function () {
