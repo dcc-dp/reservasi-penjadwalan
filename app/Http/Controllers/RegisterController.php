@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    public function create()
+    public function index()
     {
-        return view('session.register');
+        return view('');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = request()->validate([
+        $request = request()->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'notelp' => 'required',
@@ -26,13 +26,13 @@ class RegisterController extends Controller
             'agreement' => 'accepted'
         ]);
 
-        $attributes['password'] = bcrypt($attributes['password']);
+        // Enkripsi password
+        $request['password'] = bcrypt($request['password']);
 
+        // Simpan ke database
+        User::create($request);
 
-
-        session()->flash('success', 'Your account has been created.');
-        $user = User::create($attributes);
-        Auth::login($user);
-        return redirect('/dashboard');
+        // Redirect ke login
+        return redirect()->route('loginUser')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 }

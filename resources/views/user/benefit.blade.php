@@ -3,8 +3,8 @@
 @section('title', 'Benefit')
 
 @section('content')
-<div class="container-fluid bg-light py-5">
-    <div class="container text-center">
+<div class="container-fluid py-5  hero-header">
+    <div class="container text-center" style="margin-top: 100px">
         <span class="border border-warning rounded-pill px-3 py-1 text-warning fw-semibold">
             Kenapa Memilih Kami?
         </span>

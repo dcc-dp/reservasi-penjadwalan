@@ -22,7 +22,7 @@ class ReservasiController extends Controller
 public function create()
 {
     $kursusList = Kursus::all();
-    return view('admin.reservasi.create', compact('kursusList'));
+    return view('user.reservasi.create', compact('kursusList'));
 }
 
 
@@ -110,6 +110,6 @@ public function create()
         $reserv = Reservasi::findOrFail($id);
         $reserv->delete();
 
-        return redirect()->route('reservasi.index')->with('success', 'Reservasi berhasil dihapus!');
+        return redirect()->route('reservasi')->with('success', 'Reservasi berhasil dihapus!');
     }
 }
