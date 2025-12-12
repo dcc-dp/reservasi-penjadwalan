@@ -31,7 +31,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('reservasi');
+            return redirect()->route('landingPage')->with('success', 'Registrasi berhasil! Silakan login.');
         }
 
         return back()->withErrors([
