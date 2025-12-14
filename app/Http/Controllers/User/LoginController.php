@@ -27,6 +27,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
@@ -41,6 +42,7 @@ class LoginController extends Controller
 
     public function register(Request $request)
     {
+        // dd($request->all());
         try {
             $request->validate([
                 'name' => 'required',
@@ -59,7 +61,7 @@ class LoginController extends Controller
                 'notelp' => $data['notelp'],
                 'alamat' => null,
                 'jk' => $data['jk'] ?? null, // optional
-                'role' => 'user', // tambahkan default role
+                'role' => 'siswa', // tambahkan default role
                 'password' => Hash::make($data['password']),
             ]);
             // Redirect ke login

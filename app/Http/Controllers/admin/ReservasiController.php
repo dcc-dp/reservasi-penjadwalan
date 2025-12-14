@@ -10,34 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservasiController extends Controller
 {
-    /**
-     * Menampilkan daftar semua reservasi (khusus admin)
-     */
     public function index()
-{
-    $reserv = Reservasi::with(['user', 'kursus'])->get();
-    return view('admin.reservasi.index', compact('reserv'));
-}
-
-public function create()
-{
-    $kursusList = Kursus::all();
-    return view('user.reservasi.create', compact('kursusList'));
-}
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
-        $kursusList = Reservasi::all();
-        return view('admin.reservasi.create',compact('kursusList'));
+        $reserv = Reservasi::with(['user', 'kursus'])->get();
+        return view('admin.reservasi.index', compact('reserv'));
     }
 
-    /**
-     * Simpan data reservasi baru
-     */
+    public function create()
+    {
+        $kursusList = Kursus::all();
+        return view('admin.reservasi.create', compact('kursusList'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -57,31 +41,22 @@ public function create()
             'jam2' => $request->jam2,
         ]);
 
-
         return redirect()->back()->with('success', 'Reservasi berhasil dibuat!');
     }
-
-    /**
-     * Tampilkan detail reservasi
-     */
     public function show($id)
     {
         $reserv = Reservasi::with(['user', 'kursus'])->findOrFail($id);
         return view('admin.reservasi.show', compact('reserv'));
     }
 
-    /**
-     * Form edit reservasi
-     */
+    
     public function edit($id)
     {
         $reserv = Reservasi::findOrFail($id);
         return view('admin.reservasi.edit', compact('reserv'));
     }
 
-    /**
-     * Update data reservasi
-     */
+    
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -102,9 +77,6 @@ public function create()
         return redirect()->route('reservasi.index')->with('success', 'Data reservasi berhasil diperbarui!');
     }
 
-    /**
-     * Hapus data reservasi
-     */
     public function destroy($id)
     {
         $reserv = Reservasi::findOrFail($id);
