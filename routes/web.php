@@ -70,6 +70,9 @@ Route::group(['middleware' => 'auth'], function () {
         return view('virtual-reality');
     })->name('virtual-reality');
 
+        Route::get('/profile-instruktur-user', [InstrukturProfileController::class, 'userInstruktur'])
+    ->name('profile.instruktur');
+
     Route::get('static-sign-in', function () {
         return view('static-sign-in');
     })->name('sign-in');
@@ -126,6 +129,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Profile Instruktur
     Route::resource('profile-instruktur', InstrukturProfileController::class);
+
+
 });
 
 Route::group(['middleware' => 'guest'], function () {

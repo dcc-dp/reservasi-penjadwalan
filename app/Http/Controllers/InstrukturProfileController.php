@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Instruktur_Profile;
+use App\Models\Jadwal;
 use App\Models\User ;
 use Illuminate\Http\Request;
 
@@ -91,4 +92,12 @@ class InstrukturProfileController extends Controller
 
         return redirect()->route('profile-instruktur.index')->with('success', 'Profile berhasil dihapus');
     }
+    public function userInstruktur(){
+          $jadwals = Jadwal::with(['user', 'kursus'])->get();
+            return view('instruktur.jadwal', compact('jadwals'));
+    }
+
+
+
+
 }
