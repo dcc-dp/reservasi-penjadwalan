@@ -452,83 +452,51 @@
         </button>
      </form>
      {{-- -----------------------------------------------------------------------------------------------------------------------------------------------------------}}
-      {{-- DASHBOARD --}}
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('user/dashboard') ? 'active' : '' }}"
-          href="{{ route('user.dashboard') }}">
-          <i class="ni ni-tv-2 text-primary"></i>
-          <span class="nav-link-text ms-1">Dashboard</span>
-        </a>
-      </li>
+      <ul class="navbar-nav">
+    @if(auth()->check())
+        {{-- Menu untuk Admin --}}
+        @if(auth()->user()->role == 'admin')
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" href="{{ url('dashboard') }}">
+                    <span class="nav-link-text ms-1">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('user-management') ? 'active' : '' }}" href="{{ url('user-management') }}">
+                    <span class="nav-link-text ms-1">User Management</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('admin') ? 'active' : '' }}" href="{{ url('admin') }}">
+                    <span class="nav-link-text ms-1">Admin</span>
+                </a>
+            </li>
+        {{-- Menu untuk User --}}
+        @elseif(auth()->user()->role == 'siswa')
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('materi') ? 'active' : '' }}" href="{{ route('materi') }}">
+                    <span class="nav-link-text ms-1">Materi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('paket') ? 'active' : '' }}" href="{{ route('paket.index') }}">
+                    <span class="nav-link-text ms-1">Paket</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('kursus') ? 'active' : '' }}" href="{{ url('kursus') }}">
+                    <span class="nav-link-text ms-1">Kursus</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('jadwal') ? 'active' : '' }}" href="{{ url('jadwal') }}">
+                    <span class="nav-link-text ms-1">Jadwal</span>
+                </a>
+            </li>
+        @endif
+    @endif
+</ul>
 
-      {{-- RESERVASI --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('reservasi*') ? 'active' : '' }}"
-         href="{{ route('reservasi') }}">
-        <i class="ni ni-calendar-grid-58 text-warning"></i>
-        <span class="nav-link-text ms-1">Reservasi</span>
-      </a>
-    </li>
-
-    {{-- JADWAL --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('jadwal*') ? 'active' : '' }}"
-         href="{{ route('jadwal.index') }}">
-        <i class="ni ni-time-alarm text-success"></i>
-        <span class="nav-link-text ms-1">Jadwal</span>
-      </a>
-    </li>
-
-    {{-- PEMBAYARAN --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('pembayaran*') ? 'active' : '' }}"
-         href="{{ route('pembayaran.index') }}">
-        <i class="ni ni-credit-card text-danger"></i>
-        <span class="nav-link-text ms-1">Pembayaran</span>
-      </a>
-    </li>
-
-    <hr class="horizontal dark my-2">
-
-    {{-- KURSUS --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('kursus*') ? 'active' : '' }}"
-         href="{{ route('kursus.index') }}">
-        <i class="ni ni-books text-info"></i>
-        <span class="nav-link-text ms-1">Kursus Saya</span>
-      </a>
-    </li>
-
-    {{-- ULASAN --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('ulasan*') ? 'active' : '' }}"
-         href="{{ route('ulasan.index') }}">
-        <i class="ni ni-chat-round text-secondary"></i>
-        <span class="nav-link-text ms-1">Ulasan</span>
-      </a>
-    </li>
-
-    <hr class="horizontal dark my-2">
-
-    {{-- PROFIL --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}"
-         href="{{ route('profile') }}">
-        <i class="ni ni-single-02 text-dark"></i>
-        <span class="nav-link-text ms-1">Profil</span>
-      </a>
-    </li>
-
-    {{-- LOGOUT --}}
-    <li class="nav-item">
-      <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button class="nav-link text-danger w-100 text-start" type="submit">
-          <i class="ni ni-button-power"></i>
-          Logout
-        </button>
-      </form>
-    </li>
       {{-------------------------------------------------------------------------------------------------------------------------------------------------------------}}
       <li class="nav-link mb-0">
         <a href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-laravel" class="btn btn-primary btn-md active px-5 text-white" target="_blank" role="button" aria-pressed="true">

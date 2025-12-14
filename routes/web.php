@@ -12,6 +12,7 @@ use App\Http\Controllers\KursusController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\InstrukturProfileController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\pendaftaranController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
@@ -93,7 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
     Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi');
-    Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
+    // Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
     Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
     // route::get('/reservasi/edit{id}', [ReservasiController::class, 'edit'])->name('reservasi.edit');
     // route::put('/reservasi/update{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
@@ -201,10 +202,14 @@ Route::prefix('user')->name('user.')->group(function () {
     });
 
     Route::middleware('auth:user')->group(function () {
-        Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('dashboard');
         Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
     });
 });
+
+// user pendaftaran form
+Route::get('/form-pendaftaran', [pendaftaranController::class, 'index'])->name('form-pendaftaran');
+Route::post('/form-pendaftaran/store', [ReservasiController::class, 'store'])->name('pendaftaran.store');
+        Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('dashboard');
 
 
 
