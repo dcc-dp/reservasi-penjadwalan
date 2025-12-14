@@ -74,9 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('static-sign-in');
     })->name('sign-in');
 
-    Route::get('static-sign-up', function () {
-        return view('static-sign-up');
-    })->name('sign-up');
+
 
     Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
     Route::get('/user-profile', [InfoUserController::class, 'create']);
@@ -132,8 +130,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'guest'], function () {
 
-    Route::get('/register', [RegisterController::class, 'create']);
-    Route::post('/register', [RegisterController::class, 'store']);
+    // Route::get('/register', [RegisterController::class, 'create']);
+    // Route::post('/register', [RegisterController::class, 'store']);
 
     Route::get('/login/forgot-password', [ResetController::class, 'create']);
     Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
@@ -141,16 +139,16 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
     Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 
-    Route::get('/login', [SessionsController::class, 'create']);
+    Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/session', [SessionsController::class, 'store']);
 
+    
     Route::get('/Register', [LoginController::class, 'registerIndex'])->name('registerUser');
     Route::post('/register/store', [LoginController::class, 'register'])->name('registerStore');
 });
 
-
 Route::get('/User', [LoginController::class, 'index'])->name('loginUser');
-Route::post('/User/store', [LoginController::class, 'login'])->name('loginUser.store');
+Route::post('/User/store', [LoginController::class, 'login'])->name('login-user.store');
 
 
 

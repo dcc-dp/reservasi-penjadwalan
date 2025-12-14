@@ -17,7 +17,7 @@
                 <div class="alert alert-danger text-center py-2">{{ session('error') }}</div>
             @endif
 
-            <form action="{{ route('reservasi.create') }}" method="GET" class="mt-4">
+            <form action="{{ route('login-user.store') }}" method="POST" class="mt-4">
                 @csrf
 
 
@@ -45,10 +45,10 @@
                 </div>
 
 
-                <a type="submit" href="{{ route('reservasi.create') }}" class="btn btn-success w-100 rounded-pill fw-semibold mt-3 py-2 shadow-sm">
+                <button type="submit" class="btn btn-success w-100 rounded-pill fw-semibold mt-3 py-2 shadow-sm">
                     <i class="bi bi-box-arrow-in-right me-2"></i> Login
-                </a>
-                <div class="mt-2 text-center">
+                </button
+                <div> class="mt-2 text-center">
                     <p>Belum memiliki akun? <a href="{{ route('registerUser') }}">Daftar</a></p>
                 </div>
 
