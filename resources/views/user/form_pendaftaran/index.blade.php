@@ -83,7 +83,7 @@
                     <hr>
 
                     {{-- JADWAL 1 --}}
-                    <h6 class="fw-bold mb-3">Pilihan Jadwal 1</h6>
+                    <h6 class="fw-bold mb-3">Hari Pertama</h6>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Tanggal</label>
@@ -96,7 +96,7 @@
                     </div>
 
                     {{-- JADWAL 2 --}}
-                    <h6 class="fw-bold mt-3 mb-3">Pilihan Jadwal 2</h6>
+                    <h6 class="fw-bold mt-3 mb-3">Hari Kedua</h6>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Tanggal</label>

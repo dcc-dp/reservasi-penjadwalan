@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body pt-4 p-3">
 
-                    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.admin.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -48,7 +48,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <option value="admin">Admin</option>
-                                    <option value="user">User</option>
+                                    <option value="siswa">siswa</option>
                                     <option value="instruktur">Instruktur</option>
                                 </select>
 
@@ -92,7 +92,7 @@
 
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('user') }}"
+                            <a href="{{ route('user.admin.index') }}"
                                 class="btn bg-secondary text-white mx-4 btn-md mt-4 mb-4">Batal</a>
                             <button type="submit"
                                 class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Save Changes' }}</button>

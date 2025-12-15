@@ -48,7 +48,7 @@ class UserController extends Controller
         $user->jk = $request->jk;
         $user->alamat = $request->alamat;
         $user->save();
-        return redirect()->route('user');
+        return redirect()->route('user.admin.index');
 
     }
 

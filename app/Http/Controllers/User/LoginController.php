@@ -7,32 +7,32 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-
 
 class LoginController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Tampilkan halaman login siswa
      */
-    public function index()
+    public function userLogin()
     {
-        return view('user.loginUser');
-    }
-    public function registerIndex()
-    {
-        return view('user.registerUser');
+        return view('user.loginUser'); // pastikan view ini ada
     }
 
-
-    public function login(Request $request)
+    /**
+     * Proses login siswa
+     */
+    public function userLoginStore(Request $request)
     {
-        
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('landingPage')->with('success', 'Registrasi berhasil! Silakan login.');
+            return redirect()->route('siswa.dashboard')->with('success', 'Login berhasil!');
         }
 
         return back()->withErrors([
@@ -40,35 +40,50 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+     * Tampilkan halaman registrasi siswa
+     */
+    public function registerIndex()
+    {
+        return view('user.registerUser'); // pastikan view ini ada
+    }
+
+    /**
+     * Proses registrasi siswa
+     */
     public function register(Request $request)
     {
-        // dd($request->all());
-        try {
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email',
-                'notelp' => 'required|numeric',
-                'password' => 'required|min:6',
-            ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'notelp' => 'required|numeric',
+            'password' => 'required|string|min:6|confirmed',
+            'jk' => 'nullable|in:L,P',
+        ]);
 
-            $data = $request->all();
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'notelp' => $request->notelp,
+            'jk' => $request->jk ?? null,
+            'alamat' => null,
+            'role' => 'siswa',
+            'password' => Hash::make($request->password),
+        ]);
 
+        // Setelah registrasi, redirect ke halaman login siswa
+        return redirect()->route('siswa.login')->with('success', 'Registrasi berhasil! Silakan login.');
+    }
 
-            // Simpan user ke database
-            User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'notelp' => $data['notelp'],
-                'alamat' => null,
-                'jk' => $data['jk'] ?? null, // optional
-                'role' => 'siswa', // tambahkan default role
-                'password' => Hash::make($data['password']),
-            ]);
-            // Redirect ke login
-            return redirect()->route('loginUser')->with('success', 'Registrasi berhasil! Silakan login.');
-        } catch (\Throwable $th) {
+    /**
+     * Logout siswa
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-            throw $th;
-        }
+        return redirect()->route('siswa.login')->with('success', 'Berhasil logout');
     }
 }

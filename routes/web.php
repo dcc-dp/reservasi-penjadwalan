@@ -19,200 +19,143 @@ use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\User\LandingPageController;
-use App\Models\Jadwal;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Landing Page
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
-
-// landing page
 Route::get('/', [LandingPageController::class, 'index'])->name('landingPage');
+Route::get('/about', [LandingPageController::class, 'about'])->name('about');
+Route::get('/benefit', [LandingPageController::class, 'benefit'])->name('benefit');
+Route::get('/pakets', [LandingPageController::class, 'pakets'])->name('pakets');
+
+/*
+|--------------------------------------------------------------------------
+| Auth Routes (Guest)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('guest')->group(function () {
+    // User login/register
+    Route::prefix('siswa')->name('siswa.')->middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'userLogin'])->name('login');
+    Route::post('/login', [LoginController::class, 'userLoginStore'])->name('login.submit');
+    Route::get('/register', [LoginController::class, 'registerIndex'])->name('register');
+    Route::post('/register/store', [LoginController::class, 'register'])->name('register.store');
+});
 
 
-Route::group(['middleware' => 'auth'], function () {
+    // Forgot/reset password
+    Route::get('/login/forgot-password', [ResetController::class, 'create'])->name('password.request');
+    Route::post('/forgot-password', [ResetController::class, 'sendEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
+    Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 
-    // Route::get('/', [HomeController::class, 'home']);
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Default login page
+    Route::get('/login', [SessionsController::class, 'create'])->name('login');
+    Route::post('/session', [SessionsController::class, 'store'])->name('session.store');
+});
 
-    Route::get('billing', function () {
-        return view('billing');
-    })->name('billing');
+/*
+|--------------------------------------------------------------------------
+| Authenticated Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function () {
 
-    Route::get('profile', function () {
-        return view('profile');
-    })->name('profile');
-
-    Route::get('rtl', function () {
-        return view('rtl');
-    })->name('rtl');
-
-    Route::get('user-management', function () {
-        return view('laravel-examples/user-management');
-    })->name('user-management');
-
-    Route::get('tables', function () {
-        return view('tables');
-    })->name('tables');
-
-    Route::get('virtual-reality', function () {
-        return view('virtual-reality');
-    })->name('virtual-reality');
-
-    Route::get('static-sign-in', function () {
-        return view('static-sign-in');
-    })->name('sign-in');
-
-
+    // Dashboard & general pages
+    Route::get('dashboard', function () { return view('dashboard'); })->name('dashboard');
+    Route::get('billing', function () { return view('billing'); })->name('billing');
+    Route::get('profile', function () { return view('profile'); })->name('profile');
+    Route::get('rtl', function () { return view('rtl'); })->name('rtl');
+    Route::get('user-management', function () { return view('laravel-examples/user-management'); })->name('user-management');
+    Route::get('tables', function () { return view('tables'); })->name('tables');
+    Route::get('virtual-reality', function () { return view('virtual-reality'); })->name('virtual-reality');
+    Route::get('static-sign-in', function () { return view('static-sign-in'); })->name('sign-in');
 
     Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
+
+    // User profile
     Route::get('/user-profile', [InfoUserController::class, 'create']);
     Route::post('/user-profile', [InfoUserController::class, 'store']);
 
-    // Route::get('/login', function () {
-    //     return view('dashboard');
-    // })->name('sign-up');
+    /*
+    |--------------------------------------------------------------------------
+    | Admin / Management Routes
+    |--------------------------------------------------------------------------
+    */
+    // Manajemen Kursus
+    Route::prefix('materi')->name('materi.')->group(function () {
+        Route::get('/', [MateriController::class, 'index'])->name('index');
+        Route::get('/create', [MateriController::class, 'create'])->name('create');
+        Route::post('/store', [MateriController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [MateriController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [MateriController::class, 'update'])->name('update');
+        Route::delete('/{id}', [MateriController::class, 'destroy'])->name('destroy');
+    });
 
-    //Manajemen Kursus
-    Route::get('/materi', [MateriController::class, 'index'])->name('materi');
-    Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
-    Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
-    route::get('/materi/edit{id}', [MateriController::class, 'edit'])->name('materi.edit');
-    route::put('/materi/update{id}', [MateriController::class, 'update'])->name('materi.update');
-    Route::delete('/materi/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
+    // Reservasi
+    Route::prefix('reservasi')->name('reservasi.')->group(function () {
+        Route::get('/', [ReservasiController::class, 'index'])->name('index');
+        Route::get('/create', [ReservasiController::class, 'create'])->name('create');
+        Route::post('/store', [ReservasiController::class, 'store'])->name('store');
+        Route::delete('/{id}', [ReservasiController::class, 'destroy'])->name('destroy');
+    });
 
-    Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi');
-    // Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
-    Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
-    // route::get('/reservasi/edit{id}', [ReservasiController::class, 'edit'])->name('reservasi.edit');
-    // route::put('/reservasi/update{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
-    Route::delete('/reservasi/{id}', [ReservasiController::class, 'destroy'])->name('reservasi.destroy');
+    // User Management
+    Route::prefix('user')->name('user.admin.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/store', [UserController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+    });
 
-    //Manajemen User
-    Route::get('/user', [UserController::class, 'index'])->name('user');
-    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
-    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-    route::get('/user/edit{id}', [UserController::class, 'edit'])->name('user.edit');
-    route::put('/user/update{id}', [UserController::class, 'update'])->name('user.update');
-    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    // Admin Management
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::get('/create', [AdminController::class, 'create'])->name('create');
+        Route::post('/store', [AdminController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [AdminController::class, 'update'])->name('update');
+        Route::delete('/{id}', [AdminController::class, 'destroy'])->name('destroy');
+    });
 
-    //admin
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-    Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
-    Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
-    route::get('/admin/edit{id}', [AdminController::class, 'edit'])->name('admin.edit');
-    route::put('/admin/update{id}', [AdminController::class, 'update'])->name('admin.update');
-    Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
-
-    //paket
-    Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
-    Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
-    Route::post('/index', [PaketController::class, 'store'])->name('paket.store');
-    Route::post('/edit', [PaketController::class, 'store'])->name('paket.store');
-    Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
-    Route::put('/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
-    Route::delete('/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+    // Paket
+    Route::prefix('paket')->name('paket.')->group(function () {
+        Route::get('/', [PaketController::class, 'index'])->name('index');
+        Route::get('/create', [PaketController::class, 'create'])->name('create');
+        Route::post('/store', [PaketController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [PaketController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [PaketController::class, 'update'])->name('update');
+        Route::delete('/{id}', [PaketController::class, 'destroy'])->name('destroy');
+    });
 
     // Profile Instruktur
     Route::resource('profile-instruktur', InstrukturProfileController::class);
 });
 
-Route::group(['middleware' => 'guest'], function () {
-
-    // Route::get('/register', [RegisterController::class, 'create']);
-    // Route::post('/register', [RegisterController::class, 'store']);
-
-    Route::get('/login/forgot-password', [ResetController::class, 'create']);
-    Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
-
-    Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
-    Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
-
-    Route::get('/login', [SessionsController::class, 'create'])->name('login');
-    Route::post('/session', [SessionsController::class, 'store']);
-
-    
-    Route::get('/Register', [LoginController::class, 'registerIndex'])->name('registerUser');
-    Route::post('/register/store', [LoginController::class, 'register'])->name('registerStore');
+/*
+|--------------------------------------------------------------------------
+| User Dashboard / Form Pendaftaran
+|--------------------------------------------------------------------------
+*/
+Route::prefix('siswa')->name('siswa.')->middleware('auth')->group(function () {
+    Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('dashboard');
+    Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
+    Route::get('/form-pendaftaran', [pendaftaranController::class, 'index'])->name('form-pendaftaran');
+    Route::post('/form-pendaftaran/store', [ReservasiController::class, 'store'])->name('pendaftaran.store');
 });
 
-Route::get('/User', [LoginController::class, 'index'])->name('loginUser');
-Route::post('/User/store', [LoginController::class, 'login'])->name('login-user.store');
-
-
-
-
-// Kursus
-Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
-Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
-Route::post('/kursus/store', [KursusController::class, 'store'])->name('kursus.store');
-Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
-Route::put('/kursus/edit/{kursus}', [KursusController::class, 'update'])->name('kursus.update');
-Route::delete('/kursus/{kursus}', [KursusController::class, 'destroy'])->name('kursus.destroy');
-
-// ulasan
-Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
-
-// pembayaran
-Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
-Route::get('/pembayaran/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
-Route::post('/pembayaran/store', [PembayaranController::class, 'store'])->name('pembayaran.store');
-Route::get('/pembayaran/edit/{id}', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
-Route::put('/pembayaran/edit/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
-Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
-
-// Jadwal
-
-Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
-Route::get('/jadwal/create', [JadwalController::class, 'create'])->name('jadwal.create');
-Route::post('/jadwal', [JadwalController::class, 'store'])->name('jadwal.store');
-Route::get('/jadwal/{id}/edit', [JadwalController::class, 'edit'])->name('jadwal.edit');
-Route::put('/jadwal/{id}', [JadwalController::class, 'update'])->name('jadwal.update');
-Route::delete('/jadwal/{id}', [JadwalController::class, 'destroy'])->name('jadwal.destroy');
-
-// ulasan
-Route::get('/ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
-
-
-//USER:LANDING PAGE
-// Route::get('/landingPage', [LandingPageController::class, 'index'])->name('landingPage');
-Route::get('/about', [LandingPageController::class, 'about'])->name('about');
-Route::get('/benefit', [LandingPageController::class, 'benefit'])->name('benefit');
-Route::get('/pakets', [LandingPageController::class, 'pakets'])->name('pakets');
-
-// USER ROUTES
-Route::prefix('user')->name('user.')->group(function () {
-    Route::middleware('guest:user')->group(function () {
-        Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login');
-        Route::post('/login', [UserAuthController::class, 'login'])->name('login.submit');
-        Route::get('/register', [UserAuthController::class, 'showRegisterForm'])->name('register');
-        Route::post('/register', [UserAuthController::class, 'register'])->name('register.submit');
-    });
-
-    Route::middleware('auth:user')->group(function () {
-        Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
-    });
-});
-
-// user pendaftaran form
-Route::get('/form-pendaftaran', [pendaftaranController::class, 'index'])->name('form-pendaftaran');
-Route::post('/form-pendaftaran/store', [ReservasiController::class, 'store'])->name('pendaftaran.store');
-        Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('dashboard');
-
-
-
-// Route::get('/login', function () {
-//     return view('session/login-session');
-// })->name('login');
+/*
+|--------------------------------------------------------------------------
+| Kursus, Ulasan, Pembayaran, Jadwal
+|--------------------------------------------------------------------------
+*/
+Route::resource('kursus', KursusController::class);
+Route::get('ulasan', [UlasanController::class, 'index'])->name('ulasan.index');
+Route::resource('pembayaran', PembayaranController::class);
+Route::resource('jadwal', JadwalController::class);

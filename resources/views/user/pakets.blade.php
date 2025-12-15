@@ -96,7 +96,7 @@
                         <li><i class="bi bi-check-circle text-success me-2"></i>Latihan Soal & Quiz</li>
                         <li><i class="bi bi-check-circle text-success me-2"></i>Sertifikat Kelulusan</li>
                     </ul>
-                    <a href="{{ route('form-pendaftaran', ['paket_id' => 1]) }}"
+                    <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => 1]) }}"
                         class="btn btn-gradient fw-semibold rounded-pill px-4 py-2">
                             Daftar Sekarang
                     </a>
@@ -120,7 +120,7 @@
                         <li><i class="bi bi-check-circle text-success me-2"></i>Domain & Hosting Gratis</li>
                         <li><i class="bi bi-check-circle text-success me-2"></i>Garansi Belajar Sampai Bisa</li>
                     </ul>
-                    <a href="{{ route('form-pendaftaran', ['paket_id' => 2]) }}"
+                    <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => 2]) }}"
                         class="btn btn-gradient fw-semibold rounded-pill px-4 py-2"
                         style="background: linear-gradient(90deg,#ffb347,#ffcc33);">
                             Daftar Sekarang
