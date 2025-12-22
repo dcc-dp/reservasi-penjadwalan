@@ -48,7 +48,7 @@
                 <button type="submit" class="btn btn-success w-100 rounded-pill fw-semibold mt-3 py-2 shadow-sm">
                     <i class="bi bi-box-arrow-in-right me-2"></i> Login
                 </button
-                <div> class="mt-2 text-center">
+                <div class="mt-2 text-center"> 
                     <p>Belum memiliki akun? <a href="{{ route('siswa.register') }}">Daftar</a></p>
                 </div>
 

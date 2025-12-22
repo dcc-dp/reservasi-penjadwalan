@@ -12,6 +12,7 @@ use App\Http\Controllers\KursusController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\InstrukturProfileController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\user\JadwalSiswaController;
 use App\Http\Controllers\pendaftaranController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -66,7 +67,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
 
     // Dashboard & general pages
-    Route::get('dashboard', function () { return view('dashboard'); })->name('dashboard');
+    // Route::get('dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('billing', function () { return view('billing'); })->name('billing');
     Route::get('profile', function () { return view('profile'); })->name('profile');
     Route::get('rtl', function () { return view('rtl'); })->name('rtl');
@@ -148,6 +149,12 @@ Route::prefix('siswa')->name('siswa.')->middleware('auth')->group(function () {
     Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
     Route::get('/form-pendaftaran', [pendaftaranController::class, 'index'])->name('form-pendaftaran');
     Route::post('/form-pendaftaran/store', [ReservasiController::class, 'store'])->name('pendaftaran.store');
+/*
+|--------------------------------------------------------------------------
+| siswa jadwal pelajaran
+|--------------------------------------------------------------------------
+*/
+    Route::get('/jadwal', [JadwalSiswaController::class, 'index'])->name('jadwal');
 });
 
 /*
