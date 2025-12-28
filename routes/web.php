@@ -20,6 +20,7 @@ use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\User\LandingPageController;
+use App\Http\Controllers\User\ReservasiSiswaController;
 use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -155,6 +156,7 @@ Route::prefix('siswa')->name('siswa.')->middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
     Route::get('/jadwal', [JadwalSiswaController::class, 'index'])->name('jadwal');
+    Route::get('/reservasi', [ReservasiSiswaController::class, 'index'])->name('reservasi');
 });
 
 /*
