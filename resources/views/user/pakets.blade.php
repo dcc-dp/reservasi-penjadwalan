@@ -1,75 +1,162 @@
+
 @extends('layouts.landingpage.landingPage')
 
 @section('title', 'Paket Kursus')
 
 @section('content')
+<style>
+    .course-card {
+        border: none;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
 
-<div class="container-fluid py-5 bg-light">
-    <div class="container">
+    .course-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
 
+    .course-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 32px;
+        color: white;
+    }
+
+    .price-old {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 14px;
+    }
+
+    .price-new {
+        font-size: 28px;
+        font-weight: bold;
+        color: #222;
+    }
+
+    .btn-gradient {
+        background: linear-gradient(90deg, #0072ff, #00c6ff);
+        border: none;
+        color: #fff;
+        transition: all 0.3s;
+    }
+
+    .btn-gradient:hover {
+        opacity: 0.9;
+        transform: scale(1.03);
+    }
+
+    .btn-daftar {
+        background: linear-gradient(90deg, #0072ff, #00c6ff);
+        color: #fff;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-daftar:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+</style>
+
+<div class="container-fluid pb-0 hero-header bg-light mb-5">
+    <div class="container py-5">
         <div class="text-center mb-5">
-            <span class="badge bg-primary px-3 py-2 rounded-pill">
+            <span class="border border-info rounded-pill px-3 py-1 text-info fw-semibold">
                 Belajar Coding Seru 🚀
             </span>
-            <h1 class="mt-3 fw-bold">Paket Kursus</h1>
-            <p class="text-muted">
-                Pilih paket belajar sesuai kebutuhanmu.
-            </p>
+            <h1 class="fw-bold mt-3">Algoritma & Pemrograman</h1>
+            <p class="text-muted">Mulai dari dasar logika pemrograman hingga membuat aplikasi profesional.</p>
         </div>
 
         <div class="row g-4 justify-content-center">
 
-            @forelse ($data as $paket)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm text-center p-4">
-
-                        <div class="mb-3 fs-1 text-primary">
-                            <i class="bi bi-code-slash"></i>
-                        </div>
-
-                        <h5 class="fw-bold">
-                            {{ $paket->jenis }}
-                        </h5>
-
-                        <h3 class="fw-bold text-primary">
-                            Rp {{ number_format($paket->harga, 0, ',', '.') }}
-                        </h3>
-
-                        <p class="text-muted small">
-                            {{ $paket->materi->nama_materi ?? 'Materi belum tersedia' }}
-                        </p>
-
-                        <ul class="list-unstyled text-start small">
-                            <li>
-                                <i class="bi bi-check-circle text-success me-2"></i>
-                                Akses Materi Lengkap
-                            </li>
-                            <li>
-                                <i class="bi bi-check-circle text-success me-2"></i>
-                                Sertifikat
-                            </li>
-                            <li>
-                                <i class="bi bi-check-circle text-success me-2"></i>
-                                Pendampingan
-                            </li>
-                        </ul>
-
-                        <a href="{{ route('loginUser', $paket->id ?? null) }}"
-                           class="btn btn-primary rounded-pill mt-auto">
-                            Daftar Sekarang
-                        </a>
-
+            {{-- Paket 1: Algoritma --}}
+            <div class="col-lg-4 col-md-6">
+                <div class="card course-card text-center p-4 h-100">
+                    <div class="course-icon" style="background: linear-gradient(135deg, #0072ff, #00c6ff);">
+                        <i class="bi bi-cpu"></i>
                     </div>
+                    <h5 class="fw-bold text-primary mb-2">Paket reguler</h5>
+                    <p class="price-old">Rp 1.500.000</p>
+                    <p class="price-new">Rp 900.000</p>
+                    <p class="text-muted small mb-4">
+                        Pelajari dasar berpikir logis dan algoritmik menggunakan bahasa Python & C++.
+                    </p>
+                    <ul class="list-unstyled small text-start d-inline-block mb-4">
+                        <li><i class="bi bi-check-circle text-success me-2"></i>40+ Video Interaktif</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Latihan Soal & Quiz</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Sertifikat Kelulusan</li>
+                    </ul>
+                    <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => 1]) }}"
+                        class="btn btn-gradient fw-semibold rounded-pill px-4 py-2">
+                            Daftar Sekarang
+                    </a>
                 </div>
-            @empty
-                <div class="col-12 text-center">
-                    <p class="text-muted">Paket belum tersedia.</p>
-                </div>
-            @endforelse
+            </div>
 
-        </div>
+            {{-- Paket 2: Website --}}
+            <div class="col-lg-4 col-md-6">
+                <div class="card course-card text-center p-4 h-100 border-top border-warning border-4">
+                    <div class="course-icon" style="background: linear-gradient(135deg, #ffb347, #ffcc33);">
+                        <i class="bi bi-globe2"></i>
+                    </div>
+                    <h5 class="fw-bold text-primary mb-2">Paket VIP</h5>
+                    <p class="price-old">Rp 3.000.000</p>
+                    <p class="price-new">Rp 2.100.000</p>
+                    <p class="text-muted small mb-4">
+                        Bangun website dari nol hingga online dengan HTML, CSS, JavaScript, dan PHP.
+                    </p>
+                    <ul class="list-unstyled small text-start d-inline-block mb-4">
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Proyek Nyata</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Domain & Hosting Gratis</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Garansi Belajar Sampai Bisa</li>
+                    </ul>
+                    <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => 2]) }}"
+                        class="btn btn-gradient fw-semibold rounded-pill px-4 py-2"
+                        style="background: linear-gradient(90deg,#ffb347,#ffcc33);">
+                            Daftar Sekarang
+                    </a>
+
+                </div>
+            </div>
+
+            {{-- Paket 3: Framework --}}
+            <div class="col-lg-4 col-md-6">
+                <div class="card course-card text-center p-4 h-100">
+                    <div class="course-icon" style="background: linear-gradient(135deg, #ff416c, #ff4b2b);">
+                        <i class="bi bi-code-slash"></i>
+                    </div>
+                    <h5 class="fw-bold text-primary mb-2">Paket VVIP</h5>
+                    <p class="price-old">Rp 4.200.000</p>
+                    <p class="price-new">Rp 3.000.000</p>
+                    <p class="text-muted small mb-4">
+                        Kuasai framework modern Laravel & React.js untuk membangun aplikasi profesional.
+                    </p>
+                    <ul class="list-unstyled small text-start d-inline-block mb-4">
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Mentoring Langsung</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Proyek Akhir Portofolio</li>
+                        <li><i class="bi bi-check-circle text-success me-2"></i>Sertifikat Profesional</li>
+                    </ul>
+                    <a href="{{route('kursus.create')}}" class="btn btn-gradient fw-semibold rounded-pill px-4 py-2" style="background: linear-gradient(90deg, #ff416c, #ff4b2b);">
+                        Daftar Sekarang
+                    </a>
+                </div>
+            </div>
+
+        </div> <!-- end row -->
+
+        <!-- Tombol Daftar -->
 
     </div>
 </div>
-
 @endsection
