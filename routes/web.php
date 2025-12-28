@@ -67,7 +67,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
 
     // Dashboard & general pages
-    // Route::get('dashboard', function () { return view('dashboard'); })->name('dashboard');
+    Route::get('dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('billing', function () { return view('billing'); })->name('billing');
     Route::get('profile', function () { return view('profile'); })->name('profile');
     Route::get('rtl', function () { return view('rtl'); })->name('rtl');
