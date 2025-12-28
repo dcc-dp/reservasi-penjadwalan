@@ -17,7 +17,7 @@
                 <div class="alert alert-danger text-center py-2">{{ session('error') }}</div>
             @endif
 
-            <form action="{{ route('registerStore') }}" method="POST" class="mt-4">
+            <form action="{{ route('siswa.register.store') }}" method="POST" class="mt-4">
                 @csrf
                 <div class="mb-4">
                     <label class="fw-semibold mb-2">Nama Lengkap</label>
@@ -69,7 +69,7 @@
                 </button>
 
                 <div class="mt-2 text-center">
-                    <p>Sudah Memiliki akun?<a href="{{ route('loginUser') }}">Login</a></p>
+                    <p>Sudah Memiliki akun?<a href="{{ route('siswa.login') }}">Login</a></p>
                 </div>
             </form>
 

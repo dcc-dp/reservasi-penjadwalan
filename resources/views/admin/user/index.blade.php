@@ -9,7 +9,7 @@
                         <div class="card-header pb-0">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h6 class="mb-0">Daftar User</h6>
-                                <a href="{{ route('user.create') }}" class="btn btn-primary btn-sm ms-2 justify-content-end">
+                                <a href="{{ route('user.admin.create') }}" class="btn btn-primary btn-sm ms-2 justify-content-end">
                                     <i class="fas fa-plus me-1"></i> Add New
                                 </a>
 
@@ -58,7 +58,7 @@
 
                                                 <td>
 
-                                                    <a href="{{ route('user.edit', $y->id) }}"
+                                                    <a href="{{ route('user.admin.edit', $y->id) }}"
                                                         class= "btn btn bg-gradient-secondary" data-bs-toggle="tooltip">edit
                                                     </a>
                                                     {{-- Tombol Hapus --}}
@@ -78,7 +78,7 @@
                                                 <div class="modal-dialog modal-danger modal-dialog-centered modal-"
                                                     role="document">
                                                     <div class="modal-content">
-                                                        <form action="{{ route('user.destroy', $y->id) }}" method="POST">
+                                                        <form action="{{ route('user.admin.destroy', $y->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <div class="modal-header">
