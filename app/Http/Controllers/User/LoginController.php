@@ -53,11 +53,12 @@ class LoginController extends Controller
      */
     public function register(Request $request)
     {
+        // dd($request->all());
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'notelp' => 'required|numeric',
-            'password' => 'required|string|min:6|confirmed',
+            'name' => 'required',
+            'email' => 'required',
+            'notelp' => 'required',
+            'password' => 'required',
             'jk' => 'nullable|in:L,P',
         ]);
 
