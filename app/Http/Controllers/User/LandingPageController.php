@@ -1,18 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
+use App\Models\Paket;
+use App\Models\Materi;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Instruktur_Profile;
+
 
 class LandingPageController extends Controller
 {
-    public function index()
-    {
-
-        return view('user.landingpage');
-    }
+  public function index()
+{
+    $instrukturs = Instruktur_Profile::with('user')->get();
+    return view('user.landingpage', compact('instrukturs'));
+}
     public function about()
     {
 
@@ -26,7 +29,7 @@ class LandingPageController extends Controller
 
      public function pakets()
     {
-
-        return view('user.pakets');
+        $data = Paket::with('materi')->get();
+        return view('user.pakets', compact('data'));
     }
 }

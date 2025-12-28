@@ -328,106 +328,41 @@
 
 
         <!-- Team Start -->
-        <div class="container-fluid bg-light py-5">
-            <div class="container py-5">
-                <h1 class="mb-5">Pengajar<span class="text-uppercase text-primary bg-light px-2">berpengalaman</span>
-                </h1>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="team-item position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ asset('assets/user/img/team-1.jpg') }}" alt="">
-                            <div class="team-overlay">
-                                <small class="mb-2">Web Programming Basic</small>
-                                <h4 class="lh-base text-light">Mahambara Agung</h4>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-                        <div class="team-item position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ asset('assets/user/img/team-2.jpg') }}" alt="">
-                            <div class="team-overlay">
-                                <small class="mb-2">Database</small>
-                                <h4 class="lh-base text-light">Johan</h4>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                        <div class="team-item position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ asset('assets/user/img/team-2.jpg') }}" alt="">
-                            <div class="team-overlay">
-                                <small class="mb-2">UI/UX Design</small>
-                                <h4 class="lh-base text-light">Prabawa</h4>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-                        <div class="team-item position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="{{ asset('assets/user/img/team-2.jpg') }}" alt="">
-                            <div class="team-overlay">
-                                <small class="mb-2">Framework</small>
-                                <h4 class="lh-base text-light">David Winalda</h4>
-                                <div class="d-flex justify-content-center">
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                    <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
-                                </div>
-                            </div>
+      <div class="container-fluid bg-light py-5">
+    <div class="container py-5">
+        <h1 class="mb-5">
+            Pengajar
+            <span class="text-uppercase text-primary bg-light px-2">Berpengalaman</span>
+        </h1>
+
+        <div class="row g-4">
+            @foreach ($instrukturs as $instruktur)
+                <div class="col-md-6 col-lg-3">
+                    <div class="p-4 bg-white shadow rounded h-100">
+                        <h5 class="text-dark mb-1">
+                            {{ $instruktur->user->name ?? 'Instruktur' }}
+                        </h5>
+
+                        <small class="text-primary d-block mb-2">
+                            {{ $instruktur->keahlian }}
+                        </small>
+
+                        <p class="text-muted small">
+                            {{ $instruktur->pengalaman }}
+                        </p>
+
+                        <div class="d-flex gap-2">
+                            <i class="fab fa-facebook-f text-primary"></i>
+                            <i class="fab fa-instagram text-primary"></i>
+                            <i class="fab fa-linkedin-in text-primary"></i>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
+    </div>
+</div>
+
         <!-- Team End -->
 
 
