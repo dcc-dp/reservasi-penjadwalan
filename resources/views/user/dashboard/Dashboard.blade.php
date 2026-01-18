@@ -42,7 +42,7 @@
                     <p class="text-sm text-muted">
                         Lihat dan pilih kursus yang tersedia.
                     </p>
-                    <a href="{{ route('kursus.index') }}" class="btn btn-outline-primary btn-sm">
+                    {{-- <a href="{{ route('kursus.index') }}" class="btn btn-outline-primary btn-sm"> --}}
                         Lihat Kursus
                     </a>
                 </div>

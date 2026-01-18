@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('siswa.dashboard')->with('success', 'Login berhasil!');
+            return redirect()->intended(route('siswa.dashboard'))->with('success', 'Login berhasil!');
         }
 
         return back()->withErrors([

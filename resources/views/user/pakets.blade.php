@@ -96,10 +96,13 @@
                         <li><i class="bi bi-check-circle text-success me-2"></i>Latihan Soal & Quiz</li>
                         <li><i class="bi bi-check-circle text-success me-2"></i>Sertifikat Kelulusan</li>
                     </ul>
-                    <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => 1]) }}"
+                    @foreach ($pakets as $paket)
+                        <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => $paket->id]) }}"
                         class="btn btn-gradient fw-semibold rounded-pill px-4 py-2">
                             Daftar Sekarang
-                    </a>
+                        </a>
+                    @endforeach
+
                 </div>
             </div>
 
@@ -146,7 +149,7 @@
                         <li><i class="bi bi-check-circle text-success me-2"></i>Proyek Akhir Portofolio</li>
                         <li><i class="bi bi-check-circle text-success me-2"></i>Sertifikat Profesional</li>
                     </ul>
-                    <a href="{{route('kursus.create')}}" class="btn btn-gradient fw-semibold rounded-pill px-4 py-2" style="background: linear-gradient(90deg, #ff416c, #ff4b2b);">
+                    <a href="{{route('siswa.reservasi.create')}}" class="btn btn-gradient fw-semibold rounded-pill px-4 py-2" style="background: linear-gradient(90deg, #ff416c, #ff4b2b);">
                         Daftar Sekarang
                     </a>
                 </div>

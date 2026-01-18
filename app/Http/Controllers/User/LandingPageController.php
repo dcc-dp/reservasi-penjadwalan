@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Paket;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class LandingPageController extends Controller
 
      public function pakets()
     {
-
-        return view('user.pakets');
+        $pakets = Paket::all();
+        return view('user.pakets', compact('pakets'));
     }
 }
