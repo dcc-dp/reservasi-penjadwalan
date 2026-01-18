@@ -18,13 +18,15 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\admin\PaketController;
 use App\Http\Controllers\admin\ReservasiController;
-
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KursusController;
 use App\Http\Controllers\user\ReservasiSiswaController;
 use App\Http\Controllers\user\JadwalSiswaController;
 
 use App\Http\Controllers\pendaftaranController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\User\SiswaController;
+use App\Models\Kursus;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,12 +50,11 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/login', [SessionsController::class, 'store']);
 
-    Route::get('/siswa/login', [LoginController::class, 'userLogin'])->name('siswa.login');
-    Route::post('/siswa/login', [LoginController::class, 'userLoginStore']);
+    Route::get('/siswa/login', [SessionsController::class, 'createSiswa'])->name('siswa.login');
+    Route::post('/siswa/login', [SessionsController::class, 'store']);
 
-    Route::get('/siswa/login', [LoginController::class, 'userLogin'])->name('siswa.login');
-    Route::post('/siswa/login', [LoginController::class, 'userLoginStore']);
-
+    // Route::get('/siswa/login', [SessionsController::class, 'userLogin'])->name('siswa.login');
+    // Route::post('/siswa/login', [SessionsController::class, 'userLoginStore']);
     Route::get('/siswa/register', [LoginController::class, 'registerIndex'])->name('siswa.register');
     Route::post('/siswa/register', [LoginController::class, 'register'])->name('siswa.register.store');
 
@@ -72,25 +73,39 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     Route::get('/dashboard', function () {
         return view('dashboard');
-    });
+    })->name('admin.dashboard');
 
-    Route::post('/logout', [SessionsController::class, 'destroy']);
+    Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
 
     // ===== Materi =====
-    Route::get('/materi', [MateriController::class, 'index']);
-    Route::get('/materi/create', [MateriController::class, 'create']);
+    Route::get('/materi', [MateriController::class, 'index'])->name('materi.index');
+    Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
     Route::post('/materi/store', [MateriController::class, 'store']);
-    Route::get('/materi/edit/{id}', [MateriController::class, 'edit']);
+    Route::get('/materi/edit/{id}', [MateriController::class, 'edit'])->name('materi.edit');
     Route::post('/materi/update/{id}', [MateriController::class, 'update']);
-    Route::post('/materi/delete/{id}', [MateriController::class, 'destroy']);
+    Route::post('/materi/delete/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
     // ===== Paket =====
-    Route::get('/paket', [PaketController::class, 'index']);
+    Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
     Route::get('/paket/create', [PaketController::class, 'create']);
     Route::post('/paket/store', [PaketController::class, 'store']);
     Route::get('/paket/edit/{id}', [PaketController::class, 'edit']);
     Route::post('/paket/update/{id}', [PaketController::class, 'update']);
     Route::post('/paket/delete/{id}', [PaketController::class, 'destroy']);
+
+    // ===== Kursus =====
+    Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
+    Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
+    Route::post('/kursus/store', [KursusController::class, 'store']);
+    Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
+    Route::post('/kursus/update/{id}', [KursusController::class, 'update']);
+    Route::post('/kursus/delete/{id}', [KursusController::class, 'destroy'])->name('kursus.destroy');
+
+    // jadwal 
+    Route::get('/kursus/jadwal', [JadwalController::class, 'index'])->name('kursus.jadwal');
+    Route::get('/jadwal/create', [JadwalController::class, 'create'])->name('jadwal.create');
+    Route::post('/kursus/jadwal/store/{id}', [JadwalController::class, 'store'])->name('jadwal.store');
+    Route::post('/kursus/jadwal/delete/{id}', [JadwalController::class, 'destroyJadwal'])->name('kursus.jadwal.destroy');   
 
     // ===== Reservasi =====
     Route::get('/reservasi', [ReservasiController::class, 'index']);

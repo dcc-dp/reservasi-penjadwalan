@@ -4,7 +4,7 @@
   @if(Auth::user()->role == 'admin')
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-    <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
+    <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('admin.dashboard') }}">
         <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="...">
         <span class="ms-3 font-weight-bold">Soft UI Dashboard Laravel</span>
     </a>
@@ -87,7 +87,7 @@
       </li>
         @if(Auth::user()->role == 'admin')
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('kursus') ? 'active' : '') }} " href="{{ url('kursus') }}">
+        <a class="nav-link {{ (Request::is('kursus') ? 'active' : '') }} " href="{{ route('kursus.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>customer-support</title>
@@ -111,7 +111,7 @@
 
         @if(Auth::user()->role == 'admin')
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('jadwal') ? 'active' : '') }} " href="{{ url('jadwal') }}">
+        <a class="nav-link {{ (Request::is('jadwal') ? 'active' : '') }} " href="{{ route('kursus.jadwal', ) }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>customer-support</title>
@@ -476,50 +476,7 @@
         </button>
      </form>
      {{-- -----------------------------------------------------------------------------------------------------------------------------------------------------------}}
-      <ul class="navbar-nav">
-    @if(auth()->check())
-        {{-- Menu untuk Admin --}}
-        @if(auth()->user()->role == 'admin')
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" href="{{ url('dashboard') }}">
-                    <span class="nav-link-text ms-1">Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('user-management') ? 'active' : '' }}" href="{{ url('user-management') }}">
-                    <span class="nav-link-text ms-1">User Management</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('admin') ? 'active' : '' }}" href="{{ url('admin') }}">
-                    <span class="nav-link-text ms-1">Admin</span>
-                </a>
-            </li>
-        {{-- Menu untuk User --}}
-        {{-- @elseif(auth()->user()->role == 'siswa')
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('materi') ? 'active' : '' }}" href="{{ route('siswa.materi') }}">
-                    <span class="nav-link-text ms-1">Materi</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('paket') ? 'active' : '' }}" href="{{ route('paket.index') }}">
-                    <span class="nav-link-text ms-1">Paket</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('kursus') ? 'active' : '' }}" href="{{ url('kursus') }}">
-                    <span class="nav-link-text ms-1">Kursus</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('jadwal') ? 'active' : '' }}" href="{{ url('jadwal') }}">
-                    <span class="nav-link-text ms-1">Jadwal</span>
-                </a>
-            </li> --}}
-        @endif
-    @endif
-</ul>
+      
 
       {{-------------------------------------------------------------------------------------------------------------------------------------------------------------}}
       <li class="nav-link mb-0">

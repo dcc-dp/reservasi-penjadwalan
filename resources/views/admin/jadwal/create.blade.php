@@ -12,7 +12,7 @@
                         <h5 class="mb-0">Tambah Jadwal</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('jadwal.store') }}" method="POST">
+                        {{-- <form action="{{ route('jadwal.store') }}" method="POST"> --}}
                             @csrf
 
                             <div class="mb-3">
@@ -65,7 +65,7 @@
 
                             <div class="d-flex">
                                 <button type="submit" class="btn btn-primary me-2">Simpan</button>
-                                <a href="{{ route('jadwal.index') }}" class="btn btn-secondary">Kembali</a>
+                                <a href="{{ route('kursus.jadwal') }}" class="btn btn-secondary">Kembali</a>
                             </div>
                         </form>
                     </div>

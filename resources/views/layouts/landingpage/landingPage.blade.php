@@ -49,7 +49,15 @@
                         <a href="{{ route('pakets')}}" class="nav-item nav-link {{ Request::is('pakets') ? 'active' : '' }}">Paket Kursus</a>
                     </div>
                     <div class="ms-lg-3">
-                        <a href="{{ route('siswa.login') }}" class="btn btn-success fw-sm">Daftar/Masuk</a>
+                        @guest
+                            <a href="{{ route('siswa.login') }}" class="btn btn-success fw-sm">Daftar / Masuk</a>
+                        @endguest
+
+                        @auth
+                            <a href="{{ route('siswa.dashboard') }}" class="btn btn-primary fw-sm">
+                                Dashboard
+                            </a>
+                        @endauth
                     </div>
                 </div>
             </nav>
