@@ -10,32 +10,44 @@ class SessionsController extends Controller
 {
     public function create()
     {
+        // default login (misalnya admin)
         return view('session.login-session');
     }
 
-    public function store()
+    public function createSiswa()
     {
-        $attributes = request()->validate([
-            'email'=>'required|email',
-            'password'=>'required' 
+        return view('user.loginUser');
+    }
+
+    public function store(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
-        if(Auth::attempt($attributes))
-        {
-            session()->regenerate();
-            return redirect('dashboard')->with(['success'=>'Anda berhasil login']);
-        }
-        else{
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-            return back()->withErrors(['email'=>'Email or password invalid.']);
+            return match (Auth::user()->role) {
+                'admin' => redirect()->route('admin.dashboard'),
+                'instruktur' => redirect()->route('instruktur.dashboard'),
+                'siswa' => redirect()->route('siswa.dashboard'),
+                default => abort(403, 'Role tidak dikenali'),
+            };
         }
+        
+        return back()->withErrors([
+            'email' => 'Email atau password salah',
+        ]);
     }
-    
-    public function destroy()
+
+    public function destroy(Request $request)
     {
-
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return redirect('/login')->with(['success'=>'kamu berhasil logout']);
+        return redirect('/login');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservasi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,6 +100,12 @@ class UserAuthController extends Controller
      */
     public function dashboard()
     {
-        return view('user.dashboard.Dashboard'); // pastikan view ada
+        // dd(Auth::user());
+        $reservasi = Reservasi::with('pembayaran')
+            ->where('id_user', Auth::user()->id)
+            ->latest()
+            ->first();
+
+        return view('dashboard', compact('reservasi'));
     }
 }
