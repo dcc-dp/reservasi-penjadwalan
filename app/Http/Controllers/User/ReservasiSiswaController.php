@@ -12,7 +12,8 @@ class ReservasiSiswaController extends Controller
 {
     public function create()
     {
-        return view('user.reservasi.create');
+        $kursusList = \App\Models\Kursus::all();
+        return view('user.reservasi.create', compact('kursusList'));
     }
     public function store(Request $request)
     {
