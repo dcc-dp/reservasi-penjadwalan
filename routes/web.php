@@ -18,6 +18,7 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\admin\PaketController;
 use App\Http\Controllers\admin\ReservasiController;
+use App\Http\Controllers\InstrukturProfileController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KursusController;
 use App\Http\Controllers\user\ReservasiSiswaController;
@@ -80,27 +81,27 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // ===== Materi =====
     Route::get('/materi', [MateriController::class, 'index'])->name('materi.index');
     Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
-    Route::post('/materi/store', [MateriController::class, 'store']);
+    Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
     Route::get('/materi/edit/{id}', [MateriController::class, 'edit'])->name('materi.edit');
-    Route::post('/materi/update/{id}', [MateriController::class, 'update']);
+    Route::post('/materi/update/{id}', [MateriController::class, 'update'])->name('materi.update');
     Route::post('/materi/delete/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
     // ===== Paket =====
     Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
     Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
-    Route::post('/paket/store', [PaketController::class, 'store']);
+    Route::post('/paket/store', [PaketController::class, 'store'])->name('paket.store');
     Route::get('/paket/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
-    Route::post('/paket/update/{id}', [PaketController::class, 'update']);
+    Route::put('/paket/update/{id}', [PaketController::class, 'update'])->name('paket.update');
     Route::post('/paket/delete/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
 
     // ===== Kursus =====
     Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
     Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
-    Route::post('/kursus/store', [KursusController::class, 'store']);
+    Route::post('/kursus/store', [KursusController::class, 'store'])->name('kursus.store');
     Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
-    Route::post('/kursus/update/{id}', [KursusController::class, 'update']);
+    Route::post('/kursus/update/{id}', [KursusController::class, 'update'])->name('kursus.update');
     Route::post('/kursus/delete/{id}', [KursusController::class, 'destroy'])->name('kursus.destroy');
-
+    Route::put('/admin/pembayaran/{id}/konfirmasi', [PembayaranController::class, 'konfirmasi'])->name('admin.pembayaran.konfirmasi');
     // jadwal 
     Route::get('/kursus/jadwal', [JadwalController::class, 'index'])->name('kursus.jadwal');
     Route::get('/jadwal/create', [JadwalController::class, 'create'])->name('jadwal.create');
@@ -108,8 +109,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/kursus/jadwal/delete/{id}', [JadwalController::class, 'destroyJadwal'])->name('kursus.jadwal.destroy');   
 
     // ===== Reservasi =====
-    Route::get('/reservasi', [ReservasiController::class, 'index']);
+    Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi');
     Route::post('/reservasi/konfirmasi/{id}', [ReservasiController::class, 'konfirmasi']);
+
+    // ===== Instruktur =====
+    Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');
+    Route::get('/instruktur/create', [InstrukturProfileController::class, 'create'])->name('instruktur.create');
+    Route::post('/instruktur/store', [InstrukturProfileController::class, 'store'])->name('instruktur.store');
+    Route::get('/instruktur/edit/{id}', [InstrukturProfileController::class, 'edit'])->name('instruktur.edit');
+    Route::post('/instruktur/update/{id}', [InstrukturProfileController::class, 'update'])->name('instruktur.update');
+    Route::post('/instruktur/delete/{id}', [InstrukturProfileController::class, 'destroy'])->name('instruktur.destroy');
 });
 
 /*

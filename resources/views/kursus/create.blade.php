@@ -15,8 +15,8 @@
         <div class="mb-3">
             <label>Instruktur</label>
             <select name="id_instruktur" class="form-control" required>
-                @foreach($instrukturs as $instruktur)
-                    <option value="{{ $instruktur->id }}">{{ $instruktur->user->name }}</option>
+                @foreach($instrukturList as $instrukturList)
+                    <option value="{{ $instrukturList->id }}">{{ $instrukturList->user->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -24,8 +24,8 @@
         <div class="mb-3">
             <label>Paket</label>
             <select name="id_paket" class="form-control" required>
-                @foreach($pakets as $paket)
-                    <option value="{{ $paket->id }}">{{ $paket->materi->Judul }}</option>
+                @foreach($paketList  as $paketList )
+                    <option value="{{ $paketList ->id }}">{{ $paketList ->materi->Judul }}</option>
                 @endforeach
             </select>
         </div>

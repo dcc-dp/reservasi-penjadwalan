@@ -16,4 +16,9 @@ class Paket extends Model
     {
         return $this->belongsTo(Materi::class, 'id_materi', 'id');
     }
+
+    // public function paket()
+    // {
+    //     return $this->hasOne(Pembayaran::class, 'paket_id');
+    // }
 }
