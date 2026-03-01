@@ -87,11 +87,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     // ===== Paket =====
     Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
-    Route::get('/paket/create', [PaketController::class, 'create']);
+    Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
     Route::post('/paket/store', [PaketController::class, 'store']);
-    Route::get('/paket/edit/{id}', [PaketController::class, 'edit']);
+    Route::get('/paket/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
     Route::post('/paket/update/{id}', [PaketController::class, 'update']);
-    Route::post('/paket/delete/{id}', [PaketController::class, 'destroy']);
+    Route::post('/paket/delete/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
 
     // ===== Kursus =====
     Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
