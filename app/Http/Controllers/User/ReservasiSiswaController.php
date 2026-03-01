@@ -4,6 +4,8 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reservasi;
+use App\Models\Paket;
+use App\Models\Materi;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +14,9 @@ class ReservasiSiswaController extends Controller
 {
     public function create()
     {
-        return view('user.reservasi.create');
+        $kursusList = \App\Models\Kursus::all();
+        $paketList = \App\Models\Materi::all();
+        return view('user.reservasi.create', compact('kursusList', 'paketList'));
     }
     public function store(Request $request)
     {
@@ -36,7 +40,6 @@ class ReservasiSiswaController extends Controller
         // otomatis buat pembayaran
         Pembayaran::create([
             'reservasi_id' => $reservasi->id,
-            'status' => 'menunggu',
         ]);
 
         return redirect()->route('siswa.dashboard')

@@ -9,7 +9,7 @@
         <h2 class="text-center text-success fw-bold mb-4">Formulir Reservasi Kursus</h2>
 
         {{-- Formulir --}}
-        <form action="{{ route('reservasi.store') }}" method="POST">
+        <form action="{{ route('siswa.reservasi.store') }}" method="POST">
             @csrf
 
             {{-- Pilih Paket Kursus --}}

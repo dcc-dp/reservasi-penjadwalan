@@ -12,16 +12,19 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h4 class="mb-0">Daftar Kursus</h4>
+            <a href="{{ route('kursus.create') }}" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Tambah Kursus
+            </a>
         </div>
-
+    
         @if (session('success'))
             <div class="alert alert-success m-3">{{ session('success') }}</div>
         @endif
 
-        <div class="table-responsive p-3">
-            <table class="table table-bordered align-middle text-sm">
-                <thead class="table-light">
-                    <tr>
+        <div class="card-body px-0 pt-0 pb-2">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
                         <th>Kursus</th>
                         <th>Instruktur</th>
                         <th>Paket</th>
@@ -31,7 +34,7 @@
                 </thead>
                 <tbody>
                     @forelse ($kursusList as $kursus)
-                        <tr>
+                        <tr class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
                             <td>{{ $kursus->name }}</td>
                             <td>{{ $kursus->instruktur->user->name ?? '-' }}</td>
                             <td>{{ $kursus->paket->materi->Judul ?? '-' }}</td>

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('reservasi_id');
-            $table->string('metode_bayar',100);
-            $table->integer('total');
+            $table->string('metode_bayar',100)->nullable();
+            $table->integer('total')->nullable();
             $table->enum('status', ['proses', 'selesai','gagal'])->nullable()->default('proses');
             $table->timestamps();
         });

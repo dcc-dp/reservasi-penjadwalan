@@ -15,7 +15,7 @@
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
                                             <th width="500px"
                                                 class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7" >Nama Materi</th>
                                             <th width="500px"
@@ -28,7 +28,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $item)
-                                            <tr class="text-sm">
+                                            <tr class="text-sm text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
                                                 <td class="ps-3">{{ optional($item->materi)->Judul ?? '-' }}</td>
                                                 <td>{{ $item->jenis }}</td>
                                                 <td>Rp{{ number_format($item->harga, 0, ',', '.') }}</td>

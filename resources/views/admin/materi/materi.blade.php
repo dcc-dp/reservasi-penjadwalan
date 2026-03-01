@@ -21,11 +21,15 @@
                                 <table class="table align-items-center mb-0">
                                     <thead class="thead-light">
                                         <tr>
+                                            
                                             <th width="500px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
+                                                No</th>
+                                            <th width="500px"
+                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
                                                 Nama Materi</th>
                                             <th width="700px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
                                                 Deskripsi</th>
                                             <th width="200px"
                                                 class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
@@ -37,17 +41,17 @@
                                         <tbody>
 
                                             <tr class="text-sm">
-                                                <td>{{ $index+1  }}</td>
-                                                <td class="px-4">{{ $y->Judul }}</td>
-                                                <td class="px-4">{{ $y->deskripsi }}</td>
+                                                <td class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">{{ $index+1  }}</td>
+                                                <td class="px-4 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">{{ $y->Judul }}</td>
+                                                <td class="px-4 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">{{ $y->deskripsi }}</td>
 
                                                 <td>
 
                                                     <a href="{{ route('materi.edit', $y->id) }}"
-                                                        class= "btn btn bg-gradient-secondary" data-bs-toggle="tooltip">edit
+                                                        class= "btn btn bg-gradient-secondary text-uppercase text-secondary text-xs font-weight-bolder opacity-7" data-bs-toggle="tooltip">edit
                                                     </a>
                                                     <!-- Tombol Hapus -->
-                                                    <button type="button" class="btn btn bg-gradient-danger btn-block mb-3"
+                                                    <button type="button" class="btn btn bg-gradient-danger btn-block mb-3 text-uppercase text-secondary text-xs font-weight-bolder opacity-7"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#Hapusdata{{ $y->id }}">Hapus</button>
 
