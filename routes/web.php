@@ -22,11 +22,14 @@ use App\Http\Controllers\InstrukturProfileController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KursusController;
 use App\Http\Controllers\user\ReservasiSiswaController;
-use App\Http\Controllers\user\JadwalSiswaController;
+use App\Http\Controllers\User\JadwalSiswaController;
 
 use App\Http\Controllers\pendaftaranController;
 use App\Http\Controllers\PembayaranController;
+// use App\Http\Controllers\Siswa\KursusSiswaController as KursusSiswaController;
 use App\Http\Controllers\User\SiswaController;
+use App\Http\Controllers\User\KursusSiswaController;
+
 use App\Models\Kursus;
 
 /*
@@ -145,4 +148,8 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->group(function () {
     Route::get('/reservasi', [ReservasiSiswaController::class, 'index'])->name('siswa.reservasi.index');
     Route::get('/reservasi/create', [ReservasiSiswaController::class, 'create'])->name('siswa.reservasi.create');
     Route::post('/reservasi/store', [ReservasiSiswaController::class, 'store'])->name('siswa.reservasi.store');
+
+    // ===== Kursus =====
+    Route::get('/kursus', [KursusSiswaController::class, 'index'])->name('siswa.kursus.index');
+
 });
