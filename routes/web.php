@@ -142,6 +142,7 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->group(function () {
     Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('siswa.pembayaran');
 
     // ===== Reservasi =====
+    Route::get('/reservasi', [ReservasiSiswaController::class, 'index'])->name('siswa.reservasi.index');
     Route::get('/reservasi/create', [ReservasiSiswaController::class, 'create'])->name('siswa.reservasi.create');
     Route::post('/reservasi/store', [ReservasiSiswaController::class, 'store'])->name('siswa.reservasi.store');
 });

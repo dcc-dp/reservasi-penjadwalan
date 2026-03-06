@@ -13,12 +13,33 @@ class SiswaController extends Controller
     {
         $user = Auth::user();
 
-        $reservasi = Reservasi::with('pembayaran')
+        $reservasiList = Reservasi::with(['pembayaran', 'kursus'])
             ->where('id_user', $user->id)
-            ->latest()
-            ->first();
+            ->get();
 
-        return view('user.dashboard.dashboard', compact('user', 'reservasi'));
+        // Total semua reservasi
+        $totalReservasi = $reservasiList->count();
+
+        // Kursus aktif (status pembayaran selesai)
+        $aktif = $reservasiList->filter(function ($r) {
+            return $r->pembayaran && $r->pembayaran->status == 'selesai';
+        })->count();
+
+        // Menunggu pembayaran
+        $menunggu = $reservasiList->filter(function ($r) {
+            return $r->pembayaran && $r->pembayaran->status == 'proses';
+        })->count();
+
+        // Ambil 1 jadwal terdekat (atau terbaru)
+        $jadwalTerdekat = $reservasiList->first();
+
+        return view('user.dashboard.dashboard', compact(
+            'user',
+            'totalReservasi',
+            'aktif',
+            'menunggu',
+            'jadwalTerdekat'
+        ));
     }
 
     public function destroy(Request $request)
