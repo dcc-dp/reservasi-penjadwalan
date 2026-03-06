@@ -16,7 +16,6 @@
 
     <hr class="horizontal dark">
 
-    <!-- Menu -->
     <ul class="navbar-nav">
 
         <!-- Dashboard -->
@@ -30,45 +29,94 @@
             </a>
         </li>
 
-        <!-- Jadwal -->
+        <!-- Kursus -->
         <li class="nav-item">
             <a 
-                class="nav-link {{ Request::is('siswa/jadwal') ? 'active' : '' }}"
-                href="{{ route('siswa.jadwal') }}"
+                class="nav-link {{ Request::is('siswa/kursus*') ? 'active' : '' }}"
+                href="{{ route('siswa.kursus.index') }}"
             >
-                <i class="fas fa-calendar me-2"></i>
-                <span class="nav-link-text">Jadwal</span>
+                <i class="fas fa-graduation-cap me-2"></i>
+                <span class="nav-link-text">Kursus</span>
             </a>
         </li>
 
-        <!-- Reservasi -->
+        <!-- Aktivitas Kursus -->
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#aktivitasKursus">
+                <i class="fas fa-layer-group me-2"></i>
+                <span class="nav-link-text">Aktivitas Kursus</span>
+            </a>
+
+            <div class="collapse" id="aktivitasKursus">
+                <ul class="nav ms-4">
+
+                    <!-- Reservasi -->
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link {{ Request::is('siswa/reservasi*') ? 'active' : '' }}"
+                            href="{{ route('siswa.reservasi.index') }}"
+                        >
+                            Reservasi
+                        </a>
+                    </li>
+
+                    <!-- Jadwal -->
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link {{ Request::is('siswa/jadwal*') ? 'active' : '' }}"
+                            href="{{ route('siswa.jadwal') }}"
+                        >
+                            Jadwal Saya
+                        </a>
+                    </li>
+
+                    <!-- Kursus Saya -->
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link {{ Request::is('siswa/kursus-saya*') ? 'active' : '' }}"
+                            href="{{ route('siswa.kursus.index') }}"
+                        >
+                            Kursus Saya
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </li>
+
+        <!-- Pembayaran -->
         <li class="nav-item">
             <a 
-                class="nav-link {{ Request::is('siswa/reservasi*') ? 'active' : '' }}"
-                href="{{ route('siswa.reservasi.index') }}"
+                class="nav-link {{ Request::is('siswa/pembayaran*') ? 'active' : '' }}"
+                href=""
             >
-                <i class="fas fa-book me-2"></i>
-                <span class="nav-link-text">Reservasi</span>
+                <i class="fas fa-credit-card me-2"></i>
+                <span class="nav-link-text">Pembayaran</span>
             </a>
         </li>
 
+        <!-- Ulasan -->
+        <li class="nav-item">
+            <a 
+                class="nav-link {{ Request::is('siswa/ulasan*') ? 'active' : '' }}"
+                href=""
+            >
+                <i class="fas fa-star me-2"></i>
+                <span class="nav-link-text">Ulasan</span>
+            </a>
+        </li>
+
+        <!-- Logout -->
         <li class="nav-item mt-3">
+            <form method="POST" action="{{ route('siswa.logout') }}">
+                @csrf
+                <button class="nav-link border-0 bg-transparent w-100 text-start">
+                    <i class="fas fa-sign-out-alt me-2"></i>
+                    <span class="nav-link-text">Logout</span>
+                </button>
+            </form>
+        </li>
 
-    <form method="POST" action="{{ route('siswa.logout') }}">
-        @csrf
-
-        <button class="nav-link border-0 bg-transparent w-100 text-start">
-
-            <i class="fas fa-sign-out-alt me-2"></i>
-            <span class="nav-link-text">Logout</span>
-
-        </button>
-
-    </form>
-
-</li>
     </ul>
-    
 
 </aside>
-
