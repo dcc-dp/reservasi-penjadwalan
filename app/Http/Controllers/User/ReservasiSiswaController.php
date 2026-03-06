@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservasiSiswaController extends Controller
 {
+    public function index()
+    {
+        $reservasiList = Reservasi::where('id_user', Auth::id())->with('kursus')->get();
+        return view('user.reservasi.index', compact('reservasiList'));
+    }
+    
     public function create()
     {
         $kursusList = \App\Models\Kursus::all();
