@@ -91,40 +91,6 @@
     </div>
     @endif
 
-    {{-- JADWAL TERDEKAT --}}
-    <div class="row">
-        <div class="col-12">
-            <div class="card shadow-sm">
-                <div class="card-header">
-                    <h6 class="mb-0">📅 Jadwal Terdekat</h6>
-                </div>
-                <div class="card-body">
-
-                    @if($jadwalTerdekat)
-
-                        <h5>{{ $jadwalTerdekat->kursus->name ?? '-' }}</h5>
-
-                        <p class="mb-1">
-                            Hari : {{ $jadwalTerdekat->hari }}
-                        </p>
-
-                        <p class="mb-1">
-                            Jam : {{ $jadwalTerdekat->jam }}
-                        </p>
-
-                    @else
-
-                        <p class="text-muted">
-                            Belum ada jadwal terdaftar.
-                        </p>
-
-                    @endif
-
-                </div>
-            </div>
-        </div>
-    </div>
-
     {{-- QUICK ACTION --}}
     <div class="row mt-4">
 

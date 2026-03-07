@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Paket;
-use App\Models\Materi;
+use App\Models\Kursus;
 use Illuminate\Http\Request;
 
 class PaketController extends Controller
@@ -13,7 +14,8 @@ class PaketController extends Controller
      */
     public function index()
     {
-        $data = Paket::with('materi')->get();
+        $data = Paket::with('kursus')->get();
+
         return view('admin.paket.index', compact('data'));
     }
 
@@ -22,9 +24,9 @@ class PaketController extends Controller
      */
     public function create()
     {
-           $materi = Materi::all();
-            return view('admin.paket.create', compact('materi'));
+        $kursus = Kursus::all();
 
+        return view('admin.paket.create', compact('kursus'));
     }
 
     /**
@@ -33,68 +35,64 @@ class PaketController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_materi' => 'required|integer|exists:materis,id',
-            'jenis'     => 'required|string|max:50',
+            'kursus_id' => 'required|exists:kursuses,id',
+            'jenis'     => 'required|in:Regular,VIP,VVIP',
             'harga'     => 'required|numeric|min:0',
         ]);
 
-        // Simpan ke database
         Paket::create([
-            'id_materi' => $request->id_materi,
+            'kursus_id' => $request->kursus_id,
             'jenis'     => $request->jenis,
             'harga'     => $request->harga,
         ]);
 
-        return redirect()->route('paket.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-
+        return redirect()->route('paket.index')
+            ->with('success','Paket berhasil ditambahkan');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $paket = Paket::findOrFail($id);
-        $materi = Materi::all();
-        return view('admin.paket.edit', compact('paket','materi'));
+        $kursus = Kursus::all();
+
+        return view('admin.paket.edit', compact('paket','kursus'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-        'id_materi' => 'required|integer|exists:materis,id',
-        'jenis' => 'required|string|max:50',
-        'harga' => 'required|numeric|min:0',
-    ]);
+            'kursus_id' => 'required|exists:kursuses,id',
+            'jenis'     => 'required|in:Regular,VIP,VVIP',
+            'harga'     => 'required|numeric|min:0',
+        ]);
 
-    $paket = Paket::findOrFail($id);
-    $paket->update([
-        'id_materi' => $request->id_materi,
-        'jenis' => $request->jenis,
-        'harga' => $request->harga,
-    ]);
+        $paket = Paket::findOrFail($id);
 
-    return redirect()->route('paket.index');
+        $paket->update([
+            'kursus_id' => $request->kursus_id,
+            'jenis'     => $request->jenis,
+            'harga'     => $request->harga,
+        ]);
+
+        return redirect()->route('paket.index')
+            ->with('success','Paket berhasil diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-                $paket = Paket::findOrFail($id);
-                $paket->delete();
+        $paket = Paket::findOrFail($id);
+        $paket->delete();
 
-            return redirect()->route('paket.index');
+        return redirect()->route('paket.index')
+            ->with('success','Paket berhasil dihapus');
     }
 }

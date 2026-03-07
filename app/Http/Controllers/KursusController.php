@@ -12,19 +12,27 @@ class KursusController extends Controller
 {
     public function index()
     {
-        $kursusList = Kursus::with(['instruktur.user', 'paket.materi'])->get();
+        $kursusList = Kursus::with(['instruktur.user','pakets'])->get();
+
         $instrukturList = Instruktur_Profile::with('user')->get();
-        $paketList = Paket::with('Materi')->get();
+
+        $paketList = Paket::all();
+
         $reserv = Reservasi::with(['user','kursus','pembayaran'])->get();
-        return view('kursus.index', compact('kursusList', 'instrukturList', 'paketList', 'reserv'));
+
+        return view('kursus.index', compact(
+            'kursusList',
+            'instrukturList',
+            'paketList',
+            'reserv'
+        ));
     }
 
     public function create()
     {
-        $paketList = Paket::with('materi')->get();
         $instrukturList = Instruktur_Profile::with('user')->get();
 
-        return view('kursus.create', compact('paketList', 'instrukturList'));
+        return view('kursus.create', compact('instrukturList'));
     }
 
     public function store(Request $request)
@@ -32,14 +40,12 @@ class KursusController extends Controller
         $request->validate([
             'name' => 'required',
             'id_instruktur' => 'required',
-            'id_paket' => 'required',
             'deskripsi' => 'nullable'
         ]);
 
         Kursus::create([
             'name' => $request->name,
             'id_instruktur' => $request->id_instruktur,
-            'id_paket' => $request->id_paket,
             'deskripsi' => $request->deskripsi,
         ]);
 
@@ -49,10 +55,9 @@ class KursusController extends Controller
 
     public function edit(Kursus $kursus)
     {
-        $paketList = Paket::with('materi')->get();
         $instrukturList = Instruktur_Profile::with('user')->get();
 
-        return view('kursus.edit', compact('kursus','paketList','instrukturList'));
+        return view('kursus.edit', compact('kursus','instrukturList'));
     }
 
     public function update(Request $request, Kursus $kursus)
@@ -60,14 +65,12 @@ class KursusController extends Controller
         $request->validate([
             'name' => 'required',
             'id_instruktur' => 'required',
-            'id_paket' => 'required',
             'deskripsi' => 'nullable'
         ]);
 
         $kursus->update([
             'name' => $request->name,
             'id_instruktur' => $request->id_instruktur,
-            'id_paket' => $request->id_paket,
             'deskripsi' => $request->deskripsi,
         ]);
 
@@ -82,6 +85,4 @@ class KursusController extends Controller
         return redirect()->route('kursus.index')
             ->with('success', 'Kursus berhasil dihapus.');
     }
-
-    
 }
