@@ -4,27 +4,19 @@
 
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
     <div class="container-fluid py-4">
-
         <div class="row">
             <div class="col-lg-6 mx-auto">
-
                 <div class="card">
-
                     <div class="card-header">
                         <h5 class="mb-0">Edit Paket</h5>
                     </div>
-
                     <div class="card-body">
-
                         <form action="{{ route('paket.update',$paket->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-
                             <div class="mb-3">
                                 <label class="form-label">Kursus</label>
-
                                 <select name="kursus_id" class="form-control" required>
-
                                     @foreach ($kursus as $k)
                                         <option value="{{ $k->id }}"
                                             {{ $paket->kursus_id == $k->id ? 'selected' : '' }}>

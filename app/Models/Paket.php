@@ -17,6 +17,11 @@ class Paket extends Model
         return $this->belongsTo(Kursus::class,'kursus_id');
     }
 
+    public function materis()
+    {
+        return $this->hasMany(Materi::class,'paket_id');
+    }
+
     public function reservasis()
     {
         return $this->hasMany(Reservasi::class,'id_paket');

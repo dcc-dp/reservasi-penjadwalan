@@ -56,7 +56,7 @@
                                 </td>
 
                                 <td>
-                                    {{ $kursus->instruktur->user->name ?? '-' }}
+                                    {{ $kursus->instruktur->name ?? '-' }}
                                 </td>
 
                                 <td>
@@ -82,31 +82,27 @@
                                     @endforelse
 
                                 </td>
-
                                 <td style="max-width:200px">
                                     {{ $kursus->deskripsi ?? '-' }}
                                 </td>
-
                                 <td>
-
-                                    <form action="{{ route('kursus.destroy', $kursus->id) }}" method="POST">
-
+                                    <a href="{{ route('kursus.edit', $kursus->id) }}" 
+                                    class="btn btn-warning btn-sm">edit
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('kursus.destroy', $kursus->id) }}" 
+                                        method="POST" 
+                                        style="display:inline">
                                         @csrf
                                         @method('DELETE')
-
                                         <button 
                                             onclick="return confirm('Yakin hapus kursus ini?')" 
-                                            class="btn btn-danger btn-sm"
-                                        >
-                                            <i class="fas fa-trash"></i>
+                                            class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i>delete
                                         </button>
-
                                     </form>
-
                                 </td>
-
                             </tr>
-
                         @empty
 
                             <tr>

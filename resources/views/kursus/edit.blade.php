@@ -6,20 +6,12 @@
 
     <h2>Edit Kursus</h2>
 
-    <form action="{{ route('kursus.update', $kursus->id) }}" method="POST">
+    <form action="{{ route('kursus.update', $id)}}" method="POST">
         @csrf
         @method('PUT')
-
         <div class="mb-3">
             <label class="form-label">Nama Kursus</label>
-
-            <input 
-                type="text"
-                name="name"
-                class="form-control"
-                value="{{ old('name', $kursus->name) }}"
-                required
-            >
+            <input type="text" name="name" class="form-control" value="{{ old('name', $kursus->name) }}" required>
 
         </div>
 
@@ -36,7 +28,7 @@
                         value="{{ $instruktur->id }}"
                         {{ old('id_instruktur', $kursus->id_instruktur) == $instruktur->id ? 'selected' : '' }}
                     >
-                        {{ $instruktur->user->name }}
+                        {{ $instruktur->name }}
                     </option>
 
                 @endforeach
@@ -44,30 +36,6 @@
             </select>
 
         </div>
-
-
-        <div class="mb-3">
-
-            <label class="form-label">Paket</label>
-
-            <select name="id_paket" class="form-control" required>
-
-                @foreach($paketList as $paket)
-
-                    <option 
-                        value="{{ $paket->id }}"
-                        {{ old('id_paket', $kursus->id_paket) == $paket->id ? 'selected' : '' }}
-                    >
-                        {{ $paket->materi->Judul }}
-                    </option>
-
-                @endforeach
-
-            </select>
-
-        </div>
-
-
         <div class="mb-3">
 
             <label class="form-label">Deskripsi</label>

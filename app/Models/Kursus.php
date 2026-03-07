@@ -17,9 +17,9 @@ class Kursus extends Model
         return $this->belongsTo(User::class,'id_instruktur');
     }
 
-    public function pakets()
+    public function paket()
     {
-        return $this->hasMany(Paket::class,'kursus_id');
+        return $this->belongsTo(Paket::class,'paket_id');
     }
 
     public function reservasis()

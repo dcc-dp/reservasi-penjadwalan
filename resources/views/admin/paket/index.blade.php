@@ -108,7 +108,6 @@
                                                     <div class="modal-footer">
 
                                                         <form action="{{ route('paket.destroy',$item->id) }}" method="POST">
-
                                                             @csrf
                                                             @method('DELETE')
 
