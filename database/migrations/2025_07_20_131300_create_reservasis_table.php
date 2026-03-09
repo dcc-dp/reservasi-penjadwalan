@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_kursus');
-            $table->string('hari');   
-            $table->time('jam'); 
+            $table->unsignedBigInteger('id_paket');
+            $table->string('ruangan')->nullable();
             $table->timestamps();
+
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_kursus')->references('id')->on('kursuses')->onDelete('cascade');
+            $table->foreign('id_paket')->references('id')->on('pakets')->onDelete('cascade');
         });
     }
     /**

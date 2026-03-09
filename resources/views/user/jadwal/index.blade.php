@@ -38,39 +38,42 @@
 
                                     {{-- Kursus --}}
                                     <td>
-                                        <h6 class="mb-0 text-sm">{{ $reservasi->kursus->name ?? '-' }}</h6>
+                                        {{ $reservasi->kursus->name ?? '-' }}
                                     </td>
 
                                     {{-- Instruktur --}}
                                     <td>
-                                        <span class="text-sm">
-                                            {{ optional(optional($reservasi->kursus)->instruktur)->user->name ?? '-' }}
-                                        </span>
+                                        {{ $reservasi->kursus?->instruktur?->name ?? '-' }}
                                     </td>
 
                                     {{-- Jadwal --}}
                                     <td>
-                                        @if ($reservasi->jadwal)
-                                            <div class="text-sm">
-                                                <strong>
-                                                    {{ $reservasi->jadwal->hari ?? '-' }} -
-                                                    {{ \Carbon\Carbon::parse($reservasi->jadwal->jam)->format('H:i') }}
-                                                </strong><br>
-                                                <small class="text-muted">
-                                                    Pertemuan {{ $reservasi->jadwal->pertemuan ?? '-' }}
-                                                </small>
-                                            </div>
+                                        @if($reservasi->jadwal?->count())
+                                            @foreach ($reservasi->jadwal as $jadwal)
+                                                <div class="text-sm mb-1">
+                                                    <strong>{{ $jadwal->hari }} - {{ \Carbon\Carbon::parse($jadwal->jam)->format('H:i') }}</strong><br>
+                                                    <small class="text-muted">Pertemuan {{ $jadwal->pertemuan }}</small>
+                                                </div>
+                                            @endforeach
                                         @else
                                             <span class="text-muted">Belum ditentukan</span>
                                         @endif
                                     </td>
 
                                     {{-- Ruangan --}}
-                                    <td>{{ $reservasi->jadwal->ruangan ?? '-' }}</td>
+                                    <td>
+                                        @if($reservasi->jadwal?->count())
+                                            @foreach($reservasi->jadwal as $jadwal)
+                                                <div class="text-sm">{{ $jadwal->ruangan ?? '-' }}</div>
+                                            @endforeach
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
 
                                     {{-- Status --}}
                                     <td>
-                                        @php $status = $reservasi->pembayaran?->status; @endphp
+                                        @php $status = $reservasi->pembayaran?->status ?? 'belum'; @endphp
 
                                         @if ($status === 'selesai')
                                             <span class="badge bg-success">Aktif</span>

@@ -12,11 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('materis', function (Blueprint $table) {
-            $table->id();
-            $table->string('Judul');
-            $table->text('deskripsi');
-            $table->timestamps();
-        });
+        $table->id();
+        $table->unsignedBigInteger('paket_id'); 
+        $table->string('judul');
+        $table->text('deskripsi');
+        $table->timestamps();
+        
+        $table->foreign('paket_id')
+            ->references('id')
+            ->on('pakets')
+            ->onDelete('cascade');
+});
     }
 
     /**

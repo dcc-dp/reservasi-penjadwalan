@@ -32,7 +32,7 @@
                                         @foreach ($jadwals as $item)
                                             <tr>
                                                 <td class="ps-3">{{ $item->user->name ?? '-' }}</td>
-                                                <td>{{ $item->kursus->name ?? '-' }}</td>
+                                                <td>{{ $item->reservasi->kursus->name ?? '-' }}</td>
                                                 <td>{{ $item->tanggal ?? '-' }}</td>
                                                 <td>{{ $item->hari ?? '-' }}</td>
                                                 <td>{{ $item->jam ?? '-' }}</td>

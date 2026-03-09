@@ -13,8 +13,8 @@ class Pembayaran extends Model
         'status',
     ];
 
-    public function reservasi()
+    public function pembayaran()
     {
-        return $this->belongsTo(Reservasi::class, 'reservasi_id');
+        return $this->hasOne(Pembayaran::class,'reservasi_id');
     }
 }

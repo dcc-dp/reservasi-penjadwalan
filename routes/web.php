@@ -95,15 +95,15 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/paket/store', [PaketController::class, 'store'])->name('paket.store');
     Route::get('/paket/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
     Route::put('/paket/update/{id}', [PaketController::class, 'update'])->name('paket.update');
-    Route::post('/paket/delete/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+    Route::delete('/paket/delete/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
 
     // ===== Kursus =====
     Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
     Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
     Route::post('/kursus/store', [KursusController::class, 'store'])->name('kursus.store');
     Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
-    Route::post('/kursus/update/{id}', [KursusController::class, 'update'])->name('kursus.update');
-    Route::post('/kursus/delete/{id}', [KursusController::class, 'destroy'])->name('kursus.destroy');
+    Route::put('/kursus/update/{id}', [KursusController::class, 'update'])->name('kursus.update');
+    Route::delete('/kursus/delete/{id}', [KursusController::class, 'destroy'])->name('kursus.destroy');
     Route::put('/admin/pembayaran/{id}/konfirmasi', [PembayaranController::class, 'konfirmasi'])->name('admin.pembayaran.konfirmasi');
     // jadwal 
     Route::get('/kursus/jadwal', [JadwalController::class, 'index'])->name('kursus.jadwal');

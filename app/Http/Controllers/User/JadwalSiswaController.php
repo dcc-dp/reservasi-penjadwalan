@@ -9,15 +9,16 @@ use Illuminate\Support\Facades\Auth;
 class JadwalSiswaController extends Controller
 {
     public function index()
-    {
-        $reservasiList = Reservasi::with([
-        'jadwal',
-        'kursus.instruktur.user',
-        'pembayaran'
+{
+    $reservasiList = Reservasi::with([
+        'jadwal',                // ambil jadwal
+        'kursus.instruktur',     // ambil instruktur kursus
+        'paket',                 // ambil paket
+        'pembayaran'             // ambil status pembayaran
     ])
     ->where('id_user', Auth::id())
     ->get();
 
-        return view('user.jadwal.index', compact('reservasiList'));
-    }
+    return view('user.jadwal.index', compact('reservasiList'));
+}
 }
