@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Kursus;
 use App\Models\Jadwal;
+use App\Models\Reservasi;
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
@@ -14,7 +15,7 @@ class JadwalController extends Controller
      */
     public function index()
     {
-        $jadwals = Jadwal::with(['user', 'kursus'])->get();
+        $jadwals = Jadwal::with(['reservasi.user','reservasi.kursus'])->get();
         return view('admin.jadwal.index', compact('jadwals'));
     }
 
@@ -23,10 +24,9 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        $kursuses = Kursus::all();
+        $reservasis = Reservasi::with('user','kursus')->get();
 
-        return view('admin.jadwal.create', compact('users', 'kursuses'));
+        return view('admin.jadwal.create', compact('reservasis'));
     }
 
     /**
@@ -35,24 +35,28 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_user'   => 'required|exists:users,id',
-            'id_kursus' => 'required|exists:kursuses,id',
-            'tanggal'   => 'required|date',
-            'jam'       => 'required',
-            'ruangan'   => 'required|string|max:50',
+            'reservasi_id' => 'required|exists:reservasis,id',
+            'tanggal' => 'required|date',
+            'jam' => 'required',
+            'ruangan' => 'required|string|max:50',
             'pertemuan' => 'required|integer|min:1',
         ]);
 
-        $data = $request->all();
+        $days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
 
-        $days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        $data['hari'] = $days[date('w', strtotime($request->tanggal))];
+        $hari = $days[date('w', strtotime($request->tanggal))];
 
-        $data['jam'] = $request->tanggal . ' ' . $request->jam . ':00';
+        Jadwal::create([
+            'reservasi_id' => $request->reservasi_id,
+            'tanggal' => $request->tanggal,
+            'hari' => $hari,
+            'jam' => $request->jam,
+            'ruangan' => $request->ruangan,
+            'pertemuan' => $request->pertemuan
+        ]);
 
-        Jadwal::create($data);
-
-        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan.');
+        return redirect()->route('jadwal.index')
+            ->with('success','Jadwal berhasil ditambahkan.');
     }
 
 

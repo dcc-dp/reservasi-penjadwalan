@@ -17,11 +17,11 @@ class Kursus extends Model
         return $this->belongsTo(User::class,'id_instruktur');
     }
 
-    public function paket()
+    public function pakets()
     {
-        return $this->belongsTo(Paket::class,'paket_id');
+        return $this->hasMany(Paket::class,'kursus_id');
     }
-
+    
     public function reservasis()
     {
         return $this->hasMany(Reservasi::class,'id_kursus');

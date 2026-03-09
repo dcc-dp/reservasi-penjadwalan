@@ -31,18 +31,19 @@
                             >
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Instruktur</label>
-                            <select name="id_instruktur" class="form-control" required>
+                        <select name="id_instruktur" class="form-control" required>
 
-                                @foreach($instrukturList as $instruktur)
-                                    <option value="{{ $instruktur->id }}">
-                                        {{ $instruktur->name }}
-                                    </option>
-                                @endforeach
+                            <option value="" disabled selected>
+                                -- Pilih Instruktur --
+                            </option>
 
-                            </select>
-                        </div>
+                            @foreach($instrukturList as $instruktur)
+                                <option value="{{ $instruktur->id }}">
+                                    {{ $instruktur->name }}
+                                </option>
+                            @endforeach
+
+                        </select>
 
                         <div class="mb-3">
                             <label class="form-label">Deskripsi</label>

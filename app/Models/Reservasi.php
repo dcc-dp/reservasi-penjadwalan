@@ -9,9 +9,7 @@ class Reservasi extends Model
     protected $fillable = [
         'id_user',
         'id_kursus',
-        'id_paket',
-        'hari',
-        'jam'
+        'id_paket'
     ];
 
     public function user()
@@ -27,5 +25,15 @@ class Reservasi extends Model
     public function paket()
     {
         return $this->belongsTo(Paket::class,'id_paket');
+    }
+
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class,'reservasi_id');
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class,'reservasi_id');
     }
 }

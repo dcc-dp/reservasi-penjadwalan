@@ -16,8 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_kursus');
             $table->unsignedBigInteger('id_paket');
-            $table->string('hari');
-            $table->time('jam');
+            $table->string('ruangan')->nullable();
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
