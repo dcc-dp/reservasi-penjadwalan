@@ -18,7 +18,10 @@ class ReservasiSiswaController extends Controller
 {
     public function index()
     {
-        $reservasiList = Reservasi::where('id_user', Auth::id())->with('kursus')->get();
+        $reservasiList = Reservasi::where('id_user', Auth::id())
+            ->with(['kursus','jadwal','pembayaran'])
+            ->get();
+
         return view('user.reservasi.index', compact('reservasiList'));
     }
     

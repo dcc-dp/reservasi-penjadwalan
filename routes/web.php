@@ -108,12 +108,18 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // jadwal 
     Route::get('/kursus/jadwal', [JadwalController::class, 'index'])->name('kursus.jadwal');
     Route::get('/jadwal/create', [JadwalController::class, 'create'])->name('jadwal.create');
-    Route::post('/kursus/jadwal/store/{id}', [JadwalController::class, 'store'])->name('jadwal.store');
-    Route::post('/kursus/jadwal/delete/{id}', [JadwalController::class, 'destroyJadwal'])->name('kursus.jadwal.destroy');   
+    Route::post('/kursus/jadwal/store', [JadwalController::class, 'store'])->name('jadwal.store');
+    Route::get('/kursus/jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('kursus.jadwal.edit');
+    Route::put('/kursus/jadwal/update/{id}', [JadwalController::class, 'update'])->name('kursus.jadwal.update');
+    Route::post('/kursus/jadwal/delete/{id}', [JadwalController::class, 'destroy'])->name('kursus.jadwal.destroy');
+    Route::get('/kursus/jadwal/detail/{id}', [JadwalController::class, 'detail'])->name('kursus.jadwal.detail');
 
     // ===== Reservasi =====
-    Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi');
+    Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
+    // Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi');
     Route::post('/reservasi/konfirmasi/{id}', [ReservasiController::class, 'konfirmasi']);
+    Route::delete('/reservasi/delete/{id}', [ReservasiController::class, 'destroy'])
+    ->name('reservasi.destroy');
 
     // ===== Instruktur =====
     Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');

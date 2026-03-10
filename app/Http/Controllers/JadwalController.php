@@ -2,48 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Kursus;
 use App\Models\Jadwal;
 use App\Models\Reservasi;
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $jadwals = Jadwal::with(['reservasi.user','reservasi.kursus'])->get();
-        return view('admin.jadwal.index', compact('jadwals'));
+        // ambil semua reservasi beserta user, kursus, jadwal
+        $reservasis = Reservasi::with('user','kursus','jadwal')->get();
+        return view('admin.jadwal.index', compact('reservasis'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $reservasis = Reservasi::with('user','kursus')->get();
-
         return view('admin.jadwal.create', compact('reservasis'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'reservasi_id' => 'required|exists:reservasis,id',
             'tanggal' => 'required|date',
             'jam' => 'required',
-            'ruangan' => 'required|string|max:50',
             'pertemuan' => 'required|integer|min:1',
         ]);
 
         $days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-
         $hari = $days[date('w', strtotime($request->tanggal))];
 
         Jadwal::create([
@@ -51,71 +38,51 @@ class JadwalController extends Controller
             'tanggal' => $request->tanggal,
             'hari' => $hari,
             'jam' => $request->jam,
-            'ruangan' => $request->ruangan,
             'pertemuan' => $request->pertemuan
         ]);
 
-        return redirect()->route('jadwal.index')
-            ->with('success','Jadwal berhasil ditambahkan.');
+        return redirect()->route('kursus.jadwal')->with('success','Jadwal berhasil ditambahkan.');
     }
 
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $jadwal = Jadwal::with('reservasi.user','reservasi.kursus')->findOrFail($id);
+        return view('admin.jadwal.edit', compact('jadwal'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $jadwal = Jadwal::findOrFail($id);
-        $users = User::all();
-        $kursuses = Kursus::all();
-
-        return view('admin.jadwal.edit', compact('jadwal', 'users', 'kursuses'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'id_user'   => 'required|exists:users,id',
-            'id_kursus' => 'required|exists:kursuses,id',
-            'tanggal'   => 'required|date',
-            'jam'       => 'required',
-            'ruangan'   => 'required|string|max:50',
+            'tanggal' => 'required|date',
+            'jam' => 'required',
             'pertemuan' => 'required|integer|min:1',
         ]);
 
         $jadwal = Jadwal::findOrFail($id);
+        $days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+        $hari = $days[date('w', strtotime($request->tanggal))];
 
-        $data = $request->all();
-        $days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        $data['hari'] = $days[date('w', strtotime($request->tanggal))];
+        $jadwal->update([
+            'tanggal' => $request->tanggal,
+            'hari' => $hari,
+            'jam' => $request->jam,
+            'pertemuan' => $request->pertemuan
+        ]);
 
-        $data['jam'] = $request->tanggal . ' ' . $request->jam;
-
-        $jadwal->update($data);
-
-        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil diperbarui.');
+        return redirect()->route('kursus.jadwal')->with('success','Jadwal berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $jadwal = Jadwal::findOrFail($id);
         $jadwal->delete();
+        return redirect()->route('kursus.jadwal')->with('success','Jadwal berhasil dihapus.');
+    }
 
-        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil dihapus.');
+    // untuk modal detail
+    public function detail($id)
+    {
+        $reservasi = Reservasi::with('user','kursus','jadwal')->findOrFail($id);
+        return view('admin.jadwal.modal_detail', compact('reservasi'));
     }
 }
