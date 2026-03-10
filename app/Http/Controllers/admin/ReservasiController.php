@@ -87,9 +87,16 @@ class ReservasiController extends Controller
     {
         $reserv = Reservasi::findOrFail($id);
 
+        // hapus jadwal
+        Jadwal::where('reservasi_id', $reserv->id)->delete();
+
+        // hapus pembayaran
+        Pembayaran::where('reservasi_id', $reserv->id)->delete();
+
+        // hapus reservasi
         $reserv->delete();
 
         return redirect()->route('reservasi.index')
-        ->with('success','Reservasi berhasil dihapus');
+            ->with('success','Reservasi berhasil dihapus');
     }
 }

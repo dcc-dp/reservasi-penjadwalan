@@ -29,22 +29,65 @@
                                         <tr class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
                                             <td>{{ $item->user->name ?? '-' }}</td>
                                             <td>{{ $item->kursus->name ?? '-' }}</td>
-                                            <td>{{ $item->hari1 }}</td>
-                                            <td>{{ $item->jam1 }}</td>
-                                            <td>{{ $item->hari2 ?? '-' }}</td>
-                                            <td>{{ $item->jam2 ?? '-' }}</td>
-
-                                            {{-- STATUS PEMBAYARAN --}}
-                                            @if ($item->pembayaran && in_array($item->pembayaran->status, ['proses','dibayar']))
-                                            <form action="{{ route('admin.pembayaran.konfirmasi', $item->pembayaran->id) }}"
-                                                method="POST" class="d-inline">
-                                                @csrf
-                                                @method('PUT')
-                                                <button class="btn btn-sm btn-success mb-1">
-                                                    Konfirmasi
-                                                </button>
-                                            </form>
+                                            <td>
+                                            @if($item->jadwal->count() > 0)
+                                                {{ $item->jadwal[0]->hari }}
+                                            @else
+                                                -
                                             @endif
+                                            </td>
+
+                                            <td>
+                                                @if($item->jadwal->count() > 0)
+                                                    {{ $item->jadwal[0]->jam }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+
+                                            <td>
+                                                @if($item->jadwal->count() > 1)
+                                                    {{ $item->jadwal[1]->hari }}
+                                                @else
+                                                    -
+                                                @endif
+                                                </td>
+
+                                                <td>
+                                                @if($item->jadwal->count() > 1)
+                                                    {{ $item->jadwal[1]->jam }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            {{-- STATUS PEMBAYARAN --}}
+                                            <td>
+                                            @if(!$item->pembayaran)
+
+                                            <span class="badge bg-secondary">
+                                            Belum Ada Data
+                                            </span>
+
+                                            @elseif($item->pembayaran->status == 'proses')
+
+                                            <span class="badge bg-warning text-dark">
+                                            Menunggu Konfirmasi
+                                            </span>
+
+                                            @elseif($item->pembayaran->status == 'dibayar')
+
+                                            <span class="badge bg-info">
+                                            Sudah Dibayar
+                                            </span>
+
+                                            @elseif($item->pembayaran->status == 'selesai')
+
+                                            <span class="badge bg-success">
+                                            Lunas
+                                            </span>
+
+                                            @endif
+                                            </td>
 
                                             {{-- AKSI --}}
                                             <td class="text-center">
@@ -89,7 +132,7 @@
                                                         <p>Yakin ingin menghapus reservasi ini?</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form action="{{ route('kursus.destroy', $item->id) }}"
+                                                        <form action="{{ route('reservasi.destroy', $item->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
