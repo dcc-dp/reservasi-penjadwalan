@@ -27,8 +27,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($profiles as $profile)
-                                            <tr>
+
+                                            <tr> @foreach ($profiles as $profile)
                                                 <td class="ps-3">{{ $profile->user->name ?? '-' }}</td>
                                                 <td>{{ $profile->keahlian }}</td>
                                                 <td>{{ $profile->pengalaman }}</td>

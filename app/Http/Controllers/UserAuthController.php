@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\UserMember;
 
 class UserAuthController extends Controller
 {
-    // Form login
+    /**
+     * Tampilkan halaman login siswa
+     */
     public function showLoginForm()
     {
-        return view('user.auth.login');
+        return view('user.loginUser'); // pastikan view ada
     }
 
-    // Login
+    /**
+     * Proses login siswa
+     */
     public function login(Request $request)
     {
         $request->validate([
@@ -23,56 +27,78 @@ class UserAuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (Auth::guard('user')->attempt($request->only('email', 'password'))) {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($request->only('email','password'))) {
             $request->session()->regenerate();
-            return redirect()->route('user.dashboard');
+
+            // Redirect sesuai role
+            if (Auth::user()->role == 'admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif (Auth::user()->role == 'instruktur') {
+                return redirect()->route('instruktur.dashboard');
+            } else {
+                return redirect()->route('siswa.dashboard');
+            }
         }
+
 
         return back()->withErrors([
             'email' => 'Email atau password salah',
         ]);
     }
 
-    // Form register
+    /**
+     * Tampilkan halaman registrasi siswa
+     */
     public function showRegisterForm()
     {
-        return view('user.auth.Register');
+        return view('user.registerUser'); // pastikan view ada
     }
 
-    // Register
+    /**
+     * Proses registrasi siswa
+     */
     public function register(Request $request)
     {
         $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:user_members,email', // sesuaikan nama tabel
-        'password' => 'required|string|min:6|confirmed',
-    ]);
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'notelp' => 'required|numeric',
+            'password' => 'required|string|min:6|confirmed',
+            'jk' => 'nullable|in:L,P',
+        ]);
 
-
-        $user = UserMember::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'notelp' => $request->notelp,
+            'jk' => $request->jk ?? null,
+            'alamat' => null,
+            'role' => 'siswa',
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::guard('user')->login($user);
-
-        return redirect()->route('user.auth.dashboard.Dashboard');
+        return redirect()->route('siswa.login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
-    // Logout
+    /**
+     * Logout siswa
+     */
     public function logout(Request $request)
     {
-        Auth::guard('user')->logout();
+        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('user.login');
+        return redirect()->route('siswa.login')->with('success', 'Berhasil logout');
     }
 
-    // Dashboard
+    /**
+     * Dashboard siswa
+     */
     public function dashboard()
     {
-        return view('user.dashboard.Dashboard');
+        return view('user.dashboard.Dashboard'); // pastikan view ada
     }
 }

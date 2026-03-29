@@ -14,7 +14,7 @@ class LandingPageController extends Controller
   public function index()
 {
     $instrukturs = Instruktur_Profile::with('user')->get();
-    return view('user.landingpage', compact('instrukturs'));
+    return view('user.landingpage', data: compact(var_name: 'instrukturs'));
 }
     public function about()
     {

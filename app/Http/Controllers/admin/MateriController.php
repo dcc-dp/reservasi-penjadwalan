@@ -39,7 +39,7 @@ class MateriController extends Controller
         $materi->Judul = $request->Judul;
         $materi->deskripsi = $request->deskripsi;
         $materi->save();
-        return redirect()->route('materi');
+        return redirect()->route('materi.index');
     }
 
     /**
@@ -84,6 +84,6 @@ class MateriController extends Controller
         $materi = Materi::findOrFail($id);
         $materi->delete();
 
-        return redirect()->route('materi');
+        return redirect()->route('materi.index');
     }
 }
