@@ -1,155 +1,274 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="">
 
 <head>
-    <meta charset="utf-8">
-    <title>Reservasi</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Bliss || Digital Agency</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Favicon -->
-    <link href="{{ asset('assets/us er/img/favicon.ico') }}" rel="icon">
+    <link rel="shortcut icon" href="{{ asset('template/img/favicon.svg') }}" />
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Space+Grotesk&display=swap" rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="{{ asset('assets/user/lib/animate/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/user/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('assets/user/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="{{ asset('assets/user/css/style.css') }}" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('template/css/bootstrap-5.0.0-beta2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/css/LineIcons.2.0.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/css/tiny-slider.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/css/animate.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/css/main.css') }}" />
 </head>
 
 <body>
-    <!-- Navbar -->
-    <div class="container-fluid sticky-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light border-bottom border-2 border-white">
-                <a href="{{ url('/') }}" class="navbar-brand">
-                    <h1>Belajar Program</h1>
-                </a>
-                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="{{ route('landingPage') }}"
-                            class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Beranda</a>
-                        <a href="{{ route('about') }}"
-                            class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">Tentang Kami</a>
-                        <a href="{{ route('benefit') }}"
-                            class="nav-item nav-link {{ Request::is('benefit') ? 'active' : '' }}">Benefit</a>
-                        <a href="{{ route('pakets') }}"
-                            class="nav-item nav-link {{ Request::is('pakets') ? 'active' : '' }}">Paket Kursus</a>
-                    </div>
-                    <div class="ms-lg-3">
 
-                        @guest
-                            <a href="{{ route('siswa.login') }}" class="btn btn-success fw-sm">
-                                Daftar / Masuk
-                            </a>
-                        @endguest
-
-                        @auth
-                            <form action="{{ route('login') }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-danger fw-sm">
-                                    Logout
-                                </button>
-                            </form>
-                        @endauth
-
-                    </div>
-                </div>
-            </nav>
+    <!-- PRELOADER -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="spinner"></div>
         </div>
     </div>
 
-    {{-- Konten Halaman --}}
-    <main>
-        @yield('content')
-    </main>
-
-    {{-- Footer --}}
-    <div class="container-fluid bg-dark text-white-50 footer pt-5">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-                    <a href="index.html" class="d-inline-block mb-3">
-                        <h1 class="text-white">Belajar Program</h1>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="navbar-area">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="{{ asset('template/img/logo/logo.svg') }}" alt="Logo" />
                     </a>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                        amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
-                        clita duo justo et tempor</p>
-                </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-                    <h5 class="text-white mb-4">Get In Touch</h5>
-                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                class="fab fa-instagram"></i></a>
-                        <a class="btn btn-outline-primary btn-square border-2 me-2" href="#!"><i
-                                class="fab fa-linkedin-in"></i></a>
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav ms-auto">
+
+                            <li>
+                                <a href="{{ route('pages.home') }}"
+                                    class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('about') }}"
+                                    class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">About Us</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('benefit') }}"
+                                    class="nav-item nav-link {{ Request::is('benefit') ? 'active' : '' }}">Benefit</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pakets') }}"
+                                    class="nav-item nav-link {{ Request::is('pakets') ? 'active' : '' }}">Program
+                                    Package</a>
+                            </li>
+                            <li>
+                                @guest
+                                    <a href="{{ route('siswa.login') }}" class="btn btn-outline-primar">
+                                        Get Started
+                                    </a>
+                                @endguest
+
+                                @auth
+                                    <a href="{{ route('siswa.dashboard') }}" class="btn btn-primary ">
+                                        Dashboard
+                                    </a>
+                                @endauth
+
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <span class="wow fadeInLeft" data-wow-delay=".2s">Welcome To Bliss</span>
+                        <h1 class="wow fadeInUp" data-wow-delay=".4s">
+                            Ready to level up your coding skills?
+                        </h1>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">
+                            Upgrade to access all courses, book your classes easily, and learn without limits.
+                        </p>
+                        <a href="javascript:void(0)" class="main-btn btn-hover wow fadeInUp" data-wow-delay=".6s">Join
+                            Now</a>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                    <h5 class="text-white mb-4">Popular Link</h5>
-                    <a class="btn btn-link" href="#!">About Us</a>
-                    <a class="btn btn-link" href="#!">Contact Us</a>
-                    <a class="btn btn-link" href="#!">Privacy Policy</a>
-                    <a class="btn btn-link" href="#!">Terms & Condition</a>
-                    <a class="btn btn-link" href="#!">Career</a>
+                <div class="col-lg-6">
+                    <div class="hero-img wow fadeInUp" data-wow-delay=".5s">
+                        <img src="{{ asset('template/img/hero/hero-img.svg') }}" alt="">
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="container wow fadeIn" data-wow-delay="0.1s">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#!">Your Site Name</a>, All Right Reserved.
+    </section>
 
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>. Distributed
-                        by
-                        <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+    <!-- ========================= about-section start ========================= -->
+    <section id="about" class="about-section pt-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-img mb-50">
+                        <img src="{{ asset('template/img/about/about-img.svg') }}" alt="about">
                     </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="#!">Home</a>
-                            <a href="#!">Cookies</a>
-                            <a href="#!">Help</a>
-                            <a href="#!">FAQs</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-content mb-50">
+                        <div class="section-title mb-50">
+                            <h1 class="mb-25">About Us</h1>
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor
+                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                                accusam et justo duo dolores.</p>
+                        </div>
+
+                        <div class="accordion pb-15" id="accordionExample">
+                            <div class="single-faq">
+                                <button class="w-100 text-start" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true">
+                                    What programming courses do you offer?
+                                </button>
+                                <div id="collapseOne" class="collapse show" data-bs-parent="#accordionExample">
+                                    <div class="faq-content">
+                                        We offer various programming courses such as Web Development, Python,
+                                        JavaScript, and UI/UX basics for beginners to advanced learners.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="single-faq">
+                                <button class="w-100 text-start collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false">
+                                    How does the learning process work?
+                                </button>
+                                <div id="collapseTwo" class="collapse" data-bs-parent="#accordionExample">
+                                    <div class="faq-content">
+                                        Learning is conducted through interactive sessions, real projects, and mentoring
+                                        support to ensure you understand the material effectively.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="single-faq">
+                                <button class="w-100 text-start collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false">
+                                    Do I need prior experience to join?
+                                </button>
+                                <div id="collapseThree" class="collapse" data-bs-parent="#accordionExample">
+                                    <div class="faq-content">
+                                        No, our courses are designed for beginners. We will guide you step by step from
+                                        the basics.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========================= about-section end ========================= -->
+
+    <!-- ========================= service-section start ========================= -->
+    <section id="service" class="service-section img-bg pt-100 pb-100 mt-150">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-10">
+                    <div class="section-title text-center mb-50">
+                        <h1>Our Programming Courses</h1>
+                        <p>Learn coding from scratch with hands-on projects and expert mentors.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="single-service">
+                        <div class="icon color-1">
+                            <i class="lni lni-layers"></i>
+                        </div>
+                        <div class="content">
+                            <h3>Algorithm</h3>
+                            <p>Lorem ipsum dolor sitsdw consetsad pscing eliewtr, diam nonumy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="single-service">
+                        <div class="icon color-2">
+                            <i class="lni lni-code-alt"></i>
+                        </div>
+                        <div class="content">
+                            <h3>Web Development</h3>
+                            <p>Lorem ipsum dolor sitsdw consetsad pscing eliewtr, diam nonumy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="single-service">
+                        <div class="icon color-3">
+                            <i class="lni lni-pallet"></i>
+                        </div>
+                        <div class="content">
+                            <h3>Graphics design</h3>
+                            <p>Lorem ipsum dolor sitsdw consetsad pscing eliewtr, diam nonumy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="single-service">
+                        <div class="icon color-4">
+                            <i class="lni lni-vector"></i>
+                        </div>
+                        <div class="content">
+                            <h3>Brand design</h3>
+                            <p>Lorem ipsum dolor sitsdw consetsad pscing eliewtr, diam nonumy.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Footer End -->
 
-    <script src="{{ asset('assets/user/js/bootstrap.bundle.min.js') }}"></script>
+            <div class="view-all-btn text-center pt-30">
+                <a href="javascript:void(0)" class="main-btn btn-hover">View All Services</a>
+            </div>
+
+        </div>
+    </section>
+    <!-- ========================= service-section end ========================= -->
+
+    <!-- ========================= cta-section start ========================= -->
+    <section class="cta-section img-bg pt-110 pb-60">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-7">
+                    <div class="section-title mb-50">
+                        <h1 class="mb-20 wow fadeInUp" data-wow-delay=".2s">Ready to start your coding journey?
+                        </h1>
+                        <p class="wow fadeInUp" data-wow-delay=".4s">Join our classes and build real-world projects with expert guidance.</p>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-5">
+                    <div class="cta-btn text-lg-end mb-50">
+                        <a href="javascript:void(0)" class="main-btn btn-hover text-uppercase">Start coding, build your future.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========================= cta-section end ========================= -->
+
+    <!-- FOOTER -->
+    <footer class="footer text-center p-4">
+        <p>© {{ date('Y') }} Course App</p>
+    </footer>
+
+    <!-- JS -->
+    <script src="{{ asset('template/js/bootstrap-5.0.0-beta2.min.js') }}"></script>
+    <script src="{{ asset('template/js/count-up.min.js') }}"></script>
+    <script src="{{ asset('template/js/tiny-slider.js') }}"></script>
+    <script src="{{ asset('template/js/wow.min.js') }}"></script>
+    <script src="{{ asset('template/js/polifill.js') }}"></script>
+    <script src="{{ asset('template/js/main.js') }}"></script>
 </body>
 
 </html>

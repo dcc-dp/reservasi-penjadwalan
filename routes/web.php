@@ -43,7 +43,7 @@ Route::post('/logout', function () {
 | LANDING PAGE (PUBLIC)
 |--------------------------------------------------------------------------
 */
-Route::get('/', [LandingPageController::class, 'index'])->name('landingPage');
+Route::get('/', [LandingPageController::class, 'index'])->name('pages.home');
 Route::get('/about', [LandingPageController::class, 'about'])->name('about');
 Route::get('/benefit', [LandingPageController::class, 'benefit'])->name('benefit');
 Route::get('/pakets', [LandingPageController::class, 'pakets'])->name('pakets');
