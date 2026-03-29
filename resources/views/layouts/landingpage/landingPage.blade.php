@@ -55,15 +55,22 @@
                             class="nav-item nav-link {{ Request::is('pakets') ? 'active' : '' }}">Paket Kursus</a>
                     </div>
                     <div class="ms-lg-3">
+
                         @guest
-                            <a href="{{ route('siswa.login') }}" class="btn btn-success fw-sm">Daftar / Masuk</a>
+                            <a href="{{ route('siswa.login') }}" class="btn btn-success fw-sm">
+                                Daftar / Masuk
+                            </a>
                         @endguest
 
                         @auth
-                            <a href="{{ route('siswa.dashboard') }}" class="btn btn-primary fw-sm">
-                                Dashboard
-                            </a>
+                            <form action="{{ route('login') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-danger fw-sm">
+                                    Logout
+                                </button>
+                            </form>
                         @endauth
+
                     </div>
                 </div>
             </nav>
