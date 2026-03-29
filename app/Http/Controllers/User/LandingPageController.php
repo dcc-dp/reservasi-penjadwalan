@@ -27,9 +27,4 @@ class LandingPageController extends Controller
         return view('user.benefit');
     }
 
-     public function pakets()
-    {
-        $data = Paket::with('materi')->get();
-        return view('user.pakets', compact('data'));
-    }
 }

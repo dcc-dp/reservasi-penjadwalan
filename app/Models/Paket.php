@@ -7,13 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Paket extends Model
 {
     protected $fillable = [
-      'id_materi',
-      'jenis',
-      'harga',
+        'kursus_id',
+        'jenis',
+        'harga'
     ];
 
-    public function materi()
+    public function kursus()
     {
-        return $this->belongsTo(Materi::class, 'id_materi', 'id');
+        return $this->belongsTo(Kursus::class,'kursus_id');
+    }
+
+    public function materis()
+    {
+        return $this->hasMany(Materi::class,'paket_id');
+    }
+
+    public function reservasis()
+    {
+        return $this->hasMany(Reservasi::class,'id_paket');
     }
 }

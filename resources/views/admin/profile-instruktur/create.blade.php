@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-4">
   <h4>Tambah Profile Instruktur</h4>
-  <form action="{{ route('profile-instruktur.store') }}" method="POST">
+  <form action="{{ route('instruktur.store') }}" method="POST">
     @csrf
     <div class="mb-3">
       <label for="user_id" class="form-label">User</label>
@@ -27,7 +27,7 @@
       <textarea name="bio" id="bio" class="form-control"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Simpan</button>
-    <a href="{{ route('profile-instruktur.index') }}" class="btn btn-secondary">Batal</a>
+    <a href="{{ route('instruktur.index') }}" class="btn btn-secondary">Batal</a>
   </form>
 </div>
 @endsection

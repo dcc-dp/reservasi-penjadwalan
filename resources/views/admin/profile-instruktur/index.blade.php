@@ -10,15 +10,14 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h6>Daftar Profile Instruktur</h6>
-                            <a href="{{ route('profile-instruktur.create') }}" class="btn btn-sm btn-primary">+ Tambah
+                            <a href="{{ route('instruktur.create') }}" class="btn btn-sm btn-primary">+ Tambah
                                 Profile</a>
                         </div>
-
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
                                             <th class="ps-3">User</th>
                                             <th>Keahlian</th>
                                             <th>Pengalaman</th>
@@ -27,14 +26,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                            <tr> @foreach ($profiles as $profile)
+                                        @foreach ($profiles as $profile)
+                                            <tr>
                                                 <td class="ps-3">{{ $profile->user->name ?? '-' }}</td>
                                                 <td>{{ $profile->keahlian }}</td>
                                                 <td>{{ $profile->pengalaman }}</td>
                                                 <td>{{ $profile->bio }}</td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('profile-instruktur.edit', $profile->id) }}"
+                                                    <a href="{{ route('instruktur.edit', $profile->id) }}"
                                                         class="btn btn-sm btn-warning me-1">Edit</a>
                                                     <!-- Tombol Hapus -->
                                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
@@ -56,7 +55,7 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <form
-                                                                        action="{{ route('profile-instruktur.destroy', $profile->id) }}"
+                                                                        action="{{ route('instruktur.destroy', $profile->id) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('DELETE')

@@ -33,7 +33,7 @@
 
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('materi') }}"
+                            <a href="{{ route('materi.index') }}"
                                 class="btn bg-secondary text-white mx-4 btn-md mt-4 mb-4">Batal</a>
                             <button type="submit"
                                 class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Save Changes' }}</button>

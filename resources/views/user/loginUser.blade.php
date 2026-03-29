@@ -17,7 +17,7 @@
                 <div class="alert alert-danger text-center py-2">{{ session('error') }}</div>
             @endif
 
-            <form action="{{ route('siswa.login.submit') }}" method="POST" class="mt-4">
+            <form action="{{ route('siswa.login') }}" method="POST" class="mt-4">
                 @csrf
 
 

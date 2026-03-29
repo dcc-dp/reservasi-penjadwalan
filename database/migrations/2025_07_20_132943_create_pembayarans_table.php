@@ -12,13 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pembayarans', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('reservasi_id');
-            $table->string('metode_bayar',100);
-            $table->integer('total');
-            $table->enum('status', ['proses', 'selesai','gagal'])->nullable()->default('proses');
-            $table->timestamps();
-        });
+        $table->id();
+        $table->unsignedBigInteger('reservasi_id');
+
+        $table->string('metode_bayar',100)->nullable();
+        $table->integer('total')->nullable();
+
+        $table->enum('status', ['proses','selesai','gagal'])
+            ->default('proses');
+
+        $table->timestamps();
+
+        $table->foreign('reservasi_id')
+            ->references('id')
+            ->on('reservasis')
+            ->onDelete('cascade');
+    });
     }
 
     /**

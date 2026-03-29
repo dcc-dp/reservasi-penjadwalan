@@ -11,11 +11,10 @@ class Pembayaran extends Model
         'metode_bayar',
         'total',
         'status',
-        
     ];
 
-    public function reservasi()
+    public function pembayaran()
     {
-        return $this->belongsTo(Reservasi::class, 'reservasi_id');
+        return $this->hasOne(Pembayaran::class,'reservasi_id');
     }
 }

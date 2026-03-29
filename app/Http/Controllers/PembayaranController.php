@@ -18,22 +18,33 @@ class PembayaranController extends Controller
     }
 
     public function store(Request $request)
-{
-    $validated = $request->validate([
-        'reservasi_id' => 'required|exists:reservasis,id',
-        'total' => 'required|numeric',
-    ]);
+    {
+        $validated = $request->validate([
+            'reservasi_id' => 'required|exists:reservasis,id',
+            'total' => 'required|numeric',
+        ]);
 
-    Pembayaran::create([
-        'reservasi_id' => $validated['reservasi_id'],
-        'total' => $validated['total'],
-        'status' => 'pending',
-    ]);
+        Pembayaran::create([
+            'reservasi_id' => $validated['reservasi_id'],
+            'total' => $validated['total'],
+            'status' => 'pending',
+        ]);
 
-    return redirect()
-        ->route('pembayaran.index')
-        ->with('success', 'Pendaftaran berhasil disimpan dan menunggu konfirmasi pembayaran.');
-}
+        return redirect()
+            ->route('pembayaran.index')
+            ->with('success', 'Pendaftaran berhasil disimpan dan menunggu konfirmasi pembayaran.');
+    }
+
+    public function konfirmasi($id)
+    {
+        $pembayaran = Pembayaran::findOrFail($id);
+
+        $pembayaran->update([
+            'status' => 'selesai'
+        ]);
+
+        return back()->with('success','Pembayaran dikonfirmasi');
+    }
 
 
 

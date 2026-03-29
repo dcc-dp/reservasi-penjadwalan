@@ -55,29 +55,23 @@
                     Form Pendaftaran Kursus
                 </h4>
 
-                <form action="{{ route('jadwal.store') }}" method="POST">
+                <form action="{{ route('form-pendaftaran.store') }}" method="POST">
                     @csrf
 
                     {{-- USER --}}
                     <div class="mb-3">
                         <label class="form-label fw-semibold">User</label>
-                        <select name="id_user" class="form-select" required>
-                            <option value="">-- Pilih User --</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" value="{{ $user->name }}" readonly>
+                        <input type="hidden" name="id_user" value="{{ $user->id }}">
                     </div>
 
                     {{-- KURSUS --}}
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Kursus</label>
-                        <select name="id_kursus" class="form-select" required>
-                            <option value="">-- Pilih Kursus --</option>
-                            @foreach($kursus as $k)
-                                <option value="{{ $k->id }}">{{ $k->nama_kursus }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" 
+                            value="{{ $kursus ? $kursus->nama_kursus : 'Kursus belum tersedia' }}" readonly>
+                        <input type="hidden" name="id_kursus" 
+                            value="{{ $kursus ? $kursus->id : '' }}">
                     </div>
 
                     <hr>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Reservasi</title>
@@ -8,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{ asset('assets/user/img/favicon.ico') }}" rel="icon">
+    <link href="{{ asset('assets/us er/img/favicon.ico') }}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +30,7 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('assets/user/css/style.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navbar -->
     <div class="container-fluid sticky-top">
@@ -43,13 +45,25 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="{{ route('landingPage') }}" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Beranda</a>
-                        <a href="{{ route('about') }}" class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">Tentang Kami</a>
-                        <a href="{{ route('benefit') }}" class="nav-item nav-link {{ Request::is('benefit') ? 'active' : '' }}">Benefit</a>
-                        <a href="{{ route('pakets')}}" class="nav-item nav-link {{ Request::is('pakets') ? 'active' : '' }}">Paket Kursus</a>
+                        <a href="{{ route('landingPage') }}"
+                            class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Beranda</a>
+                        <a href="{{ route('about') }}"
+                            class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">Tentang Kami</a>
+                        <a href="{{ route('benefit') }}"
+                            class="nav-item nav-link {{ Request::is('benefit') ? 'active' : '' }}">Benefit</a>
+                        <a href="{{ route('pakets') }}"
+                            class="nav-item nav-link {{ Request::is('pakets') ? 'active' : '' }}">Paket Kursus</a>
                     </div>
                     <div class="ms-lg-3">
-                        <a href="{{ route('siswa.login') }}" class="btn btn-success fw-sm">Daftar/Masuk</a>
+                        @guest
+                            <a href="{{ route('siswa.login') }}" class="btn btn-success fw-sm">Daftar / Masuk</a>
+                        @endguest
+
+                        @auth
+                            <a href="{{ route('siswa.dashboard') }}" class="btn btn-primary fw-sm">
+                                Dashboard
+                            </a>
+                        @endauth
                     </div>
                 </div>
             </nav>
@@ -57,12 +71,12 @@
     </div>
 
     {{-- Konten Halaman --}}
-  <main>
-    @yield('content')
-  </main>
+    <main>
+        @yield('content')
+    </main>
 
-  {{-- Footer --}}
-  <div class="container-fluid bg-dark text-white-50 footer pt-5">
+    {{-- Footer --}}
+    <div class="container-fluid bg-dark text-white-50 footer pt-5">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
@@ -130,4 +144,5 @@
 
     <script src="{{ asset('assets/user/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 </html>

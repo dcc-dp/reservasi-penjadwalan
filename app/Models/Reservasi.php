@@ -9,21 +9,31 @@ class Reservasi extends Model
     protected $fillable = [
         'id_user',
         'id_kursus',
-        'hari1',
-        'jam1',
-        'hari2',
-        'jam2',
+        'id_paket'
     ];
 
-    // Relasi ke tabel users
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class,'id_user');
     }
 
-    // Relasi ke tabel kursus
     public function kursus()
     {
-        return $this->belongsTo(Kursus::class, 'id_kursus');
+        return $this->belongsTo(Kursus::class,'id_kursus');
+    }
+
+    public function paket()
+    {
+        return $this->belongsTo(Paket::class,'id_paket');
+    }
+
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class,'reservasi_id');
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class,'reservasi_id');
     }
 }
