@@ -1,3 +1,4 @@
+
 @extends('layouts.landingpage.landingPage')
 
 @section('title', 'Paket Kursus')
@@ -158,7 +159,7 @@
         </div> <!-- end row -->
 
         <!-- Tombol Daftar -->
-        
+
     </div>
 </div>
 @endsection
