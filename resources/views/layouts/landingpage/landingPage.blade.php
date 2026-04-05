@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Bliss || Digital Agency</title>
+    <title>Bliss || Reservasi_Penjadwalan</title>
 
     <link rel="stylesheet" href="{{ asset('template/css/bootstrap-5.0.0-beta2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/css/main.css') }}">
@@ -72,7 +72,7 @@
 
                         <li class="nav-item">
                             <a href="{{ route('pakets') }}"
-                               class="nav-link {{ request()->routeIs('pakets') ? 'active' : '' }}">
+                               class="nav-link {{ request()->routeIs('Program Package') ? 'active' : '' }}">
                                 Program Package
                             </a>
                         </li>
