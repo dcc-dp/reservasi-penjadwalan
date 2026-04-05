@@ -28,6 +28,6 @@ class LandingPageController extends Controller
      public function pakets()
     {
         $pakets = Paket::all();
-        return view('user.pakets', compact('pakets'));
+        return view('user.pages.pakets', compact('pakets'));
     }
 }
