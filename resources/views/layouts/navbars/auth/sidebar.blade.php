@@ -460,7 +460,7 @@
           <span class="nav-link-text ms-1">Sign Up</span>
         </a>
       </li> --}}
-      <form method="POST" action="{{ route('logout') }}" class="m-0 p-0">
+      <form method="POST" action="{{ route('siswa.logout') }}" class="m-0 p-0">
         @csrf
             <button type="submit" class="nav-link btn w-100 text-start text-dark border-0 bg-transparent">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

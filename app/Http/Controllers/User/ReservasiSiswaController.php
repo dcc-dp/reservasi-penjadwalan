@@ -33,48 +33,48 @@ class ReservasiSiswaController extends Controller
         return view('user.reservasi.create', compact('kursusList', 'paketList'));
     }
     public function store(Request $request)
-{
-    $request->validate([
-        'id_kursus' => 'required|exists:kursuses,id',
-        'id_paket'  => 'required|exists:pakets,id',
-        'jadwal.*.hari' => 'required|date',
-        'jadwal.*.jam' => 'required'
-    ]);
+    {
+        $request->validate([
+            'id_kursus' => 'required|exists:kursuses,id',
+            'id_paket'  => 'required|exists:pakets,id',
+            'jadwal.*.hari' => 'required|date',
+            'jadwal.*.jam' => 'required'
+        ]);
 
-    $paket = Paket::findOrFail($request->id_paket);
+        $paket = Paket::findOrFail($request->id_paket);
 
-    // Simpan reservasi
-    $reservasi = Reservasi::create([
-        'id_user'   => Auth::id(),
-        'id_kursus' => $request->id_kursus,
-        'id_paket'  => $request->id_paket,
-        'ruangan'   => $request->ruangan ?? null, // optional
-    ]);
+        // Simpan reservasi
+        $reservasi = Reservasi::create([
+            'id_user'   => Auth::id(),
+            'id_kursus' => $request->id_kursus,
+            'id_paket'  => $request->id_paket,
+            'ruangan'   => $request->ruangan ?? null, // optional
+        ]);
 
-    // Simpan jadwal
-    $days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+        // Simpan jadwal
+        $days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
 
-    foreach ($request->jadwal as $index => $j) {
-        if(!empty($j['hari']) && !empty($j['jam'])){
-            Jadwal::create([
-                'reservasi_id' => $reservasi->id,
-                'tanggal'      => $j['hari'],
-                'hari'         => $days[date('w', strtotime($j['hari']))],
-                'jam'          => $j['jam'],
-                'pertemuan'    => $index + 1,
-            ]);
+        foreach ($request->jadwal as $index => $j) {
+            if(!empty($j['hari']) && !empty($j['jam'])){
+                Jadwal::create([
+                    'reservasi_id' => $reservasi->id,
+                    'tanggal'      => $j['hari'],
+                    'hari'         => $days[date('w', strtotime($j['hari']))],
+                    'jam'          => $j['jam'],
+                    'pertemuan'    => $index + 1,
+                ]);
+            }
         }
+
+        // Buat pembayaran otomatis
+        Pembayaran::create([
+            'reservasi_id' => $reservasi->id,
+            'total'        => $paket->harga,
+            'status'       => 'proses'
+        ]);
+
+        return redirect()->route('siswa.dashboard')
+            ->with('success','Reservasi berhasil dibuat, silakan lakukan pembayaran');
     }
-
-    // Buat pembayaran otomatis
-    Pembayaran::create([
-        'reservasi_id' => $reservasi->id,
-        'total'        => $paket->harga,
-        'status'       => 'proses'
-    ]);
-
-    return redirect()->route('siswa.dashboard')
-        ->with('success','Reservasi berhasil dibuat, silakan lakukan pembayaran');
-}
 }
 

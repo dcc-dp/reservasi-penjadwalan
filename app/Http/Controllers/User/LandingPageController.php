@@ -12,17 +12,17 @@ class LandingPageController extends Controller
     public function index()
     {
 
-        return view('user.landingpage');
+        return view('user.pages.home');
     }
     public function about()
     {
 
-        return view('user.about');
+        return view('user.pages.about');
     }
     public function benefit()
     {
 
-        return view('user.benefit');
+        return view('user.pages.benefit');
     }
 
      public function pakets()
