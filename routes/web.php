@@ -27,6 +27,7 @@ use App\Http\Controllers\user\ReservasiSiswaController;
 
 use App\Http\Controllers\pendaftaranController;
 use App\Http\Controllers\PembayaranController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ use App\Http\Controllers\PembayaranController;
 |--------------------------------------------------------------------------
 */
 Route::post('/logout', function () {
-    auth()->logout();
+    Auth::logout();
     return redirect('/login');
 })->name('siswa.logout');
 
@@ -89,12 +90,32 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
 
     Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
+    Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
+    Route::post('/paket/store', [PaketController::class, 'store'])->name('paket.store');
+    Route::get('/paket/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
+    Route::post('/paket/update/{id}', [PaketController::class, 'update'])->name('paket.update');
+    Route::delete('/paket/destroy/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
 
     Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
+    Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
+    Route::post('/kursus/store', [KursusController::class, 'store'])->name('kursus.store');
+    Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
+    Route::post('/kursus/update/{id}', [KursusController::class, 'update'])->name('kursus.update');
+    Route::delete('/kursus/destroy/{id}', [KursusController::class, 'destroy'])->name('kursus.destroy');
 
     Route::get('/kursus/jadwal', [JadwalController::class, 'index'])->name('kursus.jadwal');
+    Route::get('/kursus/jadwal/create', [JadwalController::class, 'create'])->name('kursus.jadwal.create');
+    Route::post('/kursus/jadwal/store', [JadwalController::class, 'store'])->name('kursus.jadwal.store');
+    Route::get('/kursus/jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('kursus.jadwal.edit');
+    Route::post('/kursus/jadwal/update/{id}', [JadwalController::class, 'update'])->name('kursus.jadwal.update');
+    Route::delete('/kursus/jadwal/destroy/{id}', [JadwalController::class, 'destroy'])->name('kursus.jadwal.destroy');
 
     Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
+    Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
+    Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
+    Route::get('/reservasi/edit/{id}', [ReservasiController::class, 'edit'])->name('reservasi.edit');
+    Route::post('/reservasi/update/{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
+    Route::delete('/reservasi/destroy/{id}', [ReservasiController::class, 'destroy'])->name('reservasi.destroy');
 
     Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');
 });
@@ -120,4 +141,11 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->group(function () {
     Route::post('/reservasi/store', [ReservasiSiswaController::class, 'store'])->name('siswa.reservasi.store');
 
     Route::get('/kursus', [KursusSiswaController::class, 'index'])->name('siswa.kursus.index');
+    
+    
+
+    Route::post('/logout', function () {
+        Auth::logout();
+        return redirect()->route('pages.home');
+    })->name('siswa.logout');
 });
