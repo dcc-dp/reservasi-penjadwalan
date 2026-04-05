@@ -244,12 +244,14 @@
                     <div class="section-title mb-50">
                         <h1 class="mb-20 wow fadeInUp" data-wow-delay=".2s">Ready to start your coding journey?
                         </h1>
-                        <p class="wow fadeInUp" data-wow-delay=".4s">Join our classes and build real-world projects with expert guidance.</p>
+                        <p class="wow fadeInUp" data-wow-delay=".4s">Join our classes and build real-world projects
+                            with expert guidance.</p>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-5">
                     <div class="cta-btn text-lg-end mb-50">
-                        <a href="javascript:void(0)" class="main-btn btn-hover text-uppercase">Start coding, build your future.</a>
+                        <a href="javascript:void(0)" class="main-btn btn-hover text-uppercase">Start coding, build
+                            your future.</a>
                     </div>
                 </div>
             </div>
@@ -257,10 +259,99 @@
     </section>
     <!-- ========================= cta-section end ========================= -->
 
-    <!-- FOOTER -->
-    <footer class="footer text-center p-4">
-        <p>© {{ date('Y') }} Course App</p>
+    <!-- ========================= footer start ========================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="widget-wrapper">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="footer-widget">
+                            <div class="logo mb-35">
+                                <a href="index.html"> <img src="assets/img/logo/logo.svg" alt=""> </a>
+                            </div>
+                            <p class="desc mb-35">We are expert designer team, There have a lot of designer and
+                                developer If you have any project you can hire Create a website.</p>
+                            <ul class="socials">
+                                <li>
+                                    <a href="jvascript:void(0)"> <i class="lni lni-facebook-filled"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="jvascript:void(0)"> <i class="lni lni-twitter-filled"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="jvascript:void(0)"> <i class="lni lni-instagram-filled"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="jvascript:void(0)"> <i class="lni lni-linkedin-original"></i> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 offset-xl-1 col-md-5 offset-md-1 col-sm-6">
+                        <div class="footer-widget">
+                            <h3>Link</h3>
+                            <ul class="links">
+                                <li> <a href="javascript:void(0)">Home</a> </li>
+                                <li> <a href="javascript:void(0)">About</a> </li>
+                                <li> <a href="javascript:void(0)">Services</a> </li>
+                                <li> <a href="javascript:void(0)">Portfolio</a> </li>
+                                <li> <a href="javascript:void(0)">Pricing</a> </li>
+                                <li> <a href="javascript:void(0)">Team</a> </li>
+                                <li> <a href="javascript:void(0)">Contact</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 col-sm-6">
+                        <div class="footer-widget">
+                            <h3>Services</h3>
+                            <ul class="links">
+                                <li> <a href="javascript:void(0)">Graphic design</a> </li>
+                                <li> <a href="javascript:void(0)">Web design</a> </li>
+                                <li> <a href="javascript:void(0)">Visual design</a> </li>
+                                <li> <a href="javascript:void(0)">Product design</a> </li>
+                                <li> <a href="javascript:void(0)">UI/UX design</a> </li>
+                                <li> <a href="javascript:void(0)">Web development</a> </li>
+                                <li> <a href="javascript:void(0)">Startup business</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="footer-widget">
+                            <h3>Contact</h3>
+                            <ul>
+                                <li>+003894372632</li>
+                                <li>helldesigner@gmail.ccom</li>
+                                <li>United state of America</li>
+                            </ul>
+                            <div class="contact_map" style="width: 100%; height: 150px; margin-top: 25px;">
+                                <div class="gmap_canvas">
+                                    <iframe id="gmap_canvas"
+                                        src="https://maps.google.com/maps?q=Mission%20District%2C%20San%20Francisco%2C%20CA%2C%20USA&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                                        style="width: 100%;"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="copy-right">
+                <p>Design and Developed by <a href="https://uideck.com" rel="nofollow" target="_blank"> UIdeck </a>.
+                    Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
+            </div>
+
+        </div>
     </footer>
+    <!-- ========================= footer end ========================= -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+    </a>
 
     <!-- JS -->
     <script src="{{ asset('template/js/bootstrap-5.0.0-beta2.min.js') }}"></script>
