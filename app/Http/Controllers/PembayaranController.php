@@ -53,8 +53,6 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::findOrFail($id);
         $pembayaran->delete();
 
-        return redirect()
-            ->route('pembayaran.index')
-            ->with('success', 'Pembayaran berhasil dihapus.');
+        return redirect()->back()->with('success', 'Data pembayaran berhasil dihapus');
     }
 }

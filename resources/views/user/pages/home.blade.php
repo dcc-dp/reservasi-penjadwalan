@@ -23,7 +23,7 @@
                         dan project nyata.
                     </p>
 
-                    <a href="{{ route('siswa.register') }}" class="main-btn btn-hover me-3">
+                    <a href="{{ route('siswa.login') }}" class="main-btn btn-hover me-3">
                         Daftar Sekarang
                     </a>
 
