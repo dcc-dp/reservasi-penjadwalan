@@ -16,7 +16,8 @@ class User extends Authenticatable
         'role',
         'notelp', 
         'jkl',
-        'alamat'
+        'alamat',
+        'photo'
     ];
 
     protected $hidden = [

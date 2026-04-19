@@ -87,7 +87,6 @@
 </header>
 <!-- ===== HEADER END ===== -->
 
-
 {{-- ===== CONTENT ===== --}}
 @yield('content')
 

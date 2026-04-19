@@ -12,21 +12,21 @@ use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\ChangePasswordController;
-
 use App\Http\Controllers\admin\MateriController;
 use App\Http\Controllers\admin\PaketController;
 use App\Http\Controllers\admin\ReservasiController;
 use App\Http\Controllers\InstrukturProfileController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KursusController;
-
 use App\Http\Controllers\User\SiswaController;
 use App\Http\Controllers\User\KursusSiswaController;
 use App\Http\Controllers\User\JadwalSiswaController;
 use App\Http\Controllers\user\ReservasiSiswaController;
-
 use App\Http\Controllers\pendaftaranController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\User\KursusSayaController;
+use App\Http\Controllers\User\PembayaranSiswaController;
+use App\Http\Controllers\User\ProfilSiswaController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -134,15 +134,22 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->group(function () {
 
     Route::get('/jadwal', [JadwalSiswaController::class, 'index'])->name('siswa.jadwal');
 
-    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('siswa.pembayaran');
+    // Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('siswa.pembayaran');
 
     Route::get('/reservasi', [ReservasiSiswaController::class, 'index'])->name('siswa.reservasi.index');
     Route::get('/reservasi/create', [ReservasiSiswaController::class, 'create'])->name('siswa.reservasi.create');
     Route::post('/reservasi/store', [ReservasiSiswaController::class, 'store'])->name('siswa.reservasi.store');
 
     Route::get('/kursus', [KursusSiswaController::class, 'index'])->name('siswa.kursus.index');
-    
-    
+    Route::get('/kursus/{id}', [KursusSiswaController::class, 'show'])->name('siswa.kursus.show');
+    Route::get('/kursus-saya', [KursusSayaController::class, 'index'])->name('siswa.kursus-saya.index');
+
+    Route::get('/profil', [ProfilSiswaController::class, 'index'])->name('siswa.profil');
+    Route::put('/profil/update', [ProfilSiswaController::class, 'update'])->name('siswa.profil.update');
+
+    Route::get('/pembayaran', [PembayaranSiswaController::class, 'index'])->name('siswa.pembayaran');
+    Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])
+    ->name('pembayaran.destroy');
 
     Route::post('/logout', function () {
         Auth::logout();

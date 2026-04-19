@@ -36,4 +36,6 @@ class Reservasi extends Model
     {
         return $this->hasOne(Pembayaran::class,'reservasi_id');
     }
+
+    
 }

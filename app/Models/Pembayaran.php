@@ -17,4 +17,9 @@ class Pembayaran extends Model
     {
         return $this->hasOne(Pembayaran::class,'reservasi_id');
     }
+
+    public function reservasi()
+    {
+        return $this->belongsTo(Reservasi::class);
+    }
 }
