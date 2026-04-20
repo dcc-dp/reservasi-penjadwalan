@@ -11,7 +11,7 @@ class JadwalSiswaController extends Controller
     public function index()
 {
     $reservasiList = Reservasi::with([
-        'jadwal',                // ambil jadwal
+        'jadwals',                // ambil jadwal
         'kursus.instruktur',     // ambil instruktur kursus
         'paket',                 // ambil paket
         'pembayaran'             // ambil status pembayaran

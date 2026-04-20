@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5>Daftar Jadwal</h5>
-            <a href="{{ route('jadwal.create') }}" class="btn btn-sm btn-primary">+ Tambah Jadwal</a>
+            <a href="{{ route('kursus.jadwal.create') }}" class="btn btn-sm btn-primary">+ Tambah Jadwal</a>
         </div>
         <div class="card-body table-responsive">
             <table class="table align-items-center mb-0">

@@ -43,6 +43,7 @@
                                     <th>Metode Bayar</th>
                                     <th>Total</th>
                                     <th>Status</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
 
@@ -76,18 +77,36 @@
                                         </td>
 
                                         <td>
-                                            @if($item->status == 'selesai')
+                                            @if(in_array($item->status, ['settlement', 'capture']))
                                                 <span class="badge badge-soft-success">Lunas</span>
-                                            @elseif($item->status == 'proses')
+                                            @elseif($item->status == 'pending')
                                                 <span class="badge badge-soft-warning">Menunggu</span>
+                                            @elseif($item->status == 'expire')
+                                                <span class="badge badge-soft-secondary">Kedaluwarsa</span>
                                             @else
                                                 <span class="badge badge-soft-danger">Gagal</span>
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if($item->status == 'pending')
+                                                <a href="{{ route('siswa.pembayaran.bayar', $item->id) }}" 
+                                                   class="btn btn-sm btn-primary">
+                                                    Bayar Sekarang
+                                                </a>
+                                            @elseif(in_array($item->status, ['settlement', 'capture']))
+                                                <span class="text-success fw-semibold">Sudah Dibayar</span>
+                                            @else
+                                                <a href="{{ route('siswa.pembayaran.bayar', $item->id) }}" 
+                                                   class="btn btn-sm btn-outline-primary">
+                                                    Bayar Ulang
+                                                </a>
                                             @endif
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5">
+                                        <td colspan="6">
                                             <div class="payment-empty-state">
                                                 <div class="payment-empty-icon">
                                                     <i class="fas fa-credit-card"></i>

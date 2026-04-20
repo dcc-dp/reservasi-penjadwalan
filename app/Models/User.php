@@ -15,7 +15,7 @@ class User extends Authenticatable
         'password',
         'role',
         'notelp', 
-        'jkl',
+        'jk',
         'alamat',
         'photo'
     ];
@@ -58,6 +58,11 @@ class User extends Authenticatable
      public function instrukturProfile()
     {
         return $this->hasOne(Instruktur_Profile::class, 'user_id', 'id');
+    }
+
+    public function reservasis()
+    {
+        return $this->hasMany(Reservasi::class, 'id_user');
     }
 
 }

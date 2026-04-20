@@ -10,7 +10,7 @@ class KursusSayaController extends Controller
 {
     public function index()
     {
-        $kursusSaya = Reservasi::with(['kursus', 'paket', 'pembayaran', 'jadwal'])
+        $kursusSaya = Reservasi::with(['kursus', 'paket', 'pembayaran', 'jadwals'])
             ->where('id_user', Auth::id())
             ->latest()
             ->get();

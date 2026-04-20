@@ -148,9 +148,10 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->group(function () {
     Route::put('/profil/update', [ProfilSiswaController::class, 'update'])->name('siswa.profil.update');
 
     Route::get('/pembayaran', [PembayaranSiswaController::class, 'index'])->name('siswa.pembayaran');
-    Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])
-    ->name('pembayaran.destroy');
-
+    Route::get('/pembayaran/{id}', [PembayaranSiswaController::class, 'show'])->name('siswa.pembayaran.show');
+    Route::get('/siswa/pembayaran/{id}/pay', [PembayaranSiswaController::class, 'bayar'])->name('siswa.pembayaran.bayar');
+    Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
+    
     Route::post('/logout', function () {
         Auth::logout();
         return redirect()->route('pages.home');
