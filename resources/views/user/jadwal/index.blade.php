@@ -3,7 +3,6 @@
 
 @section('content')
 
-
 <div class="container-fluid py-4">
 
     {{-- HEADER --}}
@@ -87,8 +86,8 @@
 
                                         {{-- Jadwal --}}
                                         <td class="text-start">
-                                            @if($reservasi->jadwal && $reservasi->jadwal->count())
-                                                @foreach ($reservasi->jadwal as $jadwal)
+                                            @if($reservasi->jadwals && $reservasi->jadwals->count())
+                                                @foreach ($reservasi->jadwals as $jadwal)
                                                     <div class="jadwal-item">
                                                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                                                             <div class="jadwal-day">
@@ -102,7 +101,7 @@
 
                                                         <div class="jadwal-meta">
                                                             <div>Pertemuan {{ $jadwal->pertemuan }}</div>
-                                                            <div>Ruangan: {{ $jadwal->ruangan ?? '-' }}</div>
+                                                            <div>Ruangan: {{ $reservasi->ruangan ?? '-' }}</div>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -117,20 +116,24 @@
                                         {{-- Status --}}
                                         <td>
                                             @php
-                                                $status = $reservasi->pembayaran?->status ?? 'belum';
+                                                $status = $reservasi->pembayaran?->status ?? 'pending';
                                             @endphp
 
-                                            @if ($status === 'selesai')
+                                            @if (in_array($status, ['settlement', 'capture']))
                                                 <span class="badge-soft-success">
                                                     Aktif
                                                 </span>
-                                            @elseif ($status === 'proses')
+                                            @elseif ($status === 'pending')
                                                 <span class="badge-soft-warning">
                                                     Menunggu
                                                 </span>
+                                            @elseif ($status === 'expire')
+                                                <span class="badge-soft-secondary">
+                                                    Kedaluwarsa
+                                                </span>
                                             @else
                                                 <span class="badge-soft-danger">
-                                                    Belum Bayar
+                                                    Gagal
                                                 </span>
                                             @endif
                                         </td>

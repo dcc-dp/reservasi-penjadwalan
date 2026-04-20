@@ -53,7 +53,7 @@
 
                         <div class="mb-3">
                             <div class="meta-label">Jumlah Jadwal</div>
-                            <div class="meta-value">{{ $item->jadwal->count() }} Pertemuan</div>
+                            <div class="meta-value">{{ $item->jadwals->count() }} Pertemuan</div>
                         </div>
 
                         <div class="mb-4">

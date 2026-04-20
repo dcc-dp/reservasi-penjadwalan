@@ -220,7 +220,7 @@
                                 Paket {{ $paket->jenis }} untuk kursus {{ $kursus->name }}.
                             </div>
 
-                            <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => $paket->id]) }}"
+                            <a href="{{ route('siswa.reservasi.create', ['paket_id' => $paket->id]) }}"
                                class="btn btn-outline-primary w-100">
                                 <i class="fas fa-check-circle me-2"></i>Pilih Paket
                             </a>

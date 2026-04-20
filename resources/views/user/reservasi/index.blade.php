@@ -64,15 +64,14 @@
 
                                         {{-- Jadwal --}}
                                         <td>
-                                            @if($item->jadwal && $item->jadwal->count())
-                                                @foreach($item->jadwal as $jadwal)
+                                            @if($item->jadwals && $item->jadwals->count())
+                                                @foreach($item->jadwals as $jadwal)
                                                     <div class="jadwal-card">
                                                         <div class="jadwal-main">
                                                             <div class="jadwal-day">
                                                                 {{ $jadwal->hari }}
                                                             </div>
                                                             <div class="jadwal-time">
-                                                                <i class="fas fa-clock me-1"></i>
                                                                 {{ \Carbon\Carbon::parse($jadwal->jam)->format('H:i') }}
                                                             </div>
                                                         </div>
@@ -82,34 +81,26 @@
                                                     </div>
                                                 @endforeach
                                             @else
-                                                <span class="text-muted small">
-                                                    <i class="fas fa-calendar-times me-1"></i>
-                                                    Belum ada jadwal
-                                                </span>
+                                                <span>Belum ada jadwal</span>
                                             @endif
                                         </td>
 
-                                        {{-- Status Pembayaran --}}
                                         <td>
-                                            @if(!$item->pembayaran)
-                                                <span class="badge-soft-secondary">
-                                                    Belum Ada Data
-                                                </span>
+                                            @php
+                                                $status = $item->pembayaran?->status ?? 'pending';
+                                            @endphp
 
-                                            @elseif($item->pembayaran->status == 'proses')
-                                                <span class="badge-soft-warning">
-                                                    Menunggu Konfirmasi
-                                                </span>
+                                            @if (in_array($status, ['settlement', 'capture']))
+                                                <span class="badge-soft-success">Aktif</span>
 
-                                            @elseif($item->pembayaran->status == 'selesai')
-                                                <span class="badge-soft-success">
-                                                    Lunas
-                                                </span>
+                                            @elseif ($status === 'pending')
+                                                <span class="badge-soft-warning">Menunggu</span>
 
-                                            @elseif($item->pembayaran->status == 'gagal')
-                                                <span class="badge-soft-danger">
-                                                    Gagal
-                                                </span>
+                                            @elseif ($status === 'expire')
+                                                <span class="badge-soft-secondary">Kedaluwarsa</span>
+
+                                            @else
+                                                <span class="badge-soft-danger">Gagal</span>
                                             @endif
                                         </td>
 

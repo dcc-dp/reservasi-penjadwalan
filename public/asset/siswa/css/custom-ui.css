@@ -1654,3 +1654,243 @@ NOTIF MODERN
         opacity:1;
     }
 }
+
+/* ======================
+RESERVASI FORM
+====================== */
+.reservasi-form-hero{
+    background: linear-gradient(135deg, #1F2A63, #4A6CF7);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+}
+
+.reservasi-form-hero::before{
+    content: "";
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    width: 170px;
+    height: 170px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+}
+
+.reservasi-form-hero::after{
+    content: "";
+    position: absolute;
+    bottom: -45px;
+    right: 70px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+}
+
+.reservasi-form-title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.reservasi-form-subtitle{
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+}
+
+.reservasi-form-card{
+    border: none;
+    border-radius: 24px;
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.07);
+}
+
+.reservasi-label{
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.reservasi-input{
+    border-radius: 16px !important;
+    border: 1px solid #e5eaf3 !important;
+    min-height: 52px;
+    box-shadow: none !important;
+    transition: .25s ease;
+}
+
+.reservasi-input:focus{
+    border-color: #4A6CF7 !important;
+    box-shadow: 0 0 0 4px rgba(74,108,247,0.10) !important;
+}
+
+.reservasi-price-box{
+    min-height: 54px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #eef4ff, #dfe8ff);
+    color: #3156f3;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #d9e4ff;
+    padding: 12px 16px;
+}
+
+.jadwal-block{
+    background: #f8fafc;
+    border: 1px solid #eef2f7;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.jadwal-block-title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.jadwal-item-box{
+    background: #fff;
+    border: 1px solid #e8eefc;
+    border-radius: 18px;
+    padding: 16px;
+}
+
+.reservasi-submit-btn{
+    border-radius: 16px;
+    min-height: 54px;
+    font-weight: 700;
+}
+
+.reservasi-back-link{
+    color: #6b7280;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .25s ease;
+}
+
+.reservasi-back-link:hover{
+    color: #4A6CF7;
+}
+
+@media (max-width: 768px){
+    .reservasi-form-title{
+        font-size: 22px;
+    }
+
+    .jadwal-block{
+        padding: 16px;
+    }
+}
+
+.reservasi-form-hero{
+    background: linear-gradient(135deg, #1F2A63, #4A6CF7);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+}
+
+.reservasi-form-hero::before{
+    content: "";
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    width: 170px;
+    height: 170px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+}
+
+.reservasi-form-hero::after{
+    content: "";
+    position: absolute;
+    bottom: -45px;
+    right: 70px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+}
+
+.reservasi-form-title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.reservasi-form-subtitle{
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+}
+
+.reservasi-form-card{
+    border: none;
+    border-radius: 24px;
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.07);
+}
+
+.reservasi-label{
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.reservasi-input{
+    border-radius: 16px !important;
+    border: 1px solid #e5eaf3 !important;
+    min-height: 52px;
+    box-shadow: none !important;
+    transition: .25s ease;
+}
+
+.reservasi-input:focus{
+    border-color: #4A6CF7 !important;
+    box-shadow: 0 0 0 4px rgba(74,108,247,0.10) !important;
+}
+
+.jadwal-block{
+    background: #f8fafc;
+    border: 1px solid #eef2f7;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.jadwal-block-title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.jadwal-item-box{
+    background: #fff;
+    border: 1px solid #e8eefc;
+    border-radius: 18px;
+    padding: 16px;
+}
+
+.reservasi-price-box{
+    min-height: 54px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #eef4ff, #dfe8ff);
+    color: #3156f3;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #d9e4ff;
+    padding: 12px 16px;
+}
+
+.reservasi-submit-btn{
+    border-radius: 16px;
+    min-height: 54px;
+    font-weight: 700;
+}
