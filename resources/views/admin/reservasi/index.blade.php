@@ -30,63 +30,68 @@
                                             <td>{{ $item->user->name ?? '-' }}</td>
                                             <td>{{ $item->kursus->name ?? '-' }}</td>
                                             <td>
-                                            @if($item->jadwal->count() > 0)
-                                                {{ $item->jadwal[0]->hari }}
+                                            @if($item->jadwals->count() > 0)
+                                                {{ $item->jadwals[0]->hari }}
                                             @else
                                                 -
                                             @endif
                                             </td>
 
                                             <td>
-                                                @if($item->jadwal->count() > 0)
-                                                    {{ $item->jadwal[0]->jam }}
+                                                @if($item->jadwals->count() > 0)
+                                                    {{ $item->jadwals[0]->jam }}
                                                 @else
                                                     -
                                                 @endif
                                             </td>
 
                                             <td>
-                                                @if($item->jadwal->count() > 1)
-                                                    {{ $item->jadwal[1]->hari }}
+                                                @if($item->jadwals->count() > 1)
+                                                    {{ $item->jadwals[1]->hari }}
                                                 @else
                                                     -
                                                 @endif
                                                 </td>
 
                                                 <td>
-                                                @if($item->jadwal->count() > 1)
-                                                    {{ $item->jadwal[1]->jam }}
+                                                @if($item->jadwals->count() > 1)
+                                                    {{ $item->jadwals[1]->jam }}
                                                 @else
                                                     -
                                                 @endif
                                             </td>
                                             {{-- STATUS PEMBAYARAN --}}
                                             <td>
-                                            @if(!$item->pembayaran)
+                                                @if(!$item->pembayaran)
+                                                    <span class="badge bg-secondary">
+                                                        Belum Ada Data
+                                                    </span>
 
-                                            <span class="badge bg-secondary">
-                                            Belum Ada Data
-                                            </span>
+                                                @elseif($item->pembayaran->status == 'pending')
+                                                    <span class="badge bg-warning text-dark">
+                                                        Menunggu Pembayaran
+                                                    </span>
 
-                                            @elseif($item->pembayaran->status == 'proses')
+                                                @elseif(in_array($item->pembayaran->status, ['settlement', 'capture']))
+                                                    <span class="badge bg-success">
+                                                        Lunas
+                                                    </span>
 
-                                            <span class="badge bg-warning text-dark">
-                                            Menunggu Konfirmasi
-                                            </span>
+                                                @elseif($item->pembayaran->status == 'expire')
+                                                    <span class="badge bg-secondary">
+                                                        Kedaluwarsa
+                                                    </span>
 
-                                            @elseif($item->pembayaran->status == 'dibayar')
+                                                @elseif(in_array($item->pembayaran->status, ['cancel', 'deny', 'failure']))
+                                                    <span class="badge bg-danger">
+                                                        Gagal
+                                                    </span>
 
-                                            <span class="badge bg-info">
-                                            Sudah Dibayar
-                                            </span>
-
-                                            @elseif($item->pembayaran->status == 'selesai')
-
-                                            <span class="badge bg-success">
-                                            Lunas
-                                            </span>
-
-                                            @endif
+                                                @else
+                                                    <span class="badge bg-dark">
+                                                        {{ ucfirst($item->pembayaran->status) }}
+                                                    </span>
+                                                @endif
                                             </td>
 
                                             {{-- AKSI --}}

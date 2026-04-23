@@ -89,6 +89,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
     Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
 
+    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('admin.pembayaran.index');
+    Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])->name('admin.pembayaran.destroy');
+
     Route::get('/paket', [PaketController::class, 'index'])->name('paket.index');
     Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
     Route::post('/paket/store', [PaketController::class, 'store'])->name('paket.store');
@@ -104,6 +107,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::delete('/kursus/destroy/{id}', [KursusController::class, 'destroy'])->name('kursus.destroy');
 
     Route::get('/kursus/jadwal', [JadwalController::class, 'index'])->name('kursus.jadwal');
+    Route::get('/kursus/jadwal/detail/{id}', [JadwalController::class, 'detail'])
+    ->name('kursus.jadwal.detail');
     Route::get('/kursus/jadwal/create', [JadwalController::class, 'create'])->name('kursus.jadwal.create');
     Route::post('/kursus/jadwal/store', [JadwalController::class, 'store'])->name('kursus.jadwal.store');
     Route::get('/kursus/jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('kursus.jadwal.edit');
