@@ -3,7 +3,6 @@
 
 @section('content')
 
-
 <div class="container-fluid py-4">
 
     <div class="row mb-4">
@@ -24,7 +23,7 @@
     <div class="row">
         @forelse($kursusSaya as $item)
             @php
-                $status = $item->pembayaran->status ?? 'belum';
+                $status = $item->pembayaran?->status ?? 'pending';
             @endphp
 
             <div class="col-xl-4 col-md-6 mb-4">
@@ -35,12 +34,14 @@
                                 {{ $item->paket->jenis ?? 'Paket' }}
                             </span>
 
-                            @if($status == 'selesai')
+                            @if(in_array($status, ['settlement', 'capture']))
                                 <span class="status-badge status-success">Aktif</span>
-                            @elseif($status == 'proses')
+                            @elseif($status == 'pending')
                                 <span class="status-badge status-warning">Menunggu</span>
+                            @elseif($status == 'expire')
+                                <span class="status-badge status-secondary">Kedaluwarsa</span>
                             @else
-                                <span class="status-badge status-danger">Belum Bayar</span>
+                                <span class="status-badge status-danger">Gagal</span>
                             @endif
                         </div>
 
