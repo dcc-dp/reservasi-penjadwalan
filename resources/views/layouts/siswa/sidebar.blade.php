@@ -86,6 +86,14 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('siswa.ulasan.index') ? 'active' : '' }}"
+               href="{{ route('siswa.ulasan.index') }}">
+                <i class="fas fa-star me-2"></i>
+                <span class="nav-link-text">Ulasan</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('siswa.profil') ? 'active' : '' }}"
                href="{{ route('siswa.profil') }}">
                 <i class="fas fa-user me-2"></i>
