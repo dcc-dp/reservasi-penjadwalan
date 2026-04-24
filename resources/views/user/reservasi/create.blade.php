@@ -29,67 +29,117 @@
                     <form action="{{ route('siswa.reservasi.store') }}" method="POST">
                         @csrf
 
-                        {{-- PILIH KURSUS --}}
-                        <div class="mb-4">
-                            <label class="form-label reservasi-label">
-                                <i class="fas fa-book me-2 text-primary"></i>
-                                Kursus
-                            </label>
+                        {{-- JIKA SISWA DATANG DARI DETAIL KURSUS / PILIH PAKET --}}
+                        @if(isset($selectedPaket) && $selectedPaket)
 
-                            <select
-                                name="id_kursus"
-                                id="kursusSelect"
-                                class="form-select reservasi-input"
-                                required
-                            >
-                                <option value="" disabled selected>Pilih kursus</option>
+                            <input type="hidden" name="id_kursus" value="{{ $selectedPaket->kursus_id }}">
+                            <input type="hidden" name="id_paket" value="{{ $selectedPaket->id }}">
 
-                                @foreach ($kursusList as $k)
-                                    <option value="{{ $k->id }}">
-                                        {{ $k->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                            {{-- KURSUS OTOMATIS --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-book me-2 text-primary"></i>
+                                    Kursus
+                                </label>
 
-                        {{-- PILIH PAKET --}}
-                        <div class="mb-4">
-                            <label class="form-label reservasi-label">
-                                <i class="fas fa-layer-group me-2 text-primary"></i>
-                                Paket Kursus
-                            </label>
-
-                            <select
-                                name="id_paket"
-                                id="paketSelect"
-                                class="form-select reservasi-input"
-                                required
-                            >
-                                <option value="" disabled selected>Pilih paket</option>
-
-                                @foreach ($paketList as $p)
-                                    <option
-                                        value="{{ $p->id }}"
-                                        data-harga="{{ $p->harga }}"
-                                        data-kursus="{{ $p->kursus_id }}"
-                                    >
-                                        {{ $p->jenis }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        {{-- HARGA --}}
-                        <div class="mb-4">
-                            <label class="form-label reservasi-label">
-                                <i class="fas fa-money-bill-wave me-2 text-primary"></i>
-                                Harga
-                            </label>
-
-                            <div id="hargaText" class="reservasi-price-box">
-                                Pilih paket terlebih dahulu
+                                <input type="text"
+                                       class="form-control reservasi-input"
+                                       value="{{ $selectedPaket->kursus->name ?? '-' }}"
+                                       readonly>
                             </div>
-                        </div>
+
+                            {{-- PAKET OTOMATIS --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-layer-group me-2 text-primary"></i>
+                                    Paket Kursus
+                                </label>
+
+                                <input type="text"
+                                       class="form-control reservasi-input"
+                                       value="{{ $selectedPaket->jenis }}"
+                                       readonly>
+                            </div>
+
+                            {{-- HARGA OTOMATIS --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-money-bill-wave me-2 text-primary"></i>
+                                    Harga
+                                </label>
+
+                                <div class="reservasi-price-box">
+                                    Rp {{ number_format($selectedPaket->harga, 0, ',', '.') }}
+                                </div>
+                            </div>
+
+                        @else
+
+                            {{-- JIKA SISWA BUKA FORM RESERVASI LANGSUNG --}}
+                            {{-- PILIH KURSUS --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-book me-2 text-primary"></i>
+                                    Kursus
+                                </label>
+
+                                <select
+                                    name="id_kursus"
+                                    id="kursusSelect"
+                                    class="form-select reservasi-input"
+                                    required
+                                >
+                                    <option value="" disabled selected>Pilih kursus</option>
+
+                                    @foreach ($kursusList as $k)
+                                        <option value="{{ $k->id }}">
+                                            {{ $k->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- PILIH PAKET --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-layer-group me-2 text-primary"></i>
+                                    Paket Kursus
+                                </label>
+
+                                <select
+                                    name="id_paket"
+                                    id="paketSelect"
+                                    class="form-select reservasi-input"
+                                    required
+                                >
+                                    <option value="" disabled selected>Pilih paket</option>
+
+                                    @foreach ($paketList as $p)
+                                        <option
+                                            value="{{ $p->id }}"
+                                            data-harga="{{ $p->harga }}"
+                                            data-kursus="{{ $p->kursus_id }}"
+                                            hidden
+                                        >
+                                            {{ $p->jenis }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- HARGA --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-money-bill-wave me-2 text-primary"></i>
+                                    Harga
+                                </label>
+
+                                <div id="hargaText" class="reservasi-price-box">
+                                    Pilih paket terlebih dahulu
+                                </div>
+                            </div>
+
+                        @endif
 
                         {{-- JADWAL --}}
                         <div class="jadwal-block mb-4">
@@ -185,6 +235,8 @@
 
 </div>
 
+{{-- SCRIPT HANYA DIPAKAI JIKA FORM DIBUKA MANUAL --}}
+@if(!isset($selectedPaket) || !$selectedPaket)
 <script>
 const kursusSelect = document.getElementById('kursusSelect');
 const paketSelect  = document.getElementById('paketSelect');
@@ -219,5 +271,6 @@ paketSelect.addEventListener('change', function () {
     hargaText.innerHTML = 'Rp ' + format;
 });
 </script>
+@endif
 
 @endsection

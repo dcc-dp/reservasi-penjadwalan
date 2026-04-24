@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('reservasi_id');
+            $table->foreignId('reservasi_id')
+                ->constrained('reservasis')
+                ->cascadeOnDelete();
 
-            // Data transaksi internal / Midtrans
             $table->string('order_id')->unique();
             $table->string('snap_token')->nullable();
             $table->string('transaction_id')->nullable();
 
-            // Informasi pembayaran
             $table->string('metode_bayar')->nullable();
             $table->string('payment_type')->nullable();
+
             $table->integer('total');
 
-            // Status pembayaran
             $table->enum('status', [
                 'pending',
                 'settlement',
@@ -38,13 +38,7 @@ return new class extends Migration
             ])->default('pending');
 
             $table->timestamp('paid_at')->nullable();
-
             $table->timestamps();
-
-            $table->foreign('reservasi_id')
-                ->references('id')
-                ->on('reservasis')
-                ->onDelete('cascade');
         });
     }
 

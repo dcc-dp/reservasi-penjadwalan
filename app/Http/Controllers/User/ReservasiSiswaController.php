@@ -22,12 +22,22 @@ class ReservasiSiswaController extends Controller
         return view('user.reservasi.index', compact('reservasiList'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $kursusList = Kursus::with('pakets')->get();
+        $selectedPaket = null;
+
+        if ($request->has('paket_id')) {
+            $selectedPaket = Paket::with('kursus')->findOrFail($request->paket_id);
+        }
+
+        $kursusList = Kursus::all();
         $paketList = Paket::with('kursus')->get();
 
-        return view('user.reservasi.create', compact('kursusList', 'paketList'));
+        return view('user.reservasi.create', compact(
+            'kursusList',
+            'paketList',
+            'selectedPaket'
+        ));
     }
 
     public function store(Request $request)

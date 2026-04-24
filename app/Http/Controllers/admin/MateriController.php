@@ -4,86 +4,77 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Materi;
+use App\Models\Paket;
 use Illuminate\Http\Request;
 
 class MateriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $materi = Materi::all();
+        $materi = Materi::with('paket.kursus')->latest()->get();
+
         return view('admin.materi.materi', compact('materi'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('admin.materi.create');
+        $pakets = Paket::with('kursus')->get();
+
+        return view('admin.materi.create', compact('pakets'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'Judul' => 'required',
-            'deskripsi' => 'required'
+            'paket_id' => 'required|exists:pakets,id',
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
         ]);
 
-        $materi = new Materi();
-        $materi->Judul = $request->Judul;
-        $materi->deskripsi = $request->deskripsi;
-        $materi->save();
-        return redirect()->route('materi.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $materi = Materi::findOrFail($id);
-        return view('admin.materi.edit', compact('materi'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'Judul' => 'required',
-            'deskripsi' => 'required',
-        ]);
-        $materi = Materi::findorfail($id);
-        $materi->update([
-            'Judul' => $request->Judul,
+        Materi::create([
+            'paket_id' => $request->paket_id,
+            'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
         ]);
-        return redirect()->route('materi');
+
+        return redirect()->route('materi.index')
+            ->with('success', 'Materi berhasil ditambahkan.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function edit($id)
+    {
+        $materi = Materi::findOrFail($id);
+        $pakets = Paket::with('kursus')->get();
+
+        return view('admin.materi.edit', compact('materi', 'pakets'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'paket_id' => 'required|exists:pakets,id',
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        $materi = Materi::findOrFail($id);
+
+        $materi->update([
+            'paket_id' => $request->paket_id,
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        return redirect()->route('materi.index')
+            ->with('success', 'Materi berhasil diperbarui.');
+    }
+
+    public function destroy($id)
     {
         $materi = Materi::findOrFail($id);
         $materi->delete();
 
-        return redirect()->route('materi.index');
+        return redirect()->route('materi.index')
+            ->with('success', 'Materi berhasil dihapus.');
     }
 }
