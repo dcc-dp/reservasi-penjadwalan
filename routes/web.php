@@ -28,6 +28,8 @@ use App\Http\Controllers\User\KursusSayaController;
 use App\Http\Controllers\User\PembayaranSiswaController;
 use App\Http\Controllers\User\ProfilSiswaController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\UlasanController;
+use App\Http\Controllers\User\UlasanSiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,6 +127,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/reservasi/update/{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
     Route::delete('/reservasi/destroy/{id}', [ReservasiController::class, 'destroy'])->name('reservasi.destroy');
 
+    Route::get('/ulasan', [UlasanController::class, 'index'])->name('admin.ulasan.index');
+    Route::delete('/ulasan/{id}', [UlasanController::class, 'destroy'])->name('admin.ulasan.destroy');
+
     Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');
 });
 
@@ -159,6 +164,9 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->group(function () {
     Route::get('/pembayaran/{id}', [PembayaranSiswaController::class, 'show'])->name('siswa.pembayaran.show');
     Route::get('/siswa/pembayaran/{id}/pay', [PembayaranSiswaController::class, 'bayar'])->name('siswa.pembayaran.bayar');
     Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
+
+    Route::get('/ulasan', [UlasanSiswaController::class, 'index'])->name('siswa.ulasan.index');
+    Route::post('/ulasan/store', [UlasanSiswaController::class, 'store'])->name('siswa.ulasan.store');
     
     Route::post('/logout', function () {
         Auth::logout();
