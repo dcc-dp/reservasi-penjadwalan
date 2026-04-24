@@ -43,7 +43,7 @@
                                     <th>Metode Bayar</th>
                                     <th>Total</th>
                                     <th>Status</th>
-                                    <th>Aksi</th>
+                                    {{-- <th>Aksi</th> --}}
                                 </tr>
                             </thead>
 
@@ -88,7 +88,7 @@
                                             @endif
                                         </td>
 
-                                        <td>
+                                        {{-- <td>
                                             @if($item->status == 'pending')
                                                 <a href="{{ route('siswa.pembayaran.bayar', $item->id) }}" 
                                                    class="btn btn-sm btn-primary">
@@ -102,7 +102,7 @@
                                                     Bayar Ulang
                                                 </a>
                                             @endif
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @empty
                                     <tr>

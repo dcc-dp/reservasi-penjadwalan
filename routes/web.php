@@ -88,6 +88,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/materi', [MateriController::class, 'index'])->name('materi.index');
     Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
     Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
+    Route::get('/materi/edit/{id}', [MateriController::class, 'edit'])->name('materi.edit');
+    Route::post('/materi/update/{id}', [MateriController::class, 'update'])->name('materi.update');
+    Route::delete('/materi/destroy/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
     Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('admin.pembayaran.index');
     Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])->name('admin.pembayaran.destroy');

@@ -10,19 +10,33 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('reservasis', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_kursus');
-            $table->unsignedBigInteger('id_paket');
-            $table->string('ruangan')->nullable();
-            $table->timestamps();
+        {
+            Schema::create('reservasis', function (Blueprint $table) {
+        $table->id();
 
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_kursus')->references('id')->on('kursuses')->onDelete('cascade');
-            $table->foreign('id_paket')->references('id')->on('pakets')->onDelete('cascade');
-        });
+        $table->foreignId('id_user')
+            ->constrained('users')
+            ->cascadeOnDelete();
+
+        $table->foreignId('id_kursus')
+            ->constrained('kursuses')
+            ->cascadeOnDelete();
+
+        $table->foreignId('id_paket')
+            ->constrained('pakets')
+            ->cascadeOnDelete();
+
+        $table->string('ruangan')->nullable();
+
+        $table->enum('status', [
+            'pending',
+            'aktif',
+            'selesai',
+            'batal'
+        ])->default('pending');
+
+        $table->timestamps();
+    });
     }
     /**
      * Reverse the migrations.
