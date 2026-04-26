@@ -31,7 +31,7 @@ class SessionsController extends Controller
 
             return match (Auth::user()->role) {
                 'admin' => redirect()->route('admin.dashboard'),
-                'instruktur' => redirect()->route('instruktur.dashboard'),
+                'instruktur' => redirect()->route('dashboard'),
                 'siswa' => redirect()->route('siswa.dashboard'),
                 default => abort(403, 'Role tidak dikenali'),
             };
