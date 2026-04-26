@@ -1,17 +1,21 @@
+@if(Auth::user()->role == 'admin')
 
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+  @if(Auth::user()->role == 'admin')
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-    <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
+    <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('admin.dashboard') }}">
         <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="...">
         <span class="ms-3 font-weight-bold">Soft UI Dashboard Laravel</span>
     </a>
   </div>
+  @endif
   <hr class="horizontal dark mt-0">
   <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ url('dashboard') }}">
+        @if(Auth::user()->role == 'admin')
+        <a class="nav-link {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ route('admin.dashboard') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>shop </title>
@@ -29,13 +33,15 @@
           </div>
           <span class="nav-link-text ms-1">Dashboard</span>
         </a>
-      </li>
+        @endif
 
+      </li>
+        @if(Auth::user()->role == 'admin')
         <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manajemen Kursus</h6>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('materi') ? 'active' : '') }} " href="{{ route('materi') }}">
+        <a class="nav-link {{ (Request::is('materi') ? 'active' : '') }} " href="{{ route('materi.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>customer-support</title>
@@ -55,7 +61,9 @@
             <span class="nav-link-text ms-1">Materi</span>
         </a>
       </li>
+        @endif
       <li class="nav-item">
+        @if(Auth::user()->role == 'admin')
         <a class="nav-link {{ (Request::is('paket') ? 'active' : '') }} " href="{{ route('paket.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -75,9 +83,11 @@
             </div>
             <span class="nav-link-text ms-1">Paket</span>
         </a>
+        @endif
       </li>
+        @if(Auth::user()->role == 'admin')
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('kursus') ? 'active' : '') }} " href="{{ url('kursus') }}">
+        <a class="nav-link {{ (Request::is('kursus') ? 'active' : '') }} " href="{{ route('kursus.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>customer-support</title>
@@ -97,8 +107,11 @@
             <span class="nav-link-text ms-1">Kursus</span>
         </a>
       </li>
+        @endif
+
+        @if(Auth::user()->role == 'admin')
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('jadwal') ? 'active' : '') }} " href="{{ url('jadwal') }}">
+        <a class="nav-link {{ (Request::is('jadwal') ? 'active' : '') }} " href="{{ route('kursus.jadwal', ) }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>customer-support</title>
@@ -118,8 +131,11 @@
             <span class="nav-link-text ms-1">Jadwal</span>
         </a>
       </li>
+        @endif
+
+        @if(Auth::user()->role == 'admin')
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('user-profile') ? 'active' : '') }} " href="{{ url('ulasan') }}">
+        <a class="nav-link {{ (Request::is('ulasan') ? 'active' : '') }} " href="{{ route('admin.ulasan.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>customer-support</title>
@@ -139,12 +155,14 @@
             <span class="nav-link-text ms-1">Ulasan</span>
         </a>
       </li>
+        @endif
 
+        @if(Auth::user()->role == 'admin')
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manajemen Reservasi</h6>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('reservasi') ? 'active' : '') }}" href="{{ url('reservasi') }}">
+        <a class="nav-link {{ (Request::is('reservasi') ? 'active' : '') }}" href="{{ route('reservasi.index') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>customer-support</title>
@@ -164,8 +182,12 @@
           <span class="nav-link-text ms-1">Reservasi</span>
         </a>
       </li>
+        @endif
+
+        @if(Auth::user()->role == 'admin')
+
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('profile') ? 'active' : '') }}" href="{{ url('pembayaran') }}">
+        <a class="nav-link {{ (Request::is('profile') ? 'active' : '') }}" href="{{ route('admin.pembayaran.index') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>customer-support</title>
@@ -185,12 +207,14 @@
           <span class="nav-link-text ms-1" >Pembayaran</span>
         </a>
       </li>
+        @endif
+
 
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manajemen User</h6>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('profile-instruktur') ? 'active' : '') }}" href="{{ url('profile-instruktur') }}">
+        <a class="nav-link {{ (Request::is('profile-instruktur') ? 'active' : '') }}" href="{{ route('instruktur.index') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>customer-support</title>
@@ -436,7 +460,7 @@
           <span class="nav-link-text ms-1">Sign Up</span>
         </a>
       </li> --}}
-      <form method="POST" action="{{ route('logout') }}" class="m-0 p-0">
+      <form method="POST" action="{{ route('siswa.logout') }}" class="m-0 p-0">
         @csrf
             <button type="submit" class="nav-link btn w-100 text-start text-dark border-0 bg-transparent">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -452,83 +476,8 @@
         </button>
      </form>
      {{-- -----------------------------------------------------------------------------------------------------------------------------------------------------------}}
-      {{-- DASHBOARD --}}
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('user/dashboard') ? 'active' : '' }}"
-          href="{{ route('user.dashboard') }}">
-          <i class="ni ni-tv-2 text-primary"></i>
-          <span class="nav-link-text ms-1">Dashboard</span>
-        </a>
-      </li>
+      
 
-      {{-- RESERVASI --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('reservasi*') ? 'active' : '' }}"
-         href="{{ route('reservasi') }}">
-        <i class="ni ni-calendar-grid-58 text-warning"></i>
-        <span class="nav-link-text ms-1">Reservasi</span>
-      </a>
-    </li>
-
-    {{-- JADWAL --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('jadwal*') ? 'active' : '' }}"
-         href="{{ route('jadwal.index') }}">
-        <i class="ni ni-time-alarm text-success"></i>
-        <span class="nav-link-text ms-1">Jadwal</span>
-      </a>
-    </li>
-
-    {{-- PEMBAYARAN --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('pembayaran*') ? 'active' : '' }}"
-         href="{{ route('pembayaran.index') }}">
-        <i class="ni ni-credit-card text-danger"></i>
-        <span class="nav-link-text ms-1">Pembayaran</span>
-      </a>
-    </li>
-
-    <hr class="horizontal dark my-2">
-
-    {{-- KURSUS --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('kursus*') ? 'active' : '' }}"
-         href="{{ route('kursus.index') }}">
-        <i class="ni ni-books text-info"></i>
-        <span class="nav-link-text ms-1">Kursus Saya</span>
-      </a>
-    </li>
-
-    {{-- ULASAN --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('ulasan*') ? 'active' : '' }}"
-         href="{{ route('ulasan.index') }}">
-        <i class="ni ni-chat-round text-secondary"></i>
-        <span class="nav-link-text ms-1">Ulasan</span>
-      </a>
-    </li>
-
-    <hr class="horizontal dark my-2">
-
-    {{-- PROFIL --}}
-    <li class="nav-item">
-      <a class="nav-link {{ Request::is('profile') ? 'active' : '' }}"
-         href="{{ route('profile') }}">
-        <i class="ni ni-single-02 text-dark"></i>
-        <span class="nav-link-text ms-1">Profil</span>
-      </a>
-    </li>
-
-    {{-- LOGOUT --}}
-    <li class="nav-item">
-      <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button class="nav-link text-danger w-100 text-start" type="submit">
-          <i class="ni ni-button-power"></i>
-          Logout
-        </button>
-      </form>
-    </li>
       {{-------------------------------------------------------------------------------------------------------------------------------------------------------------}}
       <li class="nav-link mb-0">
         <a href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-laravel" class="btn btn-primary btn-md active px-5 text-white" target="_blank" role="button" aria-pressed="true">
@@ -552,3 +501,6 @@
     </div>
   </div>
 </aside>
+  @endif
+
+

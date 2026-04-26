@@ -9,7 +9,7 @@
     <div class="d-flex justify-content-center align-items-center   hero-header min-vh-100 bg-light">
         <div class="card shadow-lg p-5 rounded-4" style="max-width: 600px; width: 100%; min-height: 550px;margin-bottom:50px">
 
-            <h3 class="text-center fw-bold mb-2 text-success">Registrasi</h3>
+            <h3 class="text-center fw-bold mb-2 text-primary">Registrasi</h3>
 
             <p class="text-center text-muted mb-4">Silakan Registrasi Terlebih Dahulu</p>
 
@@ -17,7 +17,7 @@
                 <div class="alert alert-danger text-center py-2">{{ session('error') }}</div>
             @endif
 
-            <form action="{{ route('registerStore') }}" method="POST" class="mt-4">
+            <form action="{{ route('siswa.register.store') }}" method="POST" class="mt-4">
                 @csrf
                 <div class="mb-4">
                     <label class="fw-semibold mb-2">Nama Lengkap</label>
@@ -64,12 +64,12 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-success w-100 rounded-pill fw-semibold mt-3 py-2 shadow-sm">
+                <button type="submit" class="btn btn-primary w-100 rounded-pill fw-semibold mt-3 py-2 shadow-sm">
                     Register
                 </button>
 
                 <div class="mt-2 text-center">
-                    <p>Sudah Memiliki akun?<a href="{{ route('loginUser') }}">Login</a></p>
+                    <p>Sudah Memiliki akun?<a href="{{ route('siswa.login') }}">Login</a></p>
                 </div>
             </form>
 

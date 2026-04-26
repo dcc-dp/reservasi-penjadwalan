@@ -12,32 +12,21 @@
                         <h5 class="mb-0">Edit Jadwal</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('jadwal.update', $jadwal->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
+                        <form action="{{ route('kursus.jadwal.update', $jadwal->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
+                        <input type="hidden" name="reservasi_id" value="{{ $jadwal->reservasi_id }}">
                             <div class="mb-3">
-                                <label for="id_user" class="form-label">User</label>
-                                <select name="id_user" id="id_user" class="form-control" required>
-                                    <option value="">-- Pilih User --</option>
-                                    @foreach($users as $u)
-                                        <option value="{{ $u->id }}" {{ $jadwal->id_user == $u->id ? 'selected' : '' }}>
-                                            {{ $u->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label">User</label>
+                                <input type="text" class="form-control"
+                                value="{{ $jadwal->reservasi->user->name }}" readonly>
                             </div>
 
                             <div class="mb-3">
-                                <label for="id_kursus" class="form-label">Kursus</label>
-                                <select name="id_kursus" id="id_kursus" class="form-control" required>
-                                    <option value="">-- Pilih Kursus --</option>
-                                    @foreach($kursuses as $k)
-                                        <option value="{{ $k->id }}" {{ $jadwal->id_kursus == $k->id ? 'selected' : '' }}>
-                                            {{ $k->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label">Kursus</label>
+                                <input type="text" class="form-control"
+                                value="{{ $jadwal->reservasi->kursus->name }}" readonly>
                             </div>
 
                             <div class="mb-3">
@@ -52,11 +41,11 @@
                                     value="{{ old('jam', date('H:i', strtotime($jadwal->jam))) }}" required>
                             </div>
 
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="ruangan" class="form-label">Ruangan</label>
                                 <input type="text" name="ruangan" id="ruangan" class="form-control"
                                     value="{{ old('ruangan', $jadwal->ruangan) }}" required>
-                            </div>
+                            </div> --}}
 
                             <div class="mb-3">
                                 <label for="pertemuan" class="form-label">Pertemuan</label>
@@ -66,7 +55,7 @@
 
                             <div class="d-flex">
                                 <button type="submit" class="btn btn-success me-2">Update</button>
-                                <a href="{{ route('jadwal.index') }}" class="btn btn-secondary">Kembali</a>
+                                <a href="{{ route('kursus.jadwal') }}" class="btn btn-secondary">Kembali</a>
                             </div>
                         </form>
                     </div>

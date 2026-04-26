@@ -9,7 +9,7 @@
     <div class="d-flex justify-content-center align-items-center   hero-header min-vh-100 bg-light">
         <div class="card shadow-lg p-5 rounded-4" style="max-width: 600px; width: 100%; min-height: 550px;margin-bottom:50px">
 
-            <h3 class="text-center fw-bold mb-2 text-success">Login</h3>
+            <h3 class="text-center fw-bold mb-2 text-primary">Login</h3>
 
             <p class="text-center text-muted mb-4">Silakan masuk untuk melanjutkan</p>
 
@@ -17,7 +17,7 @@
                 <div class="alert alert-danger text-center py-2">{{ session('error') }}</div>
             @endif
 
-            <form action="{{ route('login-user.store') }}" method="POST" class="mt-4">
+            <form action="{{ route('siswa.login') }}" method="POST" class="mt-4">
                 @csrf
 
 
@@ -45,12 +45,13 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-success w-100 rounded-pill fw-semibold mt-3 py-2 shadow-sm">
+                <button type="submit" class="btn btn-primary w-100 rounded-pill fw-semibold mt-3 py-2 shadow-sm">
                     <i class="bi bi-box-arrow-in-right me-2"></i> Login
                 </button
-                <div> class="mt-2 text-center">
-                    <p>Belum memiliki akun? <a href="{{ route('registerUser') }}">Daftar</a></p>
+                <div class="mt-2 text-center"> 
+                    <p>Belum memiliki akun? <a href="{{ route('siswa.register') }}">Daftar</a></p>
                 </div>
+
 
 
                 {{-- <p class="text-center mt-auto small text-muted">

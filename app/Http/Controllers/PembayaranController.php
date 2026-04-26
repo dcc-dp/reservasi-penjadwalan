@@ -9,41 +9,49 @@ class PembayaranController extends Controller
 {
     public function index()
     {
-        // Ambil semua data pembayaran beserta relasi reservasi
         $pembayarans = Pembayaran::with('reservasi')
             ->latest()
-            ->paginate(10); // pakai paginate biar rapi
+            ->paginate(10);
 
         return view('pembayaran.index', compact('pembayarans'));
     }
 
     public function store(Request $request)
-{
-    $validated = $request->validate([
-        'reservasi_id' => 'required|exists:reservasis,id',
-        'total' => 'required|numeric',
-    ]);
+    {
+        $validated = $request->validate([
+            'reservasi_id' => 'required|exists:reservasis,id',
+            'total' => 'required|numeric',
+        ]);
 
-    Pembayaran::create([
-        'reservasi_id' => $validated['reservasi_id'],
-        'total' => $validated['total'],
-        'status' => 'pending',
-    ]);
+        Pembayaran::create([
+            'reservasi_id' => $validated['reservasi_id'],
+            'order_id' => 'ORD-' . time() . '-' . $validated['reservasi_id'],
+            'total' => $validated['total'],
+            'status' => 'pending',
+        ]);
 
-    return redirect()
-        ->route('pembayaran.index')
-        ->with('success', 'Pendaftaran berhasil disimpan dan menunggu konfirmasi pembayaran.');
-}
+        return redirect()
+            ->route('pembayaran.index')
+            ->with('success', 'Pembayaran berhasil dibuat.');
+    }
 
+    public function konfirmasi($id)
+    {
+        $pembayaran = Pembayaran::findOrFail($id);
 
+        $pembayaran->update([
+            'status' => 'settlement',
+            'paid_at' => now(),
+        ]);
+
+        return back()->with('success', 'Pembayaran dikonfirmasi');
+    }
 
     public function destroy($id)
     {
         $pembayaran = Pembayaran::findOrFail($id);
         $pembayaran->delete();
 
-        return redirect()
-            ->route('pembayaran.index')
-            ->with('success', 'Pembayaran berhasil dihapus.');
+        return redirect()->back()->with('success', 'Data pembayaran berhasil dihapus');
     }
 }

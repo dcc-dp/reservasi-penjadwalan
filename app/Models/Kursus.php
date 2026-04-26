@@ -9,31 +9,26 @@ class Kursus extends Model
     protected $fillable = [
         'name',
         'id_instruktur',
-        'id_paket',
-        'deskripsi',
+        'deskripsi'
     ];
 
     public function instruktur()
     {
-        return $this->belongsTo(Instruktur_Profile::class, 'id_instruktur','id');
+        return $this->belongsTo(User::class,'id_instruktur');
     }
 
-    public function paket()
+    public function pakets()
     {
-        return $this->belongsTo(Paket::class, 'id_paket');
+        return $this->hasMany(Paket::class,'kursus_id');
+    }
+    
+    public function reservasis()
+    {
+        return $this->hasMany(Reservasi::class,'id_kursus');
     }
 
-    public function ulasan()
+    public function ulasans()
     {
         return $this->hasMany(Ulasan::class, 'id_kursus');
     }
-    
-
-    public function reservasi()
-    {
-        return $this->hasMany(Reservasi::class, 'id_kursus');
-    }
-
-
-
 }

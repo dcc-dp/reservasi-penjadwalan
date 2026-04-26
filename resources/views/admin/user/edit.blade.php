@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body pt-4 p-3">
 
-                    <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.admin.edit', $user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf 
                         @method('PUT')
 
@@ -91,8 +91,18 @@
                         </div>
 
 
-                        <a href="{{ route('user') }}" class="btn bg-secondary text-white mx-4 btn-md mt-4 mb-4">Batal</a>
-                        <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Save Changes' }}</button>
+                        <!-- Form edit -->
+                <form action="{{ route('user.admin.update', $user->id) }}" method="POST">
+                    @csrf
+                    @method('PUT') <!-- ini memberitahu Laravel untuk method PUT -->
+                    
+                    <!-- input fields -->
+                    
+                    <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">Save Changes</button>
+                </form>
+
+                <!-- Tombol Batal -->
+                <a href="{{ route('user.admin.index') }}" class="btn bg-secondary text-white mx-4 btn-md mt-4 mb-4">Batal</a>
                 </div>
                 </form>
 

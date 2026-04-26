@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal extends Model
 {
     protected $fillable = [
-        'id_user',
-        'id_kursus',
+        'reservasi_id',
         'tanggal',
         'hari',
         'jam',
@@ -16,15 +15,8 @@ class Jadwal extends Model
         'pertemuan',
     ];
 
-
-    public function user()
+    public function reservasi()
     {
-        return $this->belongsTo(User::class, 'id_user');
-    }
-
-
-    public function kursus()
-    {
-        return $this->belongsTo(Kursus::class, 'id_kursus');
+        return $this->belongsTo(Reservasi::class,'reservasi_id');
     }
 }

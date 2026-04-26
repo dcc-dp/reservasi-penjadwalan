@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -15,8 +16,9 @@ class User extends Authenticatable
         'password',
         'role',
         'notelp', 
-        'jkl',
-        'alamat'
+        'jk',
+        'alamat',
+        'photo'
     ];
 
     protected $hidden = [
@@ -48,7 +50,7 @@ class User extends Authenticatable
         return $this->role === 'siswa';
     }
 
-    public function ulasan()
+    public function ulasans()
     {
         return $this->hasMany(Ulasan::class, 'id_user');
     }
@@ -57,6 +59,11 @@ class User extends Authenticatable
      public function instrukturProfile()
     {
         return $this->hasOne(Instruktur_Profile::class, 'user_id', 'id');
+    }
+
+    public function reservasis()
+    {
+        return $this->hasMany(Reservasi::class, 'id_user');
     }
 
 }

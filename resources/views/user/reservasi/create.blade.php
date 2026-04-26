@@ -1,73 +1,276 @@
-@extends('layouts.landingpage.landingPage')
+@extends('layouts.siswa.siswa')
 
-@section('title', 'Reservasi Kursus')
+@section('title','Reservasi Kursus')
 
 @section('content')
 
-<div class="container-fluid py-5  hero-header">
-    <div class="card shadow-lg border-0 rounded-4 p-4 mx-5" style="margin-top: 100px">
-        <h2 class="text-center text-success fw-bold mb-4">Formulir Reservasi Kursus</h2>
+<div class="container-fluid py-4">
 
-        {{-- Formulir --}}
-        <form action="{{ route('reservasi.store') }}" method="POST">
-            @csrf
-
-            {{-- Pilih Paket Kursus --}}
-            <div class="mb-4" style="ma">
-                <label class="form-label fw-semibold">Pilih Paket Kursus</label>
-                <select name="id_kursus" class="form-select" required>
-                    <option value="" selected disabled>-- Pilih Paket --</option>
-                    @foreach ($kursusList as $k)
-                        <option value="{{ $k->id }}">
-                            {{ $k->name }} - Rp {{ number_format($k->harga_normal, 0, ',', '.') }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            {{-- Jadwal Pertama --}}
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">Hari Pertama <span class="text-danger">*</span></label>
-                    <input type="date" name="hari1" class="form-control" required>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Jam Pertama <span class="text-danger">*</span></label>
-                    <input type="time" name="jam1" class="form-control" required>
+    {{-- HEADER --}}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card reservasi-form-hero border-0 shadow-lg">
+                <div class="card-body text-white p-4 p-md-5 position-relative">
+                    <h3 class="reservasi-form-title mb-2">Reservasi Kursus</h3>
+                    <p class="reservasi-form-subtitle mb-0">
+                        Pilih kursus, paket, jadwal belajar, dan tempat belajar kamu.
+                    </p>
                 </div>
             </div>
-
-            {{-- Jadwal Kedua (Opsional) --}}
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">Hari Kedua (Opsional)</label>
-                    <input type="date" name="hari2" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Jam Kedua (Opsional)</label>
-                    <input type="time" name="jam2" class="form-control">
-                </div>
-            </div>
-
-            {{-- Tombol Kirim --}}
-            <div class="d-grid mt-4">
-                <button type="submit" class="btn btn-success rounded-pill py-2 fw-semibold">
-                    <i class="bi bi-send me-2"></i> Kirim Reservasi
-                </button>
-            </div>
-
-            {{-- Tombol Kembali --}}
-            <div class="text-center mt-3">
-                <a href="{{ url()->previous() }}" class="btn btn-link text-secondary">
-                    <i class="bi bi-arrow-left-circle me-1"></i> Kembali
-                </a>
-            </div>
-        </form>
+        </div>
     </div>
 
-    <footer class="text-center text-muted mt-5">
-        &copy; {{ date('Y') }} Dipanegara Computer Club — Semua Hak Dilindungi.
-    </footer>
+    {{-- FORM --}}
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card reservasi-form-card">
+                <div class="card-body p-4 p-md-5">
+
+                    <form action="{{ route('siswa.reservasi.store') }}" method="POST">
+                        @csrf
+
+                        {{-- JIKA SISWA DATANG DARI DETAIL KURSUS / PILIH PAKET --}}
+                        @if(isset($selectedPaket) && $selectedPaket)
+
+                            <input type="hidden" name="id_kursus" value="{{ $selectedPaket->kursus_id }}">
+                            <input type="hidden" name="id_paket" value="{{ $selectedPaket->id }}">
+
+                            {{-- KURSUS OTOMATIS --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-book me-2 text-primary"></i>
+                                    Kursus
+                                </label>
+
+                                <input type="text"
+                                       class="form-control reservasi-input"
+                                       value="{{ $selectedPaket->kursus->name ?? '-' }}"
+                                       readonly>
+                            </div>
+
+                            {{-- PAKET OTOMATIS --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-layer-group me-2 text-primary"></i>
+                                    Paket Kursus
+                                </label>
+
+                                <input type="text"
+                                       class="form-control reservasi-input"
+                                       value="{{ $selectedPaket->jenis }}"
+                                       readonly>
+                            </div>
+
+                            {{-- HARGA OTOMATIS --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-money-bill-wave me-2 text-primary"></i>
+                                    Harga
+                                </label>
+
+                                <div class="reservasi-price-box">
+                                    Rp {{ number_format($selectedPaket->harga, 0, ',', '.') }}
+                                </div>
+                            </div>
+
+                        @else
+
+                            {{-- JIKA SISWA BUKA FORM RESERVASI LANGSUNG --}}
+                            {{-- PILIH KURSUS --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-book me-2 text-primary"></i>
+                                    Kursus
+                                </label>
+
+                                <select
+                                    name="id_kursus"
+                                    id="kursusSelect"
+                                    class="form-select reservasi-input"
+                                    required
+                                >
+                                    <option value="" disabled selected>Pilih kursus</option>
+
+                                    @foreach ($kursusList as $k)
+                                        <option value="{{ $k->id }}">
+                                            {{ $k->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- PILIH PAKET --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-layer-group me-2 text-primary"></i>
+                                    Paket Kursus
+                                </label>
+
+                                <select
+                                    name="id_paket"
+                                    id="paketSelect"
+                                    class="form-select reservasi-input"
+                                    required
+                                >
+                                    <option value="" disabled selected>Pilih paket</option>
+
+                                    @foreach ($paketList as $p)
+                                        <option
+                                            value="{{ $p->id }}"
+                                            data-harga="{{ $p->harga }}"
+                                            data-kursus="{{ $p->kursus_id }}"
+                                            hidden
+                                        >
+                                            {{ $p->jenis }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- HARGA --}}
+                            <div class="mb-4">
+                                <label class="form-label reservasi-label">
+                                    <i class="fas fa-money-bill-wave me-2 text-primary"></i>
+                                    Harga
+                                </label>
+
+                                <div id="hargaText" class="reservasi-price-box">
+                                    Pilih paket terlebih dahulu
+                                </div>
+                            </div>
+
+                        @endif
+
+                        {{-- JADWAL --}}
+                        <div class="jadwal-block mb-4">
+                            <h5 class="jadwal-block-title mb-3">
+                                <i class="fas fa-calendar-alt me-2 text-primary"></i>
+                                Pilih Jadwal Belajar
+                            </h5>
+
+                            {{-- JADWAL 1 --}}
+                            <div class="jadwal-item-box mb-3">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label reservasi-label">Hari Pertama</label>
+                                        <input
+                                            type="date"
+                                            name="jadwal[0][hari]"
+                                            class="form-control reservasi-input"
+                                            required
+                                        >
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label reservasi-label">Jam</label>
+                                        <input
+                                            type="time"
+                                            name="jadwal[0][jam]"
+                                            class="form-control reservasi-input"
+                                            required
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- JADWAL 2 --}}
+                            <div class="jadwal-item-box">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label reservasi-label">Hari Kedua (Opsional)</label>
+                                        <input
+                                            type="date"
+                                            name="jadwal[1][hari]"
+                                            class="form-control reservasi-input"
+                                        >
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label reservasi-label">Jam</label>
+                                        <input
+                                            type="time"
+                                            name="jadwal[1][jam]"
+                                            class="form-control reservasi-input"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- TEMPAT BELAJAR --}}
+                        <div class="mb-4">
+                            <label class="form-label reservasi-label">
+                                <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                                Tempat Belajar
+                            </label>
+
+                            <select name="ruangan" class="form-select reservasi-input" required>
+                                <option value="">Pilih Tempat</option>
+                                <option value="Online">Online</option>
+                                <option value="DCC Lab">DCC Lab</option>
+                                <option value="Rumah Siswa">Rumah Siswa</option>
+                            </select>
+                        </div>
+
+                        {{-- BUTTON --}}
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg reservasi-submit-btn">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Kirim Reservasi
+                            </button>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <a href="{{ url()->previous() }}" class="reservasi-back-link">
+                                Kembali
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+{{-- SCRIPT HANYA DIPAKAI JIKA FORM DIBUKA MANUAL --}}
+@if(!isset($selectedPaket) || !$selectedPaket)
+<script>
+const kursusSelect = document.getElementById('kursusSelect');
+const paketSelect  = document.getElementById('paketSelect');
+const hargaText    = document.getElementById('hargaText');
+
+kursusSelect.addEventListener('change', function () {
+    let kursusID = this.value;
+
+    Array.from(paketSelect.options).forEach(option => {
+        if (!option.value) return;
+
+        if (option.dataset.kursus == kursusID) {
+            option.hidden = false;
+        } else {
+            option.hidden = true;
+        }
+    });
+
+    paketSelect.value = '';
+    hargaText.innerHTML = 'Pilih paket terlebih dahulu';
+});
+
+paketSelect.addEventListener('change', function () {
+    let harga = this.options[this.selectedIndex].dataset.harga;
+
+    if (!harga) {
+        hargaText.innerHTML = 'Pilih paket terlebih dahulu';
+        return;
+    }
+
+    let format = new Intl.NumberFormat('id-ID').format(harga);
+    hargaText.innerHTML = 'Rp ' + format;
+});
+</script>
+@endif
 
 @endsection

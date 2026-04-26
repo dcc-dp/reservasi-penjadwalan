@@ -48,7 +48,7 @@ class AdminController extends Controller
         $admin->jk = $request->jk;
         $admin->alamat = $request->alamat;
         $admin->save();
-        return redirect()->route('admin');
+        return redirect()->route('user.admin.index');
 
     }
 

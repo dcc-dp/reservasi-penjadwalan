@@ -13,10 +13,31 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('reservasi_id');
-            $table->string('metode_bayar',100);
+
+            $table->foreignId('reservasi_id')
+                ->constrained('reservasis')
+                ->cascadeOnDelete();
+
+            $table->string('order_id')->unique();
+            $table->string('snap_token')->nullable();
+            $table->string('transaction_id')->nullable();
+
+            $table->string('metode_bayar')->nullable();
+            $table->string('payment_type')->nullable();
+
             $table->integer('total');
-            $table->enum('status', ['proses', 'selesai','gagal'])->nullable()->default('proses');
+
+            $table->enum('status', [
+                'pending',
+                'settlement',
+                'capture',
+                'expire',
+                'cancel',
+                'deny',
+                'failure'
+            ])->default('pending');
+
+            $table->timestamp('paid_at')->nullable();
             $table->timestamps();
         });
     }

@@ -39,7 +39,7 @@ class InstrukturProfileController extends Controller
 
         Instruktur_Profile::create($request->all());
 
-        return redirect()->route('profile-instruktur.index')->with('success', 'Profile berhasil ditambahkan');
+        return redirect()->route('instruktur.index')->with('success', 'Profile berhasil ditambahkan');
 
     }
 

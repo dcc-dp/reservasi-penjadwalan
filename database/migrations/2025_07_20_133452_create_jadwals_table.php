@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('id_user');
-            $table->unsignedInteger('id_kursus');
+
+            $table->foreignId('reservasi_id')
+                ->constrained('reservasis')
+                ->cascadeOnDelete();
+
             $table->date('tanggal');
             $table->string('hari');
             $table->time('jam');
-            $table->string('ruangan');
-            $table->string('pertemuan');
+            $table->integer('pertemuan');
             $table->timestamps();
         });
     }
