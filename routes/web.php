@@ -29,7 +29,12 @@ use App\Http\Controllers\User\PembayaranSiswaController;
 use App\Http\Controllers\User\ProfilSiswaController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\UlasanController;
+use App\Http\Controllers\Instruktur\DashboardInstrukturController;
 use App\Http\Controllers\User\UlasanSiswaController;
+use App\Http\Controllers\Instruktur\KursusInstrukturController;
+use App\Http\Controllers\Instruktur\JadwalInstrukturController;
+use App\Http\Controllers\Instruktur\UlasanInstrukturController;
+use App\Http\Controllers\Instruktur\ProfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,6 +138,41 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');
 });
 
+/*
+|--------------------------------------------------------------------------
+| INSTRUKTUR (AUTH + ROLE INSTRUKTUR)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:instruktur'])
+    ->prefix('instruktur')
+    ->name('instruktur.')
+    ->group(function () {
+
+        Route::get('/dashboard', [DashboardInstrukturController::class, 'index'])
+            ->name('dashboard');
+
+        Route::get('/kursus', [KursusInstrukturController::class, 'index'])
+            ->name('kursus.index');
+
+        Route::get('/jadwal', [JadwalInstrukturController::class, 'index'])
+            ->name('jadwal.index');
+
+        Route::get('/ulasan', [UlasanInstrukturController::class, 'index'])
+            ->name('ulasan.index');
+
+        // PROFIL
+        Route::get('/profil', [ProfilController::class, 'index'])
+            ->name('profil');
+
+        Route::post('/profil/update', [ProfilController::class, 'update'])
+            ->name('profil.update');
+
+        Route::post('/logout', function () {
+            Auth::logout();
+            return redirect('/');
+        })->name('logout');
+
+    });
 /*
 |--------------------------------------------------------------------------
 | SISWA (AUTH + ROLE SISWA)

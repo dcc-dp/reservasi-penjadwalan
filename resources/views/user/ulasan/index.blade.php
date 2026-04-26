@@ -51,7 +51,7 @@
                         <div class="mb-3">
                             <label class="form-label review-label">Rating</label>
                             <select name="rating" class="form-select review-input" required>
-                                <option value="">Pilih Rating</option>
+                                <option value="">Rating</option>
                                 <option value="5">★★★★★ - Sangat Baik</option>
                                 <option value="4">★★★★☆ - Baik</option>
                                 <option value="3">★★★☆☆ - Cukup</option>
