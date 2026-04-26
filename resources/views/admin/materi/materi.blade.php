@@ -19,86 +19,76 @@
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            
-                                            <th width="500px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
-                                                No</th>
-                                            <th width="500px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
-                                                Nama Materi</th>
-                                            <th width="700px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
-                                                Deskripsi</th>
-                                            <th width="200px"
-                                                class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
-                                                Action</th>
-                                        </tr>
-                                    </thead>
+                                  <thead class="thead-light">
+                                      <tr class="text-center">
+                                          <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">No</th>
+                                          <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kursus</th>
+                                          <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Paket</th>
+                                          <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Judul Materi</th>
+                                          <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Deskripsi</th>
+                                          <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Action</th>
+                                      </tr>
+                                  </thead>
 
-                                    @foreach ($materi as $index => $y)
-                                        <tbody>
+                                  <tbody>
+                                      @forelse ($materi as $index => $y)
+                                          <tr class="text-center">
+                                              <td>{{ $index + 1 }}</td>
+                                              <td>{{ $y->paket->kursus->name ?? '-' }}</td>
+                                              <td>{{ $y->paket->jenis ?? '-' }}</td>
+                                              <td>{{ $y->judul }}</td>
+                                              <td>{{ $y->deskripsi }}</td>
+                                              <td>
+                                                  <a href="{{ route('materi.edit', $y->id) }}" class="btn btn-sm btn-secondary">
+                                                      Edit
+                                                  </a>
 
-                                            <tr class="text-sm">
-                                                <td class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">{{ $index+1  }}</td>
-                                                <td class="px-4 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">{{ $y->Judul }}</td>
-                                                <td class="px-4 text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">{{ $y->deskripsi }}</td>
+                                                  <button type="button"
+                                                      class="btn btn-sm btn-danger"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#Hapusdata{{ $y->id }}">
+                                                      Hapus
+                                                  </button>
+                                              </td>
+                                          </tr>
 
-                                                <td>
+                                          <div class="modal fade" id="Hapusdata{{ $y->id }}" tabindex="-1" aria-hidden="true">
+                                              <div class="modal-dialog modal-dialog-centered">
+                                                  <div class="modal-content">
+                                                      <form action="{{ route('materi.destroy', $y->id) }}" method="POST">
+                                                          @csrf
+                                                          @method('DELETE')
 
-                                                    <a href="{{ route('materi.edit', $y->id) }}"
-                                                        class= "btn btn bg-gradient-secondary text-uppercase text-secondary text-xs font-weight-bolder opacity-7" data-bs-toggle="tooltip">edit
-                                                    </a>
-                                                    <!-- Tombol Hapus -->
-                                                    <button type="button" class="btn btn bg-gradient-danger btn-block mb-3 text-uppercase text-secondary text-xs font-weight-bolder opacity-7"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#Hapusdata{{ $y->id }}">Hapus</button>
+                                                          <div class="modal-header">
+                                                              <h6 class="modal-title">Hapus Data</h6>
+                                                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                          </div>
 
-                                                </td>
-                                            </tr>
+                                                          <div class="modal-body text-center">
+                                                              <p>Yakin ingin menghapus materi <strong>{{ $y->judul }}</strong>?</p>
+                                                          </div>
 
-                                        </tbody>
-
-                                        <!-- Modal Hapus -->
-                                        <div class="col-md-4">
-                                            <div class="modal fade" id="Hapusdata{{ $y->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                                                <div class="modal-dialog modal-danger modal-dialog-centered modal-"
-                                                    role="document">
-                                                    <div class="modal-content">
-                                                        <form action="{{ route('materi.destroy', $y->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <div class="modal-header">
-                                                                <h6 class="modal-title" id="modal-title-notification">Hapus Data</h6>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">×</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="py-3 text-center">
-                                                                    <i class="ni ni-bell-55 ni-3x"></i>
-                                                                    <h6 class="text-gradient text-danger mt-4">
-                                                                        Yakin ingin menghapus materi
-                                                                        <strong>{{ $y->Judul }}</strong>?
-                                                                    </h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-danger">Ya,
-                                                                    Hapus</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </table>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                                  Batal
+                                                              </button>
+                                                              <button type="submit" class="btn btn-danger">
+                                                                  Ya, Hapus
+                                                              </button>
+                                                          </div>
+                                                      </form>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      @empty
+                                          <tr>
+                                              <td colspan="6" class="text-center text-muted py-4">
+                                                  Belum ada data materi.
+                                              </td>
+                                          </tr>
+                                      @endforelse
+                                  </tbody>
+                              </table>
                             </div>
                         </div>
                     </div>

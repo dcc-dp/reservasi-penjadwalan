@@ -12,22 +12,34 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pembayarans', function (Blueprint $table) {
-        $table->id();
-        $table->unsignedBigInteger('reservasi_id');
+            $table->id();
 
-        $table->string('metode_bayar',100)->nullable();
-        $table->integer('total')->nullable();
+            $table->foreignId('reservasi_id')
+                ->constrained('reservasis')
+                ->cascadeOnDelete();
 
-        $table->enum('status', ['proses','selesai','gagal'])
-            ->default('proses');
+            $table->string('order_id')->unique();
+            $table->string('snap_token')->nullable();
+            $table->string('transaction_id')->nullable();
 
-        $table->timestamps();
+            $table->string('metode_bayar')->nullable();
+            $table->string('payment_type')->nullable();
 
-        $table->foreign('reservasi_id')
-            ->references('id')
-            ->on('reservasis')
-            ->onDelete('cascade');
-    });
+            $table->integer('total');
+
+            $table->enum('status', [
+                'pending',
+                'settlement',
+                'capture',
+                'expire',
+                'cancel',
+                'deny',
+                'failure'
+            ])->default('pending');
+
+            $table->timestamp('paid_at')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kursus;
 use App\Models\Paket;
+use App\Models\Kursus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,16 +11,27 @@ class PendaftaranController extends Controller
 {
     public function index(Request $request)
     {
-        
         $user = Auth::user();
+        $paketDipilih = null;
+        $kursus = null;
 
-        // ambil paket dari URL
-        $paketDipilih = Paket::findOrFail($request->paket_id);
+        if ($request->filled('paket_id')) {
+            $paketDipilih = Paket::find($request->paket_id);
 
-        // ambil kursus berdasarkan paket
-        // jika 1 paket = 1 kursus
-        $kursus = Kursus::where('id_paket', $paketDipilih->id)->first();
+            if ($paketDipilih) {
+                $kursus = $paketDipilih->kursus;
+            }
+        }
 
-        return view('user.form_pendaftaran.index', compact('user','paketDipilih', 'kursus'));
+        $paketList = Paket::with('kursus')->get();
+        $kursusList = Kursus::with('pakets')->get();
+
+        return view('user.form_pendaftaran.index', compact(
+            'user',
+            'paketDipilih',
+            'kursus',
+            'paketList',
+            'kursusList'
+        ));
     }
 }

@@ -26,4 +26,9 @@ class Kursus extends Model
     {
         return $this->hasMany(Reservasi::class,'id_kursus');
     }
+
+    public function ulasans()
+    {
+        return $this->hasMany(Ulasan::class, 'id_kursus');
+    }
 }

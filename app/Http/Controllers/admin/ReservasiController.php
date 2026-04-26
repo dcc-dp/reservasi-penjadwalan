@@ -15,7 +15,7 @@ class ReservasiController extends Controller
 {
     public function index()
     {
-        $reserv = Reservasi::with(['user','kursus','paket','pembayaran'])->get();
+        $reserv = Reservasi::with(['user', 'kursus', 'paket', 'jadwals', 'pembayaran'])->get();
 
         return view('admin.reservasi.index', compact('reserv'));
     }
@@ -61,8 +61,9 @@ class ReservasiController extends Controller
         // buat pembayaran
         Pembayaran::create([
             'reservasi_id' => $reservasi->id,
+            'order_id' => 'ORD-' . time() . '-' . $reservasi->id,
             'total' => $paket->harga,
-            'status' => 'proses'
+            'status' => 'pending'
         ]);
 
         return redirect()->route('reservasi.index')

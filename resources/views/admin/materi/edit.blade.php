@@ -1,58 +1,66 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-    <div>
+<div class="container-fluid py-4">
+    <div class="card shadow border-0">
+        <div class="card-header pb-0 px-3">
+            <h6 class="mb-0">Edit Materi</h6>
+        </div>
 
-        <div class="container-fluid py-4">
-            <div class="card">
-                <div class="card-header pb-0 px-3">
-                    <h6 class="mb-0">{{ __('Edit Materi') }}</h6>
+        <div class="card-body pt-4 p-3">
+            <form action="{{ route('materi.update', $materi->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="form-group mb-3">
+                    <label for="paket_id">Pilih Paket</label>
+                    <select name="paket_id" id="paket_id" class="form-control @error('paket_id') is-invalid @enderror">
+                        <option value="">-- Pilih Paket --</option>
+                        @foreach ($pakets as $paket)
+                            <option value="{{ $paket->id }}"
+                                {{ old('paket_id', $materi->paket_id) == $paket->id ? 'selected' : '' }}>
+                                {{ $paket->kursus->name ?? '-' }} - {{ $paket->jenis }} - Rp{{ number_format($paket->harga, 0, ',', '.') }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('paket_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="card-body pt-4 p-3">
 
-                    <form action="{{ route('materi.update', $materi->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf @method('PUT')
-
-                        <div class="form-group">
-                            <label for="Judul">Nama Materi</label>
-                            <input type="text" class="form-control @error('Judul') is-invalid @enderror" id="Judul"
-                                name="Judul" value="{{ $materi->Judul }}">
-                            @error('Judul')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="deskripsi">Deskripsi Materi</label>
-                            <input type="text" class="form-control @error('deskripsi') is-invalid @enderror"
-                                id="deskripsi" name="deskripsi" value="{{ $materi->deskripsi }}">
-                            @error('deskripsi')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-
-
-                        <div class="d-flex justify-content-end">
-                            <a href="{{ route('materi.index') }}"
-                                class="btn bg-secondary text-white mx-4 btn-md mt-4 mb-4">Batal</a>
-                            <button type="submit"
-                                class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Save Changes' }}</button>
-                        </div>
-                    </form>
-
-                    {{-- @if (session('success'))
-                        <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
-                            <span class="alert-text text-white">
-                            {{ session('success') }}</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    @endif --}}
-
-
+                <div class="form-group mb-3">
+                    <label for="judul">Nama Materi</label>
+                    <input type="text"
+                           class="form-control @error('judul') is-invalid @enderror"
+                           id="judul"
+                           name="judul"
+                           value="{{ old('judul', $materi->judul) }}">
+                    @error('judul')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
-            </div>
+
+                <div class="form-group mb-3">
+                    <label for="deskripsi">Deskripsi Materi</label>
+                    <textarea class="form-control @error('deskripsi') is-invalid @enderror"
+                              id="deskripsi"
+                              name="deskripsi"
+                              rows="4">{{ old('deskripsi', $materi->deskripsi) }}</textarea>
+                    @error('deskripsi')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('materi.index') }}" class="btn bg-secondary text-white mx-4 btn-md mt-4 mb-4">
+                        Batal
+                    </a>
+                    <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 @endsection

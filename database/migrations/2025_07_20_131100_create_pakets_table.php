@@ -9,17 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pakets', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('kursus_id');
-            $table->enum('jenis', ['Regular','VIP','VVIP']);
-            $table->integer('harga');
-            $table->timestamps();
+        $table->id();
+        $table->foreignId('kursus_id')
+            ->constrained('kursuses')
+            ->cascadeOnDelete();
 
-            $table->foreign('kursus_id')
-                  ->references('id')
-                  ->on('kursuses')
-                  ->onDelete('cascade');
-        });
+        $table->enum('jenis', ['Regular', 'VIP', 'VVIP']);
+        $table->integer('harga');
+        $table->timestamps();
+    });
     }
 
     public function down(): void

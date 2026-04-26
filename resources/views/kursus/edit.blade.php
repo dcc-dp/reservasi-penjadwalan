@@ -6,9 +6,8 @@
 
     <h2>Edit Kursus</h2>
 
-    <form action="{{ route('kursus.update', $id)}}" method="POST">
+    <form action="{{ route('kursus.update', $kursus->id) }}" method="POST">
         @csrf
-        @method('PUT')
         <div class="mb-3">
             <label class="form-label">Nama Kursus</label>
             <input type="text" name="name" class="form-control" value="{{ old('name', $kursus->name) }}" required>

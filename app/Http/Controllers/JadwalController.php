@@ -11,7 +11,7 @@ class JadwalController extends Controller
     public function index()
     {
         // ambil semua reservasi beserta user, kursus, jadwal
-        $reservasis = Reservasi::with('user','kursus','jadwal')->get();
+        $reservasis = Reservasi::with('user','kursus','jadwals')->get();
         return view('admin.jadwal.index', compact('reservasis'));
     }
 

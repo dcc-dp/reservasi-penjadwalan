@@ -9,10 +9,9 @@ class PembayaranController extends Controller
 {
     public function index()
     {
-        // Ambil semua data pembayaran beserta relasi reservasi
         $pembayarans = Pembayaran::with('reservasi')
             ->latest()
-            ->paginate(10); // pakai paginate biar rapi
+            ->paginate(10);
 
         return view('pembayaran.index', compact('pembayarans'));
     }
@@ -26,13 +25,14 @@ class PembayaranController extends Controller
 
         Pembayaran::create([
             'reservasi_id' => $validated['reservasi_id'],
+            'order_id' => 'ORD-' . time() . '-' . $validated['reservasi_id'],
             'total' => $validated['total'],
             'status' => 'pending',
         ]);
 
         return redirect()
             ->route('pembayaran.index')
-            ->with('success', 'Pendaftaran berhasil disimpan dan menunggu konfirmasi pembayaran.');
+            ->with('success', 'Pembayaran berhasil dibuat.');
     }
 
     public function konfirmasi($id)
@@ -40,21 +40,18 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::findOrFail($id);
 
         $pembayaran->update([
-            'status' => 'selesai'
+            'status' => 'settlement',
+            'paid_at' => now(),
         ]);
 
-        return back()->with('success','Pembayaran dikonfirmasi');
+        return back()->with('success', 'Pembayaran dikonfirmasi');
     }
-
-
 
     public function destroy($id)
     {
         $pembayaran = Pembayaran::findOrFail($id);
         $pembayaran->delete();
 
-        return redirect()
-            ->route('pembayaran.index')
-            ->with('success', 'Pembayaran berhasil dihapus.');
+        return redirect()->back()->with('success', 'Data pembayaran berhasil dihapus');
     }
 }

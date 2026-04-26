@@ -12,7 +12,7 @@
                         <h5 class="mb-0">Tambah Jadwal</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('jadwal.store') }}" method="POST">
+                        <form action="{{ route('kursus.jadwal.store') }}" method="POST">
                         @csrf
 
                         <div class="mb-3">
