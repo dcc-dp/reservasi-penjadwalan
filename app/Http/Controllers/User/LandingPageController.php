@@ -12,7 +12,8 @@ class LandingPageController extends Controller
     public function index()
     {
 
-        return view('user.pages.home');
+        $paket = Paket::latest()->take(3)->get();
+        return view('user.pages.home', compact('paket'));
     }
     public function about()
     {
@@ -25,7 +26,7 @@ class LandingPageController extends Controller
         return view('user.pages.benefit');
     }
 
-     public function pakets()
+    public function pakets()
     {
         $pakets = Paket::all();
         return view('user.pages.pakets', compact('pakets'));
