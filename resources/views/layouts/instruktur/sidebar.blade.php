@@ -1,5 +1,5 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 my-3 fixed-start ms-3 instruktur-sidebar"
-       id="sidenav-main">
+    id="sidenav-main">
 
     <div class="sidenav-header px-3 pt-3">
         <a class="navbar-brand m-0 d-flex align-items-center" href="{{ route('instruktur.dashboard') }}">
@@ -23,7 +23,7 @@
 
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center {{ request()->routeIs('instruktur.dashboard') ? 'active' : '' }}"
-                   href="{{ route('instruktur.dashboard') }}">
+                    href="{{ route('instruktur.dashboard') }}">
                     <div class="nav-icon">
                         <i class="ni ni-tv-2 text-sm opacity-10"></i>
                     </div>
@@ -33,7 +33,7 @@
 
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center {{ request()->routeIs('instruktur.kursus.*') ? 'active' : '' }}"
-                   href="{{ route('instruktur.kursus.index') }}">
+                    href="{{ route('instruktur.kursus.index') }}">
                     <div class="nav-icon">
                         <i class="ni ni-books text-sm opacity-10"></i>
                     </div>
@@ -43,7 +43,7 @@
 
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center {{ request()->routeIs('instruktur.jadwal.*') ? 'active' : '' }}"
-                   href="{{ route('instruktur.jadwal.index') }}">
+                    href="{{ route('instruktur.jadwal.index') }}">
                     <div class="nav-icon">
                         <i class="ni ni-calendar-grid-58 text-sm opacity-10"></i>
                     </div>
@@ -53,7 +53,7 @@
 
             <li class="nav-item">
                 <a class="nav-link d-flex align-items-center {{ request()->routeIs('instruktur.ulasan.*') ? 'active' : '' }}"
-                   href="{{ route('instruktur.ulasan.index') }}">
+                    href="{{ route('instruktur.ulasan.index') }}">
                     <div class="nav-icon">
                         <i class="ni ni-like-2 text-sm opacity-10"></i>
                     </div>
@@ -70,6 +70,19 @@
                     </div>
                     <span class="nav-link-text">Profil</span>
                 </a>
+            </li>
+
+            <li class="nav-item">
+                <form action="{{ route('instruktur.logout') }}" method="POST">
+                    @csrf
+                    <button type="submit"
+                        class="nav-link d-flex align-items-center text-danger border-0 bg-transparent w-100">
+                        <div class="nav-icon">
+                            <i class="ni ni-button-power text-sm opacity-10"></i>
+                        </div>
+                        <span class="text-warning">Logout</span>
+                    </button>
+                </form>
             </li>
 
         </ul>
