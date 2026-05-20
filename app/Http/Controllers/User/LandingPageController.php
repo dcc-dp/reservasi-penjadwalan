@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Admin\PaketController;
 use App\Http\Controllers\Controller;
 use App\Models\Paket;
 use App\Models\User;
