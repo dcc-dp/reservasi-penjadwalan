@@ -77,7 +77,7 @@ class InstrukturProfileController extends Controller
         $profile = Instruktur_Profile::findOrFail($id);
         $profile->update($request->all());
 
-        return redirect()->route('profile-instruktur.index')->with('success', 'Profile berhasil diperbarui');
+        return redirect()->route('instruktur.index')->with('success', 'Profile berhasil diperbarui');
     }
 
 
@@ -89,6 +89,6 @@ class InstrukturProfileController extends Controller
         $profile = Instruktur_Profile::findOrFail($id);
         $profile->delete();
 
-        return redirect()->route('profile-instruktur.index')->with('success', 'Profile berhasil dihapus');
+        return redirect()->route('instruktur.index')->with('success', 'Profile berhasil dihapus');
     }
 }
