@@ -4,7 +4,7 @@
 @section('content')
 <div class="container mt-4">
   <h4>Edit Profile Instruktur</h4>
-  <form action="{{ route('profile-instruktur.update', $profile->id) }}" method="POST">
+  <form action="{{ route('instruktur.update', $profile->id) }}" method="POST">
     @csrf
     @method('PUT')
     <div class="mb-3">
@@ -30,7 +30,7 @@
       <textarea name="bio" id="bio" class="form-control">{{ $profile->bio }}</textarea>
     </div>
     <button type="submit" class="btn btn-success">Update</button>
-    <a href="{{ route('profile-instruktur.index') }}" class="btn btn-secondary">Batal</a>
+    <a href="{{ route('instruktur.index') }}" class="btn btn-secondary">Batal</a>
   </form>
 </div>
 @endsection
