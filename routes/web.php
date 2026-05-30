@@ -36,18 +36,6 @@ use App\Http\Controllers\Instruktur\KursusInstrukturController;
 use App\Http\Controllers\Instruktur\JadwalInstrukturController;
 use App\Http\Controllers\Instruktur\UlasanInstrukturController;
 use App\Http\Controllers\Instruktur\ProfilController;
-
-/*
-|--------------------------------------------------------------------------
-| GLOBAL LOGOUT (WAJIB DI ATAS)
-|--------------------------------------------------------------------------
-*/
-
-Route::post('/logout', function () {
-    Auth::logout();
-    return redirect('/login');
-})->name('siswa.logout');
-
 /*
 |--------------------------------------------------------------------------
 | LANDING PAGE (PUBLIC)
@@ -85,10 +73,18 @@ Route::middleware('guest')->group(function () {
 | ADMIN (AUTH + ROLE ADMIN)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'role:admin'])
+    ->prefix('modern')
+    ->group(function () {
+
+        Route::get('/dashboard', [HomeController::class, 'dashboard'])
+            ->name('modern.dashboard');
+
+    });
+    Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     Route::get('/dashboard', [HomeController::class, 'dashboard'])
-    ->name('dashboard');
+    ->name('admin.dashboard');
 
     // logout admin (opsional, beda nama biar tidak bentrok)
     Route::post('/logout', [SessionsController::class, 'destroy'])->name('admin.logout');
@@ -117,14 +113,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::put('/kursus/update/{id}', [KursusController::class, 'update'])->name('kursus.update');
     Route::delete('/kursus/destroy/{id}', [KursusController::class, 'destroy'])->name('kursus.destroy');
 
-    Route::get('/kursus/jadwal', [JadwalController::class, 'index'])->name('kursus.jadwal');
-    Route::get('/kursus/jadwal/detail/{id}', [JadwalController::class, 'detail'])
-        ->name('kursus.jadwal.detail');
-    Route::get('/kursus/jadwal/create', [JadwalController::class, 'create'])->name('kursus.jadwal.create');
-    Route::post('/kursus/jadwal/store', [JadwalController::class, 'store'])->name('kursus.jadwal.store');
-    Route::get('/kursus/jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('kursus.jadwal.edit');
-    Route::put('/kursus/jadwal/update/{id}', [JadwalController::class, 'update'])->name('kursus.jadwal.update');
-    Route::delete('/kursus/jadwal/destroy/{id}', [JadwalController::class, 'destroy'])->name('kursus.jadwal.destroy');
+    Route::get('/jadwal', [JadwalController::class, 'index'])->name('admin.jadwal');
+    Route::get('/jadwal/detail/{id}', [JadwalController::class, 'detail'])->name('admin.jadwal.detail');
+    Route::get('/jadwal/create', [JadwalController::class, 'create'])->name('admin.jadwal.create');
+    Route::post('/jadwal/store', [JadwalController::class, 'store'])->name('admin.jadwal.store');
+    Route::get('/jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('admin.jadwal.edit');
+    Route::put('/jadwal/update/{id}', [JadwalController::class, 'update'])->name('admin.jadwal.update');
+    Route::delete('/jadwal/destroy/{id}', [JadwalController::class, 'destroy'])->name('admin.jadwal.destroy');
 
 
     Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');
@@ -145,6 +140,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::delete('/ulasan/{id}', [UlasanController::class, 'destroy'])->name('admin.ulasan.destroy');
 
     Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');
+    Route::post('/admin/logout', function () {
+            Auth::logout();
+            return redirect('/');
+        })->name('admin.logout');
 });
 
 /*
@@ -181,7 +180,7 @@ Route::middleware(['auth', 'role:instruktur'])
         Route::post('/logout', function () {
             Auth::logout();
             return redirect('/');
-        })->name('logout');
+        })->name('instruktur.logout');
     });
 /*
 |--------------------------------------------------------------------------
