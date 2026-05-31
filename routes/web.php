@@ -36,6 +36,8 @@ use App\Http\Controllers\Instruktur\KursusInstrukturController;
 use App\Http\Controllers\Instruktur\JadwalInstrukturController;
 use App\Http\Controllers\Instruktur\UlasanInstrukturController;
 use App\Http\Controllers\Instruktur\ProfilController;
+use App\Http\Controllers\RegisterController;
+
 /*
 |--------------------------------------------------------------------------
 | LANDING PAGE (PUBLIC)
@@ -52,7 +54,14 @@ Route::get('/pakets', [LandingPageController::class, 'pakets'])->name('pakets');
 |--------------------------------------------------------------------------
 */
 Route::middleware('guest')->group(function () {
-
+    Route::get('/register', [RegisterController::class, 'index'])->name('register.admin');
+        Route::post('/register', [RegisterController::class, 'store'])->name('register.admin.store');
+    
+        Route::get('/siswa/login', [SessionsController::class, 'createSiswa'])->name('siswa.login');
+        Route::post('/siswa/login', [SessionsController::class, 'store']);
+    
+        Route::get('/siswa/register', [LoginController::class, 'registerIndex'])->name('siswa.register');
+        Route::post('/siswa/register', [LoginController::class, 'register'])->name('siswa.register.store');
     Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/login', [SessionsController::class, 'store']);
 

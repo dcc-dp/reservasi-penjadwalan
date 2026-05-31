@@ -11,7 +11,7 @@ class SessionsController extends Controller
     public function create()
     {
         // default login (misalnya admin)
-        return view('session.login-session');
+        return view('modern.auth.login');
     }
 
     public function createSiswa()
