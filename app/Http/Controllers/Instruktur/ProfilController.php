@@ -24,7 +24,7 @@ class ProfilController extends Controller
         ]);
 
         /** @var \App\Models\User $user */
-        $user = auth::user();
+        $user = Auth::user();
 
         $data = [
             'name' => $request->name,

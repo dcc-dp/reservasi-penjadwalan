@@ -152,7 +152,7 @@ Route::middleware(['auth', 'role:admin'])
     Route::post('/admin/logout', function () {
             Auth::logout();
             return redirect('/');
-        })->name('admin.logout');
+        })->name('logout');
 });
 
 /*
@@ -189,7 +189,7 @@ Route::middleware(['auth', 'role:instruktur'])
         Route::post('/logout', function () {
             Auth::logout();
             return redirect('/');
-        })->name('instruktur.logout');
+        })->name('logout');
     });
 /*
 |--------------------------------------------------------------------------
