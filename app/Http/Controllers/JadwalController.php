@@ -12,13 +12,13 @@ class JadwalController extends Controller
     {
         // ambil semua reservasi beserta user, kursus, jadwal
         $reservasis = Reservasi::with('user','kursus','jadwals')->get();
-        return view('admin.jadwal.index', compact('reservasis'));
+        return view('modern.admin.jadwal.index', compact('reservasis'));
     }
 
     public function create()
     {
         $reservasis = Reservasi::with('user','kursus')->get();
-        return view('admin.jadwal.create', compact('reservasis'));
+        return view('modern.admin.jadwal.create', compact('reservasis'));
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class JadwalController extends Controller
     public function edit($id)
     {
         $jadwal = Jadwal::with('reservasi.user','reservasi.kursus')->findOrFail($id);
-        return view('admin.jadwal.edit', compact('jadwal'));
+        return view('modern.admin.jadwal.edit', compact('jadwal'));
     }
 
     public function update(Request $request, $id)
@@ -80,9 +80,8 @@ class JadwalController extends Controller
     }
 
     // untuk modal detail
-    public function detail($id)
-    {
-        $reservasi = Reservasi::with('user','kursus','jadwal')->findOrFail($id);
-        return view('admin.jadwal.modal_detail', compact('reservasi'));
+    public function detail($id) { 
+        $reservasi = Reservasi::with( 'user', 'kursus', 'jadwals' )->findOrFail($id); 
+        return view( 'modern.admin.jadwal.modal_detail', compact('reservasi') ); 
     }
 }

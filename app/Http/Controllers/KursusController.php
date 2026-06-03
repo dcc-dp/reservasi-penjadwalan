@@ -12,14 +12,14 @@ class KursusController extends Controller
     {
         $kursusList = Kursus::with(['instruktur', 'pakets'])->latest()->get();
 
-        return view('kursus.index', compact('kursusList'));
+        return view('modern.admin.kursus.index', compact('kursusList'));
     }
 
     public function create()
     {
         $instrukturList = User::where('role', 'instruktur')->get();
 
-        return view('kursus.create', compact('instrukturList'));
+        return view('modern.admin.kursus.create', compact('instrukturList'));
     }
 
     public function store(Request $request)
@@ -45,7 +45,7 @@ class KursusController extends Controller
         $kursus = Kursus::findOrFail($id);
         $instrukturList = User::where('role', 'instruktur')->get();
 
-        return view('kursus.edit', compact('kursus', 'instrukturList'));
+        return view('modern.admin.kursus.edit', compact('kursus', 'instrukturList'));
     }
 
     public function update(Request $request, $id)

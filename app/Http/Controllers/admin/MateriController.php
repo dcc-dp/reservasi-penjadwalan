@@ -13,14 +13,14 @@ class MateriController extends Controller
     {
         $materi = Materi::with('paket.kursus')->latest()->get();
 
-        return view('admin.materi.materi', compact('materi'));
+        return view('modern.admin.materi.index', compact('materi'));
     }
 
     public function create()
     {
         $pakets = Paket::with('kursus')->get();
 
-        return view('admin.materi.create', compact('pakets'));
+        return view('modern.admin.materi.create', compact('pakets'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class MateriController extends Controller
         $materi = Materi::findOrFail($id);
         $pakets = Paket::with('kursus')->get();
 
-        return view('admin.materi.edit', compact('materi', 'pakets'));
+        return view('modern.admin.materi.edit', compact('materi', 'pakets'));
     }
 
     public function update(Request $request, $id)

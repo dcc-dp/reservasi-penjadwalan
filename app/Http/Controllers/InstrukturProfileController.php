@@ -13,7 +13,7 @@ class InstrukturProfileController extends Controller
     public function index()
     {
         $profiles = Instruktur_Profile::all();
-        return view('admin.profile-instruktur.index', compact('profiles'));
+        return view('modern.admin.profile-instruktur.index', compact('profiles'));
     }
 
     /**
@@ -22,7 +22,7 @@ class InstrukturProfileController extends Controller
     public function create()
     {
          $users = User::all();
-        return view('admin.profile-instruktur.create', compact('users'));
+        return view('modern.admin.profile-instruktur.create', compact('users'));
     }
 
     /**
@@ -58,7 +58,7 @@ class InstrukturProfileController extends Controller
     {
         $profile = Instruktur_Profile::findOrFail($id);
         $users = User::all();
-        return view('admin.profile-instruktur.edit', compact('profile','users'));
+        return view('modern.admin.profile-instruktur.edit', compact('profile','users'));
     }
 
 

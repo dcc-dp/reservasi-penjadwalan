@@ -13,7 +13,7 @@ class PembayaranController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('pembayaran.index', compact('pembayarans'));
+        return view('modern.admin.pembayaran.index', compact('pembayarans'));
     }
 
     public function store(Request $request)
