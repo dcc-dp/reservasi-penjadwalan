@@ -1,134 +1,199 @@
 @extends('modern.layouts.app')
 
+@section('title', 'Tambah Instruktur')
+
 @section('content')
 
 <div class="p-6">
 
-    <div class="max-w-3xl mx-auto">
+    <div class="max-w-5xl mx-auto">
 
         {{-- HEADER --}}
         <div class="mb-6">
 
             <h1 class="text-2xl font-bold text-zinc-900">
-                Tambah Profile Instruktur
+                Tambah Instruktur
             </h1>
 
             <p class="text-sm text-zinc-500 mt-1">
-                Tambahkan data profile instruktur baru.
+                Buat akun instruktur baru beserta profil pengajarnya.
             </p>
 
         </div>
 
-        {{-- CARD --}}
-        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6">
+        <form action="{{ route('instruktur.store') }}" method="POST">
 
-            <form action="{{ route('instruktur.store') }}" method="POST">
+            @csrf
 
-                @csrf
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {{-- DATA AKUN --}}
+                <div class="bg-white rounded-2xl border border-zinc-200 p-6">
 
-                    {{-- USER --}}
-                    <div class="md:col-span-2">
+                    <h3 class="text-lg font-semibold text-zinc-900 mb-5">
+                        Data Akun
+                    </h3>
 
-                        <label class="block text-sm font-medium text-zinc-700 mb-2">
-                            Pilih User
-                        </label>
+                    <div class="space-y-5">
 
-                        <select
-                            name="user_id"
-                            required
-                            class="w-full rounded-xl border border-zinc-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zinc-900">
+                        <div>
 
-                            <option value="">
-                                -- Pilih User --
-                            </option>
+                            <label class="block text-sm font-medium mb-2">
+                                Nama Lengkap
+                            </label>
 
-                            @foreach ($users as $user)
+                            <input
+                                type="text"
+                                name="name"
+                                value="{{ old('name') }}"
+                                required
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
 
-                                <option value="{{ $user->id }}">
-                                    {{ $user->name }}
-                                </option>
+                        </div>
 
-                            @endforeach
+                        <div>
 
-                        </select>
+                            <label class="block text-sm font-medium mb-2">
+                                Email
+                            </label>
 
-                    </div>
+                            <input
+                                type="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                required
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
 
-                    {{-- KEAHLIAN --}}
-                    <div>
+                        </div>
 
-                        <label class="block text-sm font-medium text-zinc-700 mb-2">
-                            Keahlian
-                        </label>
+                        <div>
 
-                        <input
-                            type="text"
-                            name="keahlian"
-                            required
-                            class="w-full rounded-xl border border-zinc-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zinc-900">
+                            <label class="block text-sm font-medium mb-2">
+                                Password
+                            </label>
 
-                    </div>
+                            <input
+                                type="password"
+                                name="password"
+                                required
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
 
-                    {{-- PENGALAMAN --}}
-                    <div>
+                        </div>
 
-                        <label class="block text-sm font-medium text-zinc-700 mb-2">
-                            Pengalaman
-                        </label>
+                        <div>
 
-                        <input
-                            type="text"
-                            name="pengalaman"
-                            required
-                            class="w-full rounded-xl border border-zinc-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zinc-900">
+                            <label class="block text-sm font-medium mb-2">
+                                Nomor Telepon
+                            </label>
 
-                    </div>
+                            <input
+                                type="text"
+                                name="notelp"
+                                value="{{ old('notelp') }}"
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
 
-                    {{-- BIO --}}
-                    <div class="md:col-span-2">
+                        </div>
 
-                        <label class="block text-sm font-medium text-zinc-700 mb-2">
-                            Bio
-                        </label>
+                        <div>
 
-                        <textarea
-                            name="bio"
-                            rows="5"
-                            class="w-full rounded-xl border border-zinc-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zinc-900"></textarea>
+                            <label class="block text-sm font-medium mb-2">
+                                Alamat
+                            </label>
+
+                            <textarea
+                                name="alamat"
+                                rows="4"
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">{{ old('alamat') }}</textarea>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-                {{-- BUTTON --}}
-                <div class="flex items-center gap-3 mt-6">
+                {{-- DATA INSTRUKTUR --}}
+                <div class="bg-white rounded-2xl border border-zinc-200 p-6">
 
-                    <button
-                        type="submit"
-                        class="px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium transition">
+                    <h3 class="text-lg font-semibold text-zinc-900 mb-5">
+                        Data Instruktur
+                    </h3>
 
-                        Simpan
+                    <div class="space-y-5">
 
-                    </button>
+                        <div>
 
-                    <a href="{{ route('instruktur.index') }}"
-                        class="px-5 py-3 rounded-xl border border-zinc-300 hover:bg-zinc-100 text-sm font-medium transition">
+                            <label class="block text-sm font-medium mb-2">
+                                Keahlian
+                            </label>
 
-                        Batal
+                            <input
+                                type="text"
+                                name="keahlian"
+                                value="{{ old('keahlian') }}"
+                                required
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
 
-                    </a>
+                        </div>
+
+                        <div>
+
+                            <label class="block text-sm font-medium mb-2">
+                                Pengalaman
+                            </label>
+
+                            <input
+                                type="text"
+                                name="pengalaman"
+                                value="{{ old('pengalaman') }}"
+                                required
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
+
+                        </div>
+
+                        <div>
+
+                            <label class="block text-sm font-medium mb-2">
+                                Bio
+                            </label>
+
+                            <textarea
+                                name="bio"
+                                rows="8"
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">{{ old('bio') }}</textarea>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-            </form>
+            </div>
 
-        </div>
+            {{-- BUTTON --}}
+            <div class="flex items-center gap-3 mt-6">
+
+                <button
+                    type="submit"
+                    class="px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium">
+
+                    Simpan Instruktur
+
+                </button>
+
+                <a
+                    href="{{ route('instruktur.index') }}"
+                    class="px-5 py-3 rounded-xl border border-zinc-300 hover:bg-zinc-100 text-sm font-medium">
+
+                    Batal
+
+                </a>
+
+            </div>
+
+        </form>
 
     </div>
 
 </div>
 
 @endsection
-

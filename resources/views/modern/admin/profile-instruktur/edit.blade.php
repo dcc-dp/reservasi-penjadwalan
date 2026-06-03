@@ -1,133 +1,183 @@
 @extends('modern.layouts.app')
 
+@section('title', 'Edit Instruktur')
+
 @section('content')
 
 <div class="p-6">
 
-    <div class="max-w-3xl mx-auto">
+    <div class="max-w-5xl mx-auto">
 
         {{-- HEADER --}}
         <div class="mb-6">
 
             <h1 class="text-2xl font-bold text-zinc-900">
-                Edit Profile Instruktur
+                Edit Instruktur
             </h1>
 
             <p class="text-sm text-zinc-500 mt-1">
-                Perbarui data profile instruktur.
+                Perbarui data akun dan profil instruktur.
             </p>
 
         </div>
 
-        {{-- CARD --}}
-        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6">
+        <form action="{{ route('instruktur.update', $profile->id) }}" method="POST">
 
-            <form action="{{ route('instruktur.update', $profile->id) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-                @csrf
-                @method('PUT')
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {{-- DATA AKUN --}}
+                <div class="bg-white rounded-2xl border border-zinc-200 p-6">
 
-                    {{-- USER --}}
-                    <div class="md:col-span-2">
+                    <h3 class="text-lg font-semibold text-zinc-900 mb-5">
+                        Data Akun
+                    </h3>
 
-                        <label class="block text-sm font-medium text-zinc-700 mb-2">
-                            Pilih User
-                        </label>
+                    <div class="space-y-5">
 
-                        <select
-                            name="user_id"
-                            required
-                            class="w-full rounded-xl border border-zinc-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zinc-900">
+                        <div>
 
-                            @foreach ($users as $user)
+                            <label class="block text-sm font-medium mb-2">
+                                Nama Lengkap
+                            </label>
 
-                                <option
-                                    value="{{ $user->id }}"
-                                    {{ $profile->user_id == $user->id ? 'selected' : '' }}>
+                            <input
+                                type="text"
+                                name="name"
+                                value="{{ old('name', $profile->user->name) }}"
+                                required
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
 
-                                    {{ $user->name }}
+                        </div>
 
-                                </option>
+                        <div>
 
-                            @endforeach
+                            <label class="block text-sm font-medium mb-2">
+                                Email
+                            </label>
 
-                        </select>
+                            <input
+                                type="email"
+                                name="email"
+                                value="{{ old('email', $profile->user->email) }}"
+                                required
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
 
-                    </div>
+                        </div>
 
-                    {{-- KEAHLIAN --}}
-                    <div>
+                        <div>
 
-                        <label class="block text-sm font-medium text-zinc-700 mb-2">
-                            Keahlian
-                        </label>
+                            <label class="block text-sm font-medium mb-2">
+                                Nomor Telepon
+                            </label>
 
-                        <input
-                            type="text"
-                            name="keahlian"
-                            value="{{ $profile->keahlian }}"
-                            required
-                            class="w-full rounded-xl border border-zinc-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zinc-900">
+                            <input
+                                type="text"
+                                name="notelp"
+                                value="{{ old('notelp', $profile->user->notelp) }}"
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
 
-                    </div>
+                        </div>
 
-                    {{-- PENGALAMAN --}}
-                    <div>
+                        <div>
 
-                        <label class="block text-sm font-medium text-zinc-700 mb-2">
-                            Pengalaman
-                        </label>
+                            <label class="block text-sm font-medium mb-2">
+                                Alamat
+                            </label>
 
-                        <input
-                            type="text"
-                            name="pengalaman"
-                            value="{{ $profile->pengalaman }}"
-                            required
-                            class="w-full rounded-xl border border-zinc-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zinc-900">
+                            <textarea
+                                name="alamat"
+                                rows="4"
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">{{ old('alamat', $profile->user->alamat) }}</textarea>
 
-                    </div>
-
-                    {{-- BIO --}}
-                    <div class="md:col-span-2">
-
-                        <label class="block text-sm font-medium text-zinc-700 mb-2">
-                            Bio
-                        </label>
-
-                        <textarea
-                            name="bio"
-                            rows="5"
-                            class="w-full rounded-xl border border-zinc-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-zinc-900">{{ $profile->bio }}</textarea>
+                        </div>
 
                     </div>
 
                 </div>
 
-                {{-- BUTTON --}}
-                <div class="flex items-center gap-3 mt-6">
+                {{-- DATA INSTRUKTUR --}}
+                <div class="bg-white rounded-2xl border border-zinc-200 p-6">
 
-                    <button
-                        type="submit"
-                        class="px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium transition">
+                    <h3 class="text-lg font-semibold text-zinc-900 mb-5">
+                        Data Instruktur
+                    </h3>
 
-                        Update
+                    <div class="space-y-5">
 
-                    </button>
+                        <div>
 
-                    <a href="{{ route('instruktur.index') }}"
-                        class="px-5 py-3 rounded-xl border border-zinc-300 hover:bg-zinc-100 text-sm font-medium transition">
+                            <label class="block text-sm font-medium mb-2">
+                                Keahlian
+                            </label>
 
-                        Batal
+                            <input
+                                type="text"
+                                name="keahlian"
+                                value="{{ old('keahlian', $profile->keahlian) }}"
+                                required
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
 
-                    </a>
+                        </div>
+
+                        <div>
+
+                            <label class="block text-sm font-medium mb-2">
+                                Pengalaman
+                            </label>
+
+                            <input
+                                type="text"
+                                name="pengalaman"
+                                value="{{ old('pengalaman', $profile->pengalaman) }}"
+                                required
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
+
+                        </div>
+
+                        <div>
+
+                            <label class="block text-sm font-medium mb-2">
+                                Bio
+                            </label>
+
+                            <textarea
+                                name="bio"
+                                rows="8"
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">{{ old('bio', $profile->bio) }}</textarea>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-            </form>
+            </div>
 
-        </div>
+            {{-- BUTTON --}}
+            <div class="flex items-center gap-3 mt-6">
+
+                <button
+                    type="submit"
+                    class="px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium">
+
+                    Update Instruktur
+
+                </button>
+
+                <a
+                    href="{{ route('instruktur.index') }}"
+                    class="px-5 py-3 rounded-xl border border-zinc-300 hover:bg-zinc-100 text-sm font-medium">
+
+                    Batal
+
+                </a>
+
+            </div>
+
+        </form>
 
     </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Instruktur_Profile;
 use App\Models\User ;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class InstrukturProfileController extends Controller
 {
@@ -12,7 +13,7 @@ class InstrukturProfileController extends Controller
      */
     public function index()
     {
-        $profiles = Instruktur_Profile::all();
+        $profiles = Instruktur_Profile::with('user')->latest()->get();
         return view('modern.admin.profile-instruktur.index', compact('profiles'));
     }
 
@@ -21,8 +22,7 @@ class InstrukturProfileController extends Controller
      */
     public function create()
     {
-         $users = User::all();
-        return view('modern.admin.profile-instruktur.create', compact('users'));
+        return view('modern.admin.profile-instruktur.create');
     }
 
     /**
@@ -30,17 +30,39 @@ class InstrukturProfileController extends Controller
      */
     public function store(Request $request)
     {
-       $request->validate([
-            'user_id' => 'required|exists:users,id',
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+
+            'notelp' => 'nullable|string|max:20',
+            'alamat' => 'nullable|string',
+
             'keahlian' => 'required|string|max:255',
             'pengalaman' => 'required|string|max:255',
             'bio' => 'nullable|string',
         ]);
 
-        Instruktur_Profile::create($request->all());
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'instruktur',
 
-        return redirect()->route('instruktur.index')->with('success', 'Profile berhasil ditambahkan');
+            'notelp' => $request->notelp,
+            'alamat' => $request->alamat,
+        ]);
 
+        Instruktur_Profile::create([
+            'user_id' => $user->id,
+            'keahlian' => $request->keahlian,
+            'pengalaman' => $request->pengalaman,
+            'bio' => $request->bio,
+        ]);
+
+        return redirect()
+            ->route('instruktur.index')
+            ->with('success', 'Instruktur berhasil ditambahkan');
     }
 
     /**
@@ -87,8 +109,17 @@ class InstrukturProfileController extends Controller
     public function destroy(string $id)
     {
         $profile = Instruktur_Profile::findOrFail($id);
+
+        $user = $profile->user;
+
         $profile->delete();
 
-        return redirect()->route('instruktur.index')->with('success', 'Profile berhasil dihapus');
+        if ($user) {
+            $user->delete();
+        }
+
+        return redirect()
+            ->route('instruktur.index')
+            ->with('success', 'Instruktur berhasil dihapus');
     }
 }

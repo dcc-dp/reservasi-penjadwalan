@@ -19,6 +19,6 @@ class Instruktur_Profile extends Model
     }
      public function kursus()
     {
-        return $this->hasMany(Kursus::class, 'instruktur_id', 'id');
+        return $this->hasMany(Kursus::class, 'id_instruktur', 'id');
     }
 }
