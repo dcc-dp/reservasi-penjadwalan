@@ -240,9 +240,6 @@
                                         Tambahkan instruktur pertama untuk mulai mengelola kursus.
 
                                     </p>
-
-                        
-
                                 </div>
 
                             </td>
