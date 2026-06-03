@@ -53,7 +53,6 @@
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
 
             @foreach($kursus as $item)
-
                 <div
                     class="group bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
 
