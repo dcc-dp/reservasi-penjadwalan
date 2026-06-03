@@ -14,6 +14,6 @@ class KursusInstrukturController extends Controller
             ->where('id_instruktur', Auth::id())
             ->get();
 
-        return view('instruktur.kursus.index', compact('kursus'));
+        return view('modern.instruktur.kursus_index', compact('kursus'));
     }
 }

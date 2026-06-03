@@ -13,14 +13,14 @@ class PaketController extends Controller
     {
         $data = Paket::with('kursus')->latest()->get();
 
-        return view('admin.paket.index', compact('data'));
+        return view('modern.admin.paket.index', compact('data'));
     }
 
     public function create()
     {
         $kursus = Kursus::latest()->get();
 
-        return view('admin.paket.create', compact('kursus'));
+        return view('modern.admin.paket.create', compact('kursus'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class PaketController extends Controller
         $paket = Paket::findOrFail($id);
         $kursus = Kursus::latest()->get();
 
-        return view('admin.paket.edit', compact('paket', 'kursus'));
+        return view('modern.admin.paket.edit', compact('paket', 'kursus'));
     }
 
     public function update(Request $request, $id)

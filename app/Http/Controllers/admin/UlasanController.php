@@ -11,7 +11,7 @@ class UlasanController extends Controller
     {
         $ulasans = Ulasan::with(['user', 'kursus'])->latest()->get();
 
-        return view('admin.ulasan.index', compact('ulasans'));
+        return view('modern.admin.ulasan.index', compact('ulasans'));
     }
 
     public function destroy($id)

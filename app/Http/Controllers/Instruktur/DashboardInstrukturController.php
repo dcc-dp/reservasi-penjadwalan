@@ -22,7 +22,7 @@ class DashboardInstrukturController extends Controller
             $query->where('id_instruktur', Auth::id());
         })->count();
 
-        return view('instruktur.dashboard', compact(
+        return view('modern.instruktur.dashboard', compact(
             'totalKursus',
             'totalSiswa',
             'totalUlasan'

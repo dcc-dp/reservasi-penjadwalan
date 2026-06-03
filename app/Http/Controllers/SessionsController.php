@@ -11,7 +11,7 @@ class SessionsController extends Controller
     public function create()
     {
         // default login (misalnya admin)
-        return view('session.login-session');
+        return view('modern.auth.login');
     }
 
     public function createSiswa()
@@ -31,7 +31,7 @@ class SessionsController extends Controller
 
             return match (Auth::user()->role) {
                 'admin' => redirect()->route('admin.dashboard'),
-                'instruktur' => redirect()->route('dashboard'),
+                'instruktur' => redirect()->route('instruktur.dashboard'),
                 'siswa' => redirect()->route('siswa.dashboard'),
                 default => abort(403, 'Role tidak dikenali'),
             };
