@@ -55,13 +55,9 @@
                                 Rp {{ number_format($p->harga, 0, ',', '.') }}
                             </h2>
 
-                            {{-- Benefit --}}
-                            <ul class="list-unstyled text-start mb-4">
-                                <li class="mb-2">✔ Materi Lengkap</li>
-                                <li class="mb-2">✔ Video Pembelajaran</li>
-                                <li class="mb-2">✔ Latihan Soal</li>
-                                <li class="mb-2">✔ Sertifikat Kelulusan</li>
-                            </ul>
+                            <div class="mb-4 text-muted">
+                                {{ \Illuminate\Support\Str::limit($p->kursus->deskripsi, 120) }}
+                            </div>
 
                             {{-- Tombol --}}
                             <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => $p->id]) }}"
