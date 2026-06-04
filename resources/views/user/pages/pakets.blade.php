@@ -58,6 +58,9 @@
                             <div class="mb-4 text-muted">
                                 {{ \Illuminate\Support\Str::limit($p->kursus->deskripsi, 120) }}
                             </div>
+                            
+
+                           
 
                             {{-- Tombol --}}
                             <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => $p->id]) }}"

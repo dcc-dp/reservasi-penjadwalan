@@ -69,44 +69,56 @@
 </section>
 
 
-<!-- STATISTICS -->
-
 <section class="pt-100 pb-100 bg-light">
     <div class="container">
 
-        <div class="row text-center">
+```
+    <div class="row text-center">
 
-            <div class="col-lg-3 col-md-6 mb-30">
-                <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">500+</h2>
-                    <p>Students</p>
-                </div>
+        <div class="col-lg-3 col-md-6 mb-30">
+            <div class="single-service p-4 shadow-sm h-100">
+                <h4 class="mb-3">Materi Terstruktur</h4>
+                <p>
+                    Pembelajaran disusun secara bertahap sehingga mudah
+                    dipahami mulai dari dasar hingga tingkat lanjutan.
+                </p>
             </div>
+        </div>
 
-            <div class="col-lg-3 col-md-6 mb-30">
-                <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">20+</h2>
-                    <p>Courses</p>
-                </div>
+        <div class="col-lg-3 col-md-6 mb-30">
+            <div class="single-service p-4 shadow-sm h-100">
+                <h4 class="mb-3">Belajar Praktis</h4>
+                <p>
+                    Fokus pada praktik dan studi kasus agar peserta dapat
+                    menerapkan ilmu yang dipelajari secara langsung.
+                </p>
             </div>
+        </div>
 
-            <div class="col-lg-3 col-md-6 mb-30">
-                <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">15+</h2>
-                    <p>Mentors</p>
-                </div>
+        <div class="col-lg-3 col-md-6 mb-30">
+            <div class="single-service p-4 shadow-sm h-100">
+                <h4 class="mb-3">Instruktur Berpengalaman</h4>
+                <p>
+                    Dibimbing oleh instruktur yang memiliki pengalaman
+                    dan pemahaman di bidang teknologi.
+                </p>
             </div>
+        </div>
 
-            <div class="col-lg-3 col-md-6 mb-30">
-                <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">5+</h2>
-                    <p>Years Experience</p>
-                </div>
+        <div class="col-lg-3 col-md-6 mb-30">
+            <div class="single-service p-4 shadow-sm h-100">
+                <h4 class="mb-3">Fleksibel</h4>
+                <p>
+                    Belajar sesuai kebutuhan dengan berbagai pilihan
+                    kursus dan paket pembelajaran yang tersedia.
+                </p>
             </div>
-
         </div>
 
     </div>
+
+</div>
+
 </section>
 
 

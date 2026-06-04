@@ -123,15 +123,16 @@
 
                             {{-- JADWAL --}}
                             <div class="jadwal-block mb-4">
+
                                 <h5 class="jadwal-block-title mb-3">
                                     <i class="fas fa-calendar-alt me-2 text-primary"></i>
-                                    Preferensi Jadwal Belajar
+                                    Pilih Jadwal Belajar
                                 </h5>
 
                                 <div class="alert alert-light border mb-4">
                                     <small>
-                                        Pilih hari dan jam yang paling sesuai. Kursus terdiri dari
-                                        <strong>15 pertemuan</strong>
+                                        Pilih hari dan jam yang paling sesuai.
+                                        Kursus terdiri dari <strong>15 pertemuan</strong>
                                     </small>
                                 </div>
 
@@ -140,82 +141,50 @@
                                     <label class="form-label reservasi-label">
                                         Tanggal Mulai Belajar
                                     </label>
+
                                     <input type="date" name="tanggal_mulai" class="form-control reservasi-input"
                                         required>
                                 </div>
 
                                 {{-- Hari Belajar --}}
                                 <div class="mb-4">
+
                                     <label class="form-label reservasi-label">
                                         Pilih Hari Belajar
                                     </label>
 
                                     <div class="row">
-                                        <div class="col-md-3 col-6 mb-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="hari[]"
-                                                    value="Senin">
-                                                <label class="form-check-label">Senin</label>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-md-3 col-6 mb-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="hari[]"
-                                                    value="Selasa">
-                                                <label class="form-check-label">Selasa</label>
-                                            </div>
-                                        </div>
+                                        @foreach (['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $hari)
+                                            <div class="col-md-3 col-6 mb-2">
+                                                <div class="form-check">
 
-                                        <div class="col-md-3 col-6 mb-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="hari[]"
-                                                    value="Rabu">
-                                                <label class="form-check-label">Rabu</label>
-                                            </div>
-                                        </div>
+                                                    <input class="form-check-input" type="checkbox" name="hari[]"
+                                                        value="{{ $hari }}">
 
-                                        <div class="col-md-3 col-6 mb-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="hari[]"
-                                                    value="Kamis">
-                                                <label class="form-check-label">Kamis</label>
-                                            </div>
-                                        </div>
+                                                    <label class="form-check-label">
+                                                        {{ $hari }}
+                                                    </label>
 
-                                        <div class="col-md-3 col-6 mb-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="hari[]"
-                                                    value="Jumat">
-                                                <label class="form-check-label">Jumat</label>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
 
-                                        <div class="col-md-3 col-6 mb-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="hari[]"
-                                                    value="Sabtu">
-                                                <label class="form-check-label">Sabtu</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3 col-6 mb-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="hari[]"
-                                                    value="Minggu">
-                                                <label class="form-check-label">Minggu</label>
-                                            </div>
-                                        </div>
                                     </div>
+
                                 </div>
 
                                 {{-- Jam --}}
-                                <div>
+                                <div class="mb-4">
+
                                     <label class="form-label reservasi-label">
                                         Jam Belajar
                                     </label>
+
                                     <input type="time" name="jam" class="form-control reservasi-input" required>
+
                                 </div>
+
                             </div>
 
                             {{-- BUTTON --}}

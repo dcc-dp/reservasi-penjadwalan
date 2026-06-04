@@ -13,12 +13,10 @@ class LandingPageController extends Controller
 {
     public function index()
     {
-
-        $kursus = Kursus::getAll();
+        $kursus = Kursus::all();
         $paket = Paket::latest()->take(3)->get();
 
-       
-        return view('user.pages.home', compact('paket', 'kursus'));
+        return view('user.pages.home', compact('kursus', 'paket'));
     }
     public function about()
     {

@@ -8,6 +8,7 @@ use App\Models\Paket;
 use App\Models\Pembayaran;
 use App\Models\Jadwal;
 use App\Models\Kursus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,38 +44,65 @@ class ReservasiSiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_kursus'     => 'required|exists:kursuses,id',
-            'id_paket'      => 'required|exists:pakets,id',
-            'ruangan'       => 'required',
-            'jadwal.0.hari' => 'required|date',
-            'jadwal.0.jam'  => 'required',
-            'jadwal.1.hari' => 'nullable|date',
-            'jadwal.1.jam'  => 'nullable',
+            'id_kursus'      => 'required|exists:kursuses,id',
+            'id_paket'       => 'required|exists:pakets,id',
+            'tanggal_mulai'  => 'required|date',
+            'hari'           => 'required|array|min:1',
+            'jam'            => 'required',
+            'ruangan'        => 'nullable',
         ]);
 
+        // dd($request->all());
+
         try {
+
             $paket = Paket::findOrFail($request->id_paket);
 
             $reservasi = Reservasi::create([
-                'id_user'   => Auth::id(),
-                'id_kursus' => $request->id_kursus,
-                'id_paket'  => $request->id_paket,
-                'ruangan'   => $request->ruangan,
-                'status'    => 'pending',
+                'id_user'       => Auth::id(),
+                'id_kursus'     => $request->id_kursus,
+                'id_paket'      => $request->id_paket,
+                'tanggal_mulai' => $request->tanggal_mulai,
+                'ruangan'       => $request->ruangan,
+                'status'        => 'pending',
             ]);
 
-            $days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            $mapHari = [
+                'Minggu' => 0,
+                'Senin'  => 1,
+                'Selasa' => 2,
+                'Rabu'   => 3,
+                'Kamis'  => 4,
+                'Jumat'  => 5,
+                'Sabtu'  => 6,
+            ];
 
-            foreach ($request->jadwal as $index => $j) {
-                if (!empty($j['hari']) && !empty($j['jam'])) {
-                    Jadwal::create([
-                        'reservasi_id' => $reservasi->id,
-                        'tanggal'      => $j['hari'],
-                        'hari'         => $days[date('w', strtotime($j['hari']))],
-                        'jam'          => $j['jam'],
-                        'pertemuan'    => $index + 1,
-                    ]);
+            $tanggal = Carbon::parse($request->tanggal_mulai);
+
+            $pertemuan = 1;
+
+            while ($pertemuan <= 15) {
+
+                $hariSekarang = $tanggal->dayOfWeek;
+
+                foreach ($request->hari as $hariDipilih) {
+
+                    if ($hariSekarang == $mapHari[$hariDipilih]) {
+
+                        Jadwal::create([
+                            'reservasi_id' => $reservasi->id,
+                            'tanggal'      => $tanggal->format('Y-m-d'),
+                            'hari'         => $hariDipilih,
+                            'jam'          => $request->jam,
+                            'pertemuan'    => $pertemuan,
+                        ]);
+
+                        $pertemuan++;
+                        break;
+                    }
                 }
+
+                $tanggal->addDay();
             }
 
             Pembayaran::create([
@@ -89,10 +117,14 @@ class ReservasiSiswaController extends Controller
                 'paid_at'        => null,
             ]);
 
-            return redirect()->route('siswa.pembayaran')
-                ->with('success', 'Reservasi berhasil dibuat, silakan lakukan pembayaran');
+            return redirect()
+                ->route('siswa.pembayaran')
+                ->with('success', 'Reservasi berhasil dibuat');
         } catch (\Exception $e) {
-            return back()->withInput()->with('error', $e->getMessage());
+
+            return back()
+                ->withInput()
+                ->with('error', $e->getMessage());
         }
     }
 }
