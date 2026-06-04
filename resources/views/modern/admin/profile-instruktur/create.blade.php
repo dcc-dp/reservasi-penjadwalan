@@ -181,7 +181,7 @@
                 </button>
 
                 <a
-                    href="{{ route('instruktur.index') }}"
+                    href="{{ url('/instruktur/create') }}"
                     class="px-5 py-3 rounded-xl border border-zinc-300 hover:bg-zinc-100 text-sm font-medium">
 
                     Batal
