@@ -11,7 +11,7 @@ class ProfilController extends Controller
 {
     public function index()
     {
-        return view('instruktur.profil.index');
+        return view('modern.instruktur.profil_index');
     }
 
     public function update(Request $request)
@@ -24,7 +24,7 @@ class ProfilController extends Controller
         ]);
 
         /** @var \App\Models\User $user */
-        $user = auth::user();
+        $user = Auth::user();
 
         $data = [
             'name' => $request->name,

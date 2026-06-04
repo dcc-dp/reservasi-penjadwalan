@@ -17,14 +17,14 @@ class ReservasiController extends Controller
     {
         $reserv = Reservasi::with(['user', 'kursus', 'paket', 'jadwals', 'pembayaran'])->get();
 
-        return view('admin.reservasi.index', compact('reserv'));
+        return view('modern.admin.reservasi.index', compact('reserv'));
     }
 
     public function create()
     {
         $kursusList = Kursus::with('pakets')->get();
 
-        return view('admin.reservasi.create', compact('kursusList'));
+        return view('modern.admin.reservasi.create', compact('kursusList'));
     }
 
     public function store(Request $request)
@@ -74,14 +74,14 @@ class ReservasiController extends Controller
     {
         $reserv = Reservasi::with(['user','kursus','paket','jadwals'])->findOrFail($id);
 
-        return view('admin.reservasi.show', compact('reserv'));
+        return view('modern.admin.reservasi.show', compact('reserv'));
     }
 
     public function edit($id)
     {
         $reserv = Reservasi::with('jadwals')->findOrFail($id);
 
-        return view('admin.reservasi.edit', compact('reserv'));
+        return view('modern.admin.reservasi.edit', compact('reserv'));
     }
 
     public function destroy($id)

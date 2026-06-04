@@ -16,6 +16,6 @@ class JadwalInstrukturController extends Controller
             })
             ->get();
 
-        return view('instruktur.jadwal.index', compact('reservasis'));
+        return view('modern.instruktur.jadwal_index', compact('reservasis'));
     }
 }

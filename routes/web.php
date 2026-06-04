@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,16 +36,7 @@ use App\Http\Controllers\Instruktur\KursusInstrukturController;
 use App\Http\Controllers\Instruktur\JadwalInstrukturController;
 use App\Http\Controllers\Instruktur\UlasanInstrukturController;
 use App\Http\Controllers\Instruktur\ProfilController;
-
-/*
-|--------------------------------------------------------------------------
-| GLOBAL LOGOUT (WAJIB DI ATAS)
-|--------------------------------------------------------------------------
-*/
-Route::post('/logout', function () {
-    Auth::logout();
-    return redirect('/login');
-})->name('siswa.logout');
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +54,14 @@ Route::get('/pakets', [LandingPageController::class, 'pakets'])->name('pakets');
 |--------------------------------------------------------------------------
 */
 Route::middleware('guest')->group(function () {
+    Route::get('/register', [RegisterController::class, 'index'])->name('register.admin');
+        Route::post('/register', [RegisterController::class, 'store'])->name('register.admin.store');
+    
+        Route::get('/siswa/login', [SessionsController::class, 'createSiswa'])->name('siswa.login');
+        Route::post('/siswa/login', [SessionsController::class, 'store']);
+    
+        Route::get('/siswa/register', [LoginController::class, 'register'])->name('siswa.register');
+        Route::post('/siswa/register', [LoginController::class, 'register'])->name('siswa.register.store');
 
     Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/login', [SessionsController::class, 'store']);
@@ -78,16 +78,27 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password', [ChangePasswordController::class, 'changePassword']);
 });
 
+    Route::post('/logout', [SessionsController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
+
 /*
 |--------------------------------------------------------------------------
 | ADMIN (AUTH + ROLE ADMIN)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'role:admin'])
+    ->prefix('modern')
+    ->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('admin.dashboard');
+        Route::get('/dashboard', [HomeController::class, 'dashboard'])
+            ->name('modern.dashboard');
+
+    });
+    Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])
+    ->name('admin.dashboard');
 
     // logout admin (opsional, beda nama biar tidak bentrok)
     Route::post('/logout', [SessionsController::class, 'destroy'])->name('admin.logout');
@@ -96,7 +107,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/materi/create', [MateriController::class, 'create'])->name('materi.create');
     Route::post('/materi/store', [MateriController::class, 'store'])->name('materi.store');
     Route::get('/materi/edit/{id}', [MateriController::class, 'edit'])->name('materi.edit');
-    Route::post('/materi/update/{id}', [MateriController::class, 'update'])->name('materi.update');
+    Route::put('/materi/update/{id}', [MateriController::class, 'update'])->name('materi.update');
     Route::delete('/materi/destroy/{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
 
     Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('admin.pembayaran.index');
@@ -106,36 +117,47 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
     Route::post('/paket/store', [PaketController::class, 'store'])->name('paket.store');
     Route::get('/paket/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
-    Route::post('/paket/update/{id}', [PaketController::class, 'update'])->name('paket.update');
+    Route::put('/paket/update/{id}', [PaketController::class, 'update'])->name('paket.update');
     Route::delete('/paket/destroy/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
 
     Route::get('/kursus', [KursusController::class, 'index'])->name('kursus.index');
     Route::get('/kursus/create', [KursusController::class, 'create'])->name('kursus.create');
     Route::post('/kursus/store', [KursusController::class, 'store'])->name('kursus.store');
     Route::get('/kursus/edit/{id}', [KursusController::class, 'edit'])->name('kursus.edit');
-    Route::post('/kursus/update/{id}', [KursusController::class, 'update'])->name('kursus.update');
+    Route::put('/kursus/update/{id}', [KursusController::class, 'update'])->name('kursus.update');
     Route::delete('/kursus/destroy/{id}', [KursusController::class, 'destroy'])->name('kursus.destroy');
 
-    Route::get('/kursus/jadwal', [JadwalController::class, 'index'])->name('kursus.jadwal');
-    Route::get('/kursus/jadwal/detail/{id}', [JadwalController::class, 'detail'])
-    ->name('kursus.jadwal.detail');
-    Route::get('/kursus/jadwal/create', [JadwalController::class, 'create'])->name('kursus.jadwal.create');
-    Route::post('/kursus/jadwal/store', [JadwalController::class, 'store'])->name('kursus.jadwal.store');
-    Route::get('/kursus/jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('kursus.jadwal.edit');
-    Route::post('/kursus/jadwal/update/{id}', [JadwalController::class, 'update'])->name('kursus.jadwal.update');
-    Route::delete('/kursus/jadwal/destroy/{id}', [JadwalController::class, 'destroy'])->name('kursus.jadwal.destroy');
+    Route::get('/jadwal', [JadwalController::class, 'index'])->name('admin.jadwal');
+    Route::get('/jadwal/detail/{id}', [JadwalController::class, 'detail'])->name('admin.jadwal.detail');
+    Route::get('/jadwal/create', [JadwalController::class, 'create'])->name('admin.jadwal.create');
+    Route::post('/jadwal/store', [JadwalController::class, 'store'])->name('admin.jadwal.store');
+    Route::get('/jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('admin.jadwal.edit');
+    Route::put('/jadwal/update/{id}', [JadwalController::class, 'update'])->name('admin.jadwal.update');
+    Route::delete('/jadwal/destroy/{id}', [JadwalController::class, 'destroy'])->name('admin.jadwal.destroy');
+
+
+    Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');
+    Route::get('/instruktur/create', [InstrukturProfileController::class, 'create'])->name('instruktur.create');
+    Route::post('/instruktur/store', [InstrukturProfileController::class, 'store'])->name('instruktur.store');
+    Route::get('/instruktur/edit/{id}', [InstrukturProfileController::class, 'edit'])->name('instruktur.edit');
+    Route::put('/instruktur/update/{id}', [InstrukturProfileController::class, 'update'])->name('instruktur.update');
+    Route::delete('/instruktur/destroy/{id}', [InstrukturProfileController::class, 'destroy'])->name('instruktur.destroy');
 
     Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
     Route::get('/reservasi/create', [ReservasiController::class, 'create'])->name('reservasi.create');
     Route::post('/reservasi/store', [ReservasiController::class, 'store'])->name('reservasi.store');
     Route::get('/reservasi/edit/{id}', [ReservasiController::class, 'edit'])->name('reservasi.edit');
-    Route::post('/reservasi/update/{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
+    Route::put('/reservasi/update/{id}', [ReservasiController::class, 'update'])->name('reservasi.update');
     Route::delete('/reservasi/destroy/{id}', [ReservasiController::class, 'destroy'])->name('reservasi.destroy');
 
     Route::get('/ulasan', [UlasanController::class, 'index'])->name('admin.ulasan.index');
     Route::delete('/ulasan/{id}', [UlasanController::class, 'destroy'])->name('admin.ulasan.destroy');
 
     Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');
+    // Route::post('/admin/logout', function () {
+    //         Auth::logout();
+    //         return redirect('/');
+    //     })->name('logout');
 });
 
 /*
@@ -167,11 +189,12 @@ Route::middleware(['auth', 'role:instruktur'])
         Route::post('/profil/update', [ProfilController::class, 'update'])
             ->name('profil.update');
 
-        Route::post('/logout', function () {
-            Auth::logout();
-            return redirect('/');
-        })->name('logout');
 
+
+        // Route::post('/logout', function () {
+        //     Auth::logout();
+        //     return redirect('/');
+        // })->name('logout');
     });
 /*
 |--------------------------------------------------------------------------

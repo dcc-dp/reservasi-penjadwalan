@@ -10,50 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    /**
-     * Tampilkan halaman login siswa
-     */
-    public function userLogin()
-    {
-        return view('user.loginUser'); // pastikan view ini ada
-    }
-
-    /**
-     * Proses login siswa
-     */
-    public function userLoginStore(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('siswa.dashboard'))->with('success', 'Login berhasil!');
-        }
-
-        return back()->withErrors([
-            'email' => 'Email atau password salah',
-        ]);
-    }
-
-    /**
-     * Tampilkan halaman registrasi siswa
-     */
-    public function registerIndex()
-    {
-        return view('user.registerUser'); // pastikan view ini ada
-    }
-
-    /**
-     * Proses registrasi siswa
-     */
     public function register(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -76,9 +34,11 @@ class LoginController extends Controller
         return redirect()->route('siswa.login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
-    /**
-     * Logout siswa
-     */
+    public function registerIndex()
+    {
+        return view('user.registerUser'); 
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();

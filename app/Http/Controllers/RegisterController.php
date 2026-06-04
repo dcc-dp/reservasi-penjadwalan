@@ -11,7 +11,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('static-sign-up');
+        return view('modern.auth.register');
     }
 
     public function store(Request $request)
@@ -33,6 +33,6 @@ class RegisterController extends Controller
         User::create($request);
 
         // Redirect ke login
-        return redirect()->route('loginUser')->with('success', 'Registrasi berhasil! Silakan login.');
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 }
