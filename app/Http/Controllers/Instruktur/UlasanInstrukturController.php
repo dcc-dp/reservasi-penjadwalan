@@ -17,6 +17,6 @@ class UlasanInstrukturController extends Controller
             ->latest()
             ->get();
 
-        return view('instruktur.ulasan.index', compact('ulasans'));
+        return view('modern.instruktur.ulasan_index', compact('ulasans'));
     }
 }

@@ -78,6 +78,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password', [ChangePasswordController::class, 'changePassword']);
 });
 
+    Route::post('/logout', [SessionsController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
+
 /*
 |--------------------------------------------------------------------------
 | ADMIN (AUTH + ROLE ADMIN)
@@ -150,10 +154,10 @@ Route::middleware(['auth', 'role:admin'])
     Route::delete('/ulasan/{id}', [UlasanController::class, 'destroy'])->name('admin.ulasan.destroy');
 
     Route::get('/instruktur', [InstrukturProfileController::class, 'index'])->name('instruktur.index');
-    Route::post('/admin/logout', function () {
-            Auth::logout();
-            return redirect('/');
-        })->name('logout');
+    // Route::post('/admin/logout', function () {
+    //         Auth::logout();
+    //         return redirect('/');
+    //     })->name('logout');
 });
 
 /*
@@ -187,10 +191,10 @@ Route::middleware(['auth', 'role:instruktur'])
 
 
 
-        Route::post('/logout', function () {
-            Auth::logout();
-            return redirect('/');
-        })->name('logout');
+        // Route::post('/logout', function () {
+        //     Auth::logout();
+        //     return redirect('/');
+        // })->name('logout');
     });
 /*
 |--------------------------------------------------------------------------
