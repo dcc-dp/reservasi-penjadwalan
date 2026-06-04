@@ -21,6 +21,20 @@
 
         </div>
 
+        @if ($errors->any())
+            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <p class="font-semibold mb-2">Data gagal disimpan:</p>
+                <ul class="list-disc list-inside space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <p class="mt-2 text-red-600">
+                    Field password dikosongkan ulang demi keamanan — isi password lagi lalu simpan.
+                </p>
+            </div>
+        @endif
+
         <form action="{{ route('instruktur.store') }}" method="POST">
 
             @csrf
@@ -62,7 +76,11 @@
                                 name="email"
                                 value="{{ old('email') }}"
                                 required
-                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3 @error('email') border-red-500 @enderror">
+
+                            @error('email')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
 
                         </div>
 
@@ -76,7 +94,12 @@
                                 type="password"
                                 name="password"
                                 required
-                                class="w-full rounded-xl border border-zinc-300 px-4 py-3">
+                                minlength="6"
+                                class="w-full rounded-xl border border-zinc-300 px-4 py-3 @error('password') border-red-500 @enderror">
+
+                            @error('password')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
 
                         </div>
 

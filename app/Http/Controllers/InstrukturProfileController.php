@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Instruktur_Profile;
+use App\Models\Jadwal;
 use App\Models\User ;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class InstrukturProfileController extends Controller
 {
@@ -35,18 +35,22 @@ class InstrukturProfileController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
 
-            'notelp' => 'nullable|string|max:20',
+            'notelp' => 'nullable|string|max:15',
             'alamat' => 'nullable|string',
 
             'keahlian' => 'required|string|max:255',
             'pengalaman' => 'required|string|max:255',
             'bio' => 'nullable|string',
+        ], [
+            'email.unique' => 'Email sudah terdaftar. Gunakan email lain.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 6 karakter.',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
             'role' => 'instruktur',
 
             'notelp' => $request->notelp,
@@ -122,4 +126,14 @@ class InstrukturProfileController extends Controller
             ->route('instruktur.index')
             ->with('success', 'Instruktur berhasil dihapus');
     }
+    public function userInstruktur(){
+          $jadwals = Jadwal::with(['user', 'kursus'])->get();
+            return view('instruktur.jadwal', compact('jadwals'));
+    }
+
+    
+
+
+
+
 }

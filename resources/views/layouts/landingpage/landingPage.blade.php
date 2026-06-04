@@ -72,7 +72,7 @@
 
                         <li class="nav-item">
                             <a href="{{ route('pakets') }}"
-                               class="nav-link {{ request()->routeIs('Program Package') ? 'active' : '' }}">
+                               class="nav-link {{ request()->routeIs('pakets') ? 'active' : '' }}">
                                 Program Package
                             </a>
                         </li>
