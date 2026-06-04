@@ -29,7 +29,7 @@ class LandingPageController extends Controller
 
     public function pakets()
     {
-        $pakets = Paket::all();
+        $pakets = Paket::latest()->take(3)->get();
         return view('user.pages.pakets', compact('pakets'));
     }
 }

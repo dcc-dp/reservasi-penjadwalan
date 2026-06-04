@@ -34,6 +34,11 @@ class LoginController extends Controller
         return redirect()->route('siswa.login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
+    public function registerIndex()
+    {
+        return view('user.registerUser'); 
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();

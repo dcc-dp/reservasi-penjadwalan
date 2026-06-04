@@ -60,8 +60,9 @@ Route::middleware('guest')->group(function () {
         Route::get('/siswa/login', [SessionsController::class, 'createSiswa'])->name('siswa.login');
         Route::post('/siswa/login', [SessionsController::class, 'store']);
     
-        Route::get('/siswa/register', [LoginController::class, 'registerIndex'])->name('siswa.register');
+        Route::get('/siswa/register', [LoginController::class, 'register'])->name('siswa.register');
         Route::post('/siswa/register', [LoginController::class, 'register'])->name('siswa.register.store');
+
     Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/login', [SessionsController::class, 'store']);
 
