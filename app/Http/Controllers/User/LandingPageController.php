@@ -22,8 +22,11 @@ class LandingPageController extends Controller
     }
     public function about()
     {
+        $totalStudents = User::where('role', 'siswa')->count();
+        $totalCourses = Kursus::count();
+        $totalMentors = User::where('role', 'instruktur')->count();
 
-        return view('user.pages.about');
+        return view('user.pages.about', compact('totalStudents', 'totalCourses', 'totalMentors'));
     }
     public function benefit()
     {

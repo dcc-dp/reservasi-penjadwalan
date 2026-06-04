@@ -78,21 +78,21 @@
 
             <div class="col-lg-3 col-md-6 mb-30">
                 <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">500+</h2>
+                    <h2 class="mb-10">{{ $totalStudents }}+</h2>
                     <p>Students</p>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-30">
                 <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">20+</h2>
+                    <h2 class="mb-10">{{ $totalCourses }}+</h2>
                     <p>Courses</p>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-30">
                 <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">15+</h2>
+                    <h2 class="mb-10">{{ $totalMentors }}+</h2>
                     <p>Mentors</p>
                 </div>
             </div>
