@@ -207,7 +207,7 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->group(function () {
 
     Route::get('/ulasan', [UlasanSiswaController::class, 'index'])->name('siswa.ulasan.index');
     Route::post('/ulasan/store', [UlasanSiswaController::class, 'store'])->name('siswa.ulasan.store');
-    
+
     Route::post('/logout', function () {
         Auth::logout();
         return redirect()->route('pages.home');
