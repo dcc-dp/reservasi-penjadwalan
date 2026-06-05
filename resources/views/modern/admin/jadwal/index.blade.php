@@ -75,17 +75,13 @@
                             Kursus
                         </th>
 
-                        <th class="text-center px-5 py-3 text-sm font-semibold text-zinc-600">
-                            Ruangan
-                        </th>
+                       
 
                         <th class="text-center px-5 py-3 text-sm font-semibold text-zinc-600">
                             Total Jadwal
                         </th>
 
-                        <th class="text-center px-5 py-3 text-sm font-semibold text-zinc-600">
-                            Aksi
-                        </th>
+                       
 
                     </tr>
 
@@ -134,18 +130,6 @@
 
                             </td>
 
-                            {{-- RUANGAN --}}
-                            <td class="px-5 py-4 text-center">
-
-                                <span
-                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 text-zinc-700">
-
-                                    {{ $res->ruangan ?? '-' }}
-
-                                </span>
-
-                            </td>
-
                             {{-- TOTAL --}}
                             <td class="px-5 py-4 text-center text-sm font-medium text-zinc-700">
 
@@ -153,23 +137,6 @@
 
                             </td>
 
-                            {{-- AKSI --}}
-                            <td class="px-5 py-4">
-
-                                <div class="flex items-center justify-center">
-
-                                    <button
-                                        type="button"
-                                        class="detailBtn w-9 h-9 rounded-xl bg-blue-100 text-blue-600 hover:bg-blue-500 hover:text-white transition flex items-center justify-center"
-                                        data-id="{{ $res->id }}">
-
-                                        <i class="fas fa-eye text-xs"></i>
-
-                                    </button>
-
-                                </div>
-
-                            </td>
 
                         </tr>
 
