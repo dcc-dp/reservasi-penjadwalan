@@ -214,7 +214,7 @@
                                     @if($item->status == 'pending')
 
                                         <form
-                                            action="{{ route('admin.pembayaran.konfirmasi', $item->id) }}"
+                                            action="{{ route('admin.pembayaran.index', $item->id) }}"
                                             method="POST">
 
                                             @csrf

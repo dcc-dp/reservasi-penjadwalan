@@ -75,33 +75,27 @@
 ```
     <div class="row text-center">
 
-        <div class="col-lg-3 col-md-6 mb-30">
-            <div class="single-service p-4 shadow-sm h-100">
-                <h4 class="mb-3">Materi Terstruktur</h4>
-                <p>
-                    Pembelajaran disusun secara bertahap sehingga mudah
-                    dipahami mulai dari dasar hingga tingkat lanjutan.
-                </p>
+            <div class="col-lg-3 col-md-6 mb-30">
+                <div class="single-service p-4 shadow-sm">
+                    <h2 class="mb-10">{{ $totalStudents }}+</h2>
+                    <p>Students</p>
+                </div>
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 mb-30">
-            <div class="single-service p-4 shadow-sm h-100">
-                <h4 class="mb-3">Belajar Praktis</h4>
-                <p>
-                    Fokus pada praktik dan studi kasus agar peserta dapat
-                    menerapkan ilmu yang dipelajari secara langsung.
-                </p>
+            <div class="col-lg-3 col-md-6 mb-30">
+                <div class="single-service p-4 shadow-sm">
+                    <h2 class="mb-10">{{ $totalCourses }}+</h2>
+                    <p>Courses</p>
+                </div>
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 mb-30">
-            <div class="single-service p-4 shadow-sm h-100">
-                <h4 class="mb-3">Instruktur Berpengalaman</h4>
-                <p>
-                    Dibimbing oleh instruktur yang memiliki pengalaman
-                    dan pemahaman di bidang teknologi.
-                </p>
+            <div class="col-lg-3 col-md-6 mb-30">
+                <div class="single-service p-4 shadow-sm">
+                    <h2 class="mb-10">{{ $totalMentors }}+</h2>
+                    <p>Mentors</p>
+                </div>
             </div>
         </div>
 

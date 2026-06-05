@@ -196,6 +196,8 @@ Route::middleware(['auth', 'role:instruktur'])
         //     return redirect('/');
         // })->name('logout');
     });
+
+    Route::post('/midtrans/callback', [PembayaranSiswaController::class, 'callback']);
 /*
 |--------------------------------------------------------------------------
 | SISWA (AUTH + ROLE SISWA)
