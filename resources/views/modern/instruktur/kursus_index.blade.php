@@ -112,7 +112,7 @@
 
                         {{-- STATS --}}
                         <div
-                            class="grid grid-cols-3 gap-3 mb-6">
+                            class="grid grid-cols-2 gap-3 mb-6">
 
                             {{-- PAKET --}}
                             <div
@@ -133,27 +133,6 @@
                                 </p>
 
                             </div>
-
-                            {{-- MATERI --}}
-                            <div
-                                class="rounded-2xl bg-zinc-100 p-4 text-center">
-
-                                <h3
-                                    class="text-2xl font-bold text-zinc-900">
-
-                                    {{ $item->pakets->sum(fn($paket) => $paket->materis->count()) }}
-
-                                </h3>
-
-                                <p
-                                    class="text-xs text-zinc-500 mt-1">
-
-                                    Materi
-
-                                </p>
-
-                            </div>
-
                             {{-- STATUS --}}
                             <div
                                 class="rounded-2xl bg-zinc-100 p-4 text-center">
@@ -215,13 +194,7 @@
 
                                             </h4>
 
-                                            <p
-                                                class="text-sm text-zinc-500">
-
-                                                {{ $paket->materis->count() }}
-                                                materi tersedia
-
-                                            </p>
+                                         
 
                                         </div>
 
@@ -270,26 +243,6 @@
                                 </div>
 
                             @endforelse
-
-                        </div>
-
-                        {{-- ACTION --}}
-                        <div
-                            class="flex items-center gap-3">
-
-                            <button
-                                class="flex-1 h-12 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-semibold transition">
-
-                                Kelola Kursus
-
-                            </button>
-
-                            <button
-                                class="w-12 h-12 rounded-2xl border border-zinc-300 hover:bg-zinc-100 text-zinc-700 transition">
-
-                                <i class="fas fa-arrow-right"></i>
-
-                            </button>
 
                         </div>
 

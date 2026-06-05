@@ -51,10 +51,6 @@ class UserController extends Controller
         return redirect()->route('user.admin.index');
 
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
