@@ -6,6 +6,7 @@ use App\Models\Instruktur_Profile;
 use App\Models\Jadwal;
 use App\Models\User ;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class InstrukturProfileController extends Controller
 {
@@ -116,17 +117,9 @@ class InstrukturProfileController extends Controller
             ->route('instruktur.index')
             ->with('success', 'Instruktur berhasil dihapus');
     }
-<<<<<<< HEAD
-=======
+
     public function userInstruktur(){
           $jadwals = Jadwal::with(['user', 'kursus'])->get();
             return view('instruktur.jadwal', compact('jadwals'));
     }
-
-    
-
-
-
-
->>>>>>> 33abef5fe1e5f452be4f6dbb368fb1eb4ce6a2d4
 }

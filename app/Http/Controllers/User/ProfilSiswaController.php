@@ -24,6 +24,7 @@ class ProfilSiswaController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+        
 
         $data = [
             'name' => $request->name,
@@ -37,7 +38,6 @@ class ProfilSiswaController extends Controller
 
             $data['photo'] = $request->file('photo')->store('profiles', 'public');
         }
-
         $user->update($data);
 
         return redirect()->route('siswa.profil')->with('success', 'Profil berhasil diperbarui');

@@ -78,10 +78,6 @@
                             </th>
 
                             <th class="text-center px-5 py-3 text-sm font-semibold text-zinc-600">
-                                Tempat
-                            </th>
-
-                            <th class="text-center px-5 py-3 text-sm font-semibold text-zinc-600">
                                 Pembayaran
                             </th>
 
@@ -129,14 +125,6 @@
                                 <td class="px-5 py-4 text-center text-sm text-zinc-700">
                                     {{ $item->jadwals->pluck('jam')->unique()->implode(', ') ?: '-' }}
                                 </td>
-
-                                {{-- TEMPAT --}}
-                                <td class="px-5 py-4 text-center text-sm text-zinc-700">
-
-                                    {{ $item->ruangan ?? '-' }}
-
-                                </td>
-
                                 {{-- STATUS PEMBAYARAN --}}
                                 <td class="px-5 py-4 text-center">
 
