@@ -69,12 +69,11 @@
 </section>
 
 
-<!-- STATISTICS -->
-
 <section class="pt-100 pb-100 bg-light">
     <div class="container">
 
-        <div class="row text-center">
+```
+    <div class="row text-center">
 
             <div class="col-lg-3 col-md-6 mb-30">
                 <div class="single-service p-4 shadow-sm">
@@ -82,6 +81,7 @@
                     <p>Students</p>
                 </div>
             </div>
+        </div>
 
             <div class="col-lg-3 col-md-6 mb-30">
                 <div class="single-service p-4 shadow-sm">
@@ -89,6 +89,7 @@
                     <p>Courses</p>
                 </div>
             </div>
+        </div>
 
             <div class="col-lg-3 col-md-6 mb-30">
                 <div class="single-service p-4 shadow-sm">
@@ -96,17 +97,22 @@
                     <p>Mentors</p>
                 </div>
             </div>
+        </div>
 
-            <div class="col-lg-3 col-md-6 mb-30">
-                <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">5+</h2>
-                    <p>Years Experience</p>
-                </div>
+        <div class="col-lg-3 col-md-6 mb-30">
+            <div class="single-service p-4 shadow-sm h-100">
+                <h4 class="mb-3">Fleksibel</h4>
+                <p>
+                    Belajar sesuai kebutuhan dengan berbagai pilihan
+                    kursus dan paket pembelajaran yang tersedia.
+                </p>
             </div>
-
         </div>
 
     </div>
+
+</div>
+
 </section>
 
 

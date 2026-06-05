@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Instruktur_Profile;
 use App\Models\Jadwal;
 use App\Models\User ;
@@ -25,53 +26,42 @@ class InstrukturProfileController extends Controller
         return view('modern.admin.profile-instruktur.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
+        try {
 
-            'notelp' => 'nullable|string|max:15',
-            'alamat' => 'nullable|string',
+            $request->validate([
+                'name' => 'required|string|max:100',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:6',
+                'keahlian' => 'required',
+                'pengalaman' => 'required',
+            ]);
 
-            'keahlian' => 'required|string|max:255',
-            'pengalaman' => 'required|string|max:255',
-            'bio' => 'nullable|string',
-        ], [
-            'email.unique' => 'Email sudah terdaftar. Gunakan email lain.',
-            'password.required' => 'Password wajib diisi.',
-            'password.min' => 'Password minimal 6 karakter.',
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'instruktur',
+                'notelp' => $request->notelp,
+                'alamat' => $request->alamat,
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'role' => 'instruktur',
+            Instruktur_Profile::create([
+                'user_id' => $user->id,
+                'keahlian' => $request->keahlian,
+                'pengalaman' => $request->pengalaman,
+                'bio' => $request->bio,
+            ]);
 
-            'notelp' => $request->notelp,
-            'alamat' => $request->alamat,
-        ]);
+            return redirect()
+                ->route('instruktur.index')
+                ->with('success', 'Instruktur berhasil ditambahkan');
+        } catch (\Exception $e) {
 
-        Instruktur_Profile::create([
-            'user_id' => $user->id,
-            'keahlian' => $request->keahlian,
-            'pengalaman' => $request->pengalaman,
-            'bio' => $request->bio,
-        ]);
-
-        return redirect()
-            ->route('instruktur.index')
-            ->with('success', 'Instruktur berhasil ditambahkan');
+            // dd($e->getMessage());
+        }
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
@@ -80,18 +70,18 @@ class InstrukturProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-      public function edit($id)
+    public function edit($id)
     {
         $profile = Instruktur_Profile::findOrFail($id);
         $users = User::all();
-        return view('modern.admin.profile-instruktur.edit', compact('profile','users'));
+        return view('modern.admin.profile-instruktur.edit', compact('profile', 'users'));
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-     public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
@@ -126,6 +116,8 @@ class InstrukturProfileController extends Controller
             ->route('instruktur.index')
             ->with('success', 'Instruktur berhasil dihapus');
     }
+<<<<<<< HEAD
+=======
     public function userInstruktur(){
           $jadwals = Jadwal::with(['user', 'kursus'])->get();
             return view('instruktur.jadwal', compact('jadwals'));
@@ -136,4 +128,5 @@ class InstrukturProfileController extends Controller
 
 
 
+>>>>>>> 33abef5fe1e5f452be4f6dbb368fb1eb4ce6a2d4
 }

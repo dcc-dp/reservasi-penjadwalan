@@ -43,11 +43,12 @@
                                 Rp {{ number_format($p->harga, 0, ',', '.') }}
                             </h2>
 
-                            @if ($p->kursus?->deskripsi)
-                                <p class="mb-4 text-muted">
-                                    {{ \Illuminate\Support\Str::limit($p->kursus->deskripsi, 120) }}
-                                </p>
-                            @endif
+                            <div class="mb-4 text-muted">
+                                {{ \Illuminate\Support\Str::limit($p->kursus->deskripsi, 120) }}
+                            </div>
+                            
+
+                           
 
                             <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => $p->id]) }}"
                                 class="main-btn btn-hover w-100">
