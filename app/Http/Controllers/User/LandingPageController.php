@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kursus;
 use App\Models\Paket;
 use App\Models\User;
+use App\Models\Ulasan;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
@@ -17,8 +18,14 @@ class LandingPageController extends Controller
         $kursus = Kursus::all();
         $paket = Paket::with('kursus')->latest()->take(3)->get();
 
+        $ulasans = Ulasan::with('user', 'kursus')
+            ->latest()
+            ->take(6)
+            ->get();
 
-        return view('user.pages.home', compact('paket', 'kursus'));
+        $totalStudents = User::where('role', 'siswa')->count();
+        $totalCourses = Kursus::count();
+        return view('user.pages.home', compact('paket', 'kursus', 'ulasans', 'totalStudents', 'totalCourses'));
     }
     public function about()
     {
