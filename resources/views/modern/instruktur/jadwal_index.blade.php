@@ -82,12 +82,7 @@
 
                             </th>
 
-                            <th class="px-6 py-4 text-left text-xs uppercase tracking-wider text-zinc-500">
-
-                                Ruangan
-
-                            </th>
-
+                        
                         </tr>
 
                     </thead>
@@ -170,17 +165,7 @@
                                     </div>
                                 </td>
 
-                                {{-- RUANGAN --}}
-                                <td class="px-6 py-4">
-
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm">
-
-                                        {{ $res->ruangan ?? '-' }}
-
-                                    </span>
-
-                                </td>
+                             
 
                             </tr>
 
