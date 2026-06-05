@@ -93,10 +93,6 @@
                             Status
                         </th>
 
-                        <th class="px-5 py-4 text-center text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                            Aksi
-                        </th>
-
                     </tr>
 
                 </thead>
@@ -202,55 +198,6 @@
                                     </span>
 
                                 @endif
-
-                            </td>
-
-                            {{-- ACTION --}}
-                            <td class="px-5 py-4">
-
-                                <div class="flex items-center justify-center gap-2">
-
-                                    {{-- KONFIRMASI --}}
-                                    @if($item->status == 'pending')
-
-                                        <form
-                                            action="{{ route('admin.pembayaran.index', $item->id) }}"
-                                            method="POST">
-
-                                            @csrf
-                                            @method('PUT')
-
-                                            <button
-                                                class="w-9 h-9 rounded-xl bg-green-100 text-green-600 hover:bg-green-500 hover:text-white transition flex items-center justify-center">
-
-                                                <i class="fas fa-check text-xs"></i>
-
-                                            </button>
-
-                                        </form>
-
-                                    @endif
-
-                                    {{-- DELETE --}}
-                                    <form
-                                        action="{{ route('pembayaran.destroy', $item->id) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('Yakin ingin menghapus pembayaran ini?')">
-
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button
-                                            type="submit"
-                                            class="w-9 h-9 rounded-xl bg-red-100 text-red-600 hover:bg-red-500 hover:text-white transition flex items-center justify-center">
-
-                                            <i class="fas fa-trash text-xs"></i>
-
-                                        </button>
-
-                                    </form>
-
-                                </div>
 
                             </td>
 

@@ -35,6 +35,7 @@
 
                         @if(auth()->user()->photo)
 
+                        {{ Storage::url($user->photo) }}
                             <img
                                 src="{{ asset('storage/' . auth()->user()->photo) }}"
                                 class="w-full h-full object-cover">
