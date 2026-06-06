@@ -17,7 +17,6 @@ class LandingPageController extends Controller
         $kursus = Kursus::all();
         $paket = Paket::with('kursus')->latest()->take(3)->get();
 
-
         return view('user.pages.home', compact('paket', 'kursus'));
     }
     public function about()
