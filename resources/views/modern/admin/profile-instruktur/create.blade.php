@@ -204,7 +204,7 @@
                 </button>
 
                 <a
-                    href="{{ url('/instruktur/create') }}"
+                    href="{{ url('/instruktur/store') }}"
                     class="px-5 py-3 rounded-xl border border-zinc-300 hover:bg-zinc-100 text-sm font-medium">
 
                     Batal

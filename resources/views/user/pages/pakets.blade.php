@@ -4,72 +4,72 @@
 
 @section('content')
 
-    <section class="pricing-section pt-150 pb-120 bg-light">
+    <section class="pt-150 pb-80 text-center bg-light">
         <div class="container">
+            <h1 class="mb-20">Paket Kursus</h1>
+            <p class="lead">
+                Pilih paket belajar yang sesuai dengan kebutuhanmu.
+                Mulai dari dasar hingga menjadi developer profesional.
+            </p>
+        </div>
+    </section>
 
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center mb-70">
-                    <h2 class="mb-20">Paket Kursus</h2>
-                    <p class="text-muted">
-                        Pilih paket belajar yang sesuai dengan kebutuhanmu.
-                        Mulai dari dasar hingga menjadi developer profesional.
-                    </p>
-                </div>
-            </div>
+    <section class="pricing-section pt-5 pb-5 bg-light min-vh-100 d-flex align-items-center">
+        <div class="container py-4">
 
-            <div class="row g-4 justify-content-center">
-                @forelse ($pakets as $p)
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-pricing text-center p-4 bg-white shadow-sm h-100 rounded">
+            {{-- Pricing Cards Grid --}}
+            <div class="row g-4 justify-content-center align-items-stretch">
 
-                            <div class="mb-3">
-                                @php
-                                    $kursusName = $p->kursus?->name ?? '';
-                                @endphp
-                                @if (str_contains(strtolower($kursusName), 'database'))
-                                    <i class="lni lni-database text-primary" style="font-size:48px;"></i>
-                                @else
-                                    <i class="lni lni-code-alt text-primary" style="font-size:48px;"></i>
-                                @endif
+                @foreach ($pakets as $p)
+                    <div class="col-lg-4 col-md-6 d-flex">
+
+                        <div class="card border-0 shadow-sm rounded-3 w-100">
+
+                            <div class="card-body text-center p-4 p-xl-5 d-flex flex-column">
+
+                                {{-- Dynamic Badge --}}
+                                <div class="mb-3">
+                                    <span
+                                        class="badge bg-primary px-3 py-2 rounded-pill fw-bold text-uppercase tracking-wider small">
+                                        {{ $p->jenis }}
+                                    </span>
+                                </div>
+
+                                {{-- Nama Kursus --}}
+                                <h4 class="fw-bold text-dark text-capitalize mb-3">
+                                    {{ $p->kursus->name }}
+                                </h4>
+
+                                {{-- Harga --}}
+                                <div class="mb-3">
+                                    <h2 class="fw-bold text-primary mb-0">
+                                        Rp {{ number_format($p->harga, 0, ',', '.') }}
+                                    </h2>
+                                </div>
+
+                                {{-- Deskripsi dengan Alignment Flexbox --}}
+                                <div class="flex-grow-1 d-flex align-items-center justify-content-center mb-4">
+                                    <p class="text-muted small mb-0 px-2">
+                                        {{ Str::limit($p->kursus->deskripsi, 50) ?: 'Tidak ada deskripsi tersedia.' }}
+                                    </p>
+                                </div>
+
+                                {{-- Tombol Aksi --}}
+                                <div class="mt-auto pt-2">
+                                    <a href="{{ route('pakets') }}"
+                                        class="btn btn-primary rounded-pill px-4 py-2 fw-semibold w-100 shadow-sm">
+                                        Lihat Detail
+                                    </a>
+                                </div>
+
                             </div>
 
-                            <h3 class="fw-bold mb-1">
-                                {{ $p->kursus?->name ?? 'Kursus' }}
-                            </h3>
-
-                            <span class="badge bg-primary mb-3">{{ $p->jenis }}</span>
-
-                            <h2 class="fw-bold mb-4">
-                                Rp {{ number_format($p->harga, 0, ',', '.') }}
-                            </h2>
-
-                            <div class="mb-4 text-muted">
-                                {{ \Illuminate\Support\Str::limit($p->kursus->deskripsi, 120) }}
-                            </div>
-                            
-
-                           
-
-                            <a href="{{ route('siswa.form-pendaftaran', ['paket_id' => $p->id]) }}"
-                                class="main-btn btn-hover w-100">
-                                Daftar Sekarang
-                            </a>
-
                         </div>
+
                     </div>
-                @empty
-                    <div class="col-lg-8 text-center">
-                        <div class="single-pricing p-5 bg-white shadow-sm rounded">
-                            <i class="lni lni-package text-muted mb-3" style="font-size:48px;"></i>
-                            <h4 class="mb-2">Belum Ada Paket Tersedia</h4>
-                            <p class="text-muted mb-0">
-                                Paket kursus akan ditampilkan di sini setelah ditambahkan melalui panel admin.
-                            </p>
-                        </div>
-                    </div>
-                @endforelse
+                @endforeach
+
             </div>
-
         </div>
     </section>
 
