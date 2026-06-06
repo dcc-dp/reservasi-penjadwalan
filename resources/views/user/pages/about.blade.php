@@ -19,45 +19,57 @@
 
 
     <!-- ABOUT CONTENT -->
-
-    <section class="about-section pt-100 pb-100">
+    <section class="py-5">
         <div class="container">
 
-            <div class="row align-items-center">
+            <div class="row align-items-center g-3-">
 
                 <!-- IMAGE -->
-                <div class="col-lg-6 mb-40">
-                    <img src="{{ asset('template/img/about/about-img.svg') }}" class="img-fluid rounded shadow">
+                <div class="col-lg-6 text-center">
+                    <img src="{{ asset('template/img/about/about-img.svg') }}" class="img-fluid w-75 bg-white"
+                        alt="About Bliss">
                 </div>
 
-                <!-- TEXT -->
+                <!-- CONTENT -->
                 <div class="col-lg-6">
 
-                    <div class="mb-40">
-                        <h3 class="mb-15">Our Mission</h3>
-                        <p>
-                            Memberikan akses pembelajaran teknologi yang mudah
-                            dipahami oleh semua orang mulai dari pemula hingga
-                            tingkat lanjut melalui kurikulum yang terstruktur.
-                        </p>
+                    <div class="card border-0 shadow-xs mb-4">
+                        <div class="card-body">
+                            <h4 class="fw-bold text-primary mb-3">
+                                <i class="fas fa-bullseye me-2"></i>Our Mission
+                            </h4>
+                            <p class="text-muted mb-0">
+                                Memberikan akses pembelajaran teknologi yang mudah
+                                dipahami oleh semua orang mulai dari pemula hingga
+                                tingkat lanjut melalui kurikulum yang terstruktur.
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="mb-40">
-                        <h3 class="mb-15">Why Choose Us</h3>
-                        <p>
-                            Kami menyediakan materi up to date, pembelajaran
-                            berbasis praktik, serta dukungan mentor yang siap
-                            membantu siswa memahami konsep secara mendalam.
-                        </p>
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h4 class="fw-bold text-success mb-3">
+                                <i class="fas fa-star me-2"></i>Why Choose Us
+                            </h4>
+                            <p class="text-muted mb-0">
+                                Kami menyediakan materi up to date, pembelajaran
+                                berbasis praktik, serta dukungan mentor yang siap
+                                membantu siswa memahami konsep secara mendalam.
+                            </p>
+                        </div>
                     </div>
 
-                    <div>
-                        <h3 class="mb-15">Our Vision</h3>
-                        <p>
-                            Menjadi platform pembelajaran teknologi yang membantu
-                            generasi muda menguasai keterampilan digital untuk
-                            menghadapi masa depan.
-                        </p>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h4 class="fw-bold text-warning mb-3">
+                                <i class="fas fa-eye me-2"></i>Our Vision
+                            </h4>
+                            <p class="text-muted mb-0">
+                                Menjadi platform pembelajaran teknologi yang membantu
+                                generasi muda menguasai keterampilan digital untuk
+                                menghadapi masa depan.
+                            </p>
+                        </div>
                     </div>
 
                 </div>
@@ -68,13 +80,20 @@
     </section>
 
 
-    <section class="pt-100 pb-100 bg-light">
+    <section class="py-5 bg-light">
+        <div class="container">
 
-        <div class="container py-5">
-            <div class="row justify-content-center g-4 text-center">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Our Achievement</h2>
+                <p class="text-muted">
+                    Statistik perkembangan platform Bliss
+                </p>
+            </div>
+
+            <div class="row g-4">
 
                 <div class="col-lg-4 col-md-6">
-                    <div class="card border-0 shadow h-100">
+                    <div class="card border-0 shadow-sm text-center h-100">
                         <div class="card-body py-5">
                             <i class="fas fa-user-graduate fa-3x text-primary mb-3"></i>
                             <h2 class="fw-bold">{{ $totalStudents }}+</h2>
@@ -84,7 +103,7 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6">
-                    <div class="card border-0 shadow h-100">
+                    <div class="card border-0 shadow-sm text-center h-100">
                         <div class="card-body py-5">
                             <i class="fas fa-book-open fa-3x text-success mb-3"></i>
                             <h2 class="fw-bold">{{ $totalCourses }}+</h2>
@@ -94,7 +113,7 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6">
-                    <div class="card border-0 shadow h-100">
+                    <div class="card border-0 shadow-sm text-center h-100">
                         <div class="card-body py-5">
                             <i class="fas fa-chalkboard-teacher fa-3x text-warning mb-3"></i>
                             <h2 class="fw-bold">{{ $totalMentors }}+</h2>
@@ -104,10 +123,9 @@
                 </div>
 
             </div>
+
         </div>
-
     </section>
-
 
     <!-- CTA -->
 
