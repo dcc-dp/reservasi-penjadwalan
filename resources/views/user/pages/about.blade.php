@@ -1,132 +1,131 @@
 @extends('layouts.landingpage.landingPage')
 
-@section('title','About Us')
+@section('title', 'About Us')
 
 @section('content')
 
-<!-- PAGE HEADER -->
+    <!-- PAGE HEADER -->
 
-<section class="pt-150 pb-80 text-center bg-light">
-    <div class="container">
-        <h1 class="mb-20">About Us</h1>
-        <p class="lead">
-            Bliss adalah platform pembelajaran teknologi yang membantu siswa
-            mengembangkan keterampilan digital melalui kursus terstruktur,
-            mentor berpengalaman, dan project nyata.
-        </p>
-    </div>
-</section>
+    <section class="pt-150 pb-80 text-center bg-light">
+        <div class="container">
+            <h1 class="mb-20">About Us</h1>
+            <p class="lead">
+                Bliss adalah platform pembelajaran teknologi yang membantu siswa
+                mengembangkan keterampilan digital melalui kursus terstruktur,
+                mentor berpengalaman, dan project nyata.
+            </p>
+        </div>
+    </section>
 
 
-<!-- ABOUT CONTENT -->
+    <!-- ABOUT CONTENT -->
 
-<section class="about-section pt-100 pb-100">
-    <div class="container">
+    <section class="about-section pt-100 pb-100">
+        <div class="container">
 
-        <div class="row align-items-center">
+            <div class="row align-items-center">
 
-            <!-- IMAGE -->
-            <div class="col-lg-6 mb-40">
-                <img src="{{ asset('template/img/about/about-img.svg') }}"
-                    class="img-fluid rounded shadow">
-            </div>
-
-            <!-- TEXT -->
-            <div class="col-lg-6">
-
-                <div class="mb-40">
-                    <h3 class="mb-15">Our Mission</h3>
-                    <p>
-                        Memberikan akses pembelajaran teknologi yang mudah
-                        dipahami oleh semua orang mulai dari pemula hingga
-                        tingkat lanjut melalui kurikulum yang terstruktur.
-                    </p>
+                <!-- IMAGE -->
+                <div class="col-lg-6 mb-40">
+                    <img src="{{ asset('template/img/about/about-img.svg') }}" class="img-fluid rounded shadow">
                 </div>
 
-                <div class="mb-40">
-                    <h3 class="mb-15">Why Choose Us</h3>
-                    <p>
-                        Kami menyediakan materi up to date, pembelajaran
-                        berbasis praktik, serta dukungan mentor yang siap
-                        membantu siswa memahami konsep secara mendalam.
-                    </p>
-                </div>
+                <!-- TEXT -->
+                <div class="col-lg-6">
 
-                <div>
-                    <h3 class="mb-15">Our Vision</h3>
-                    <p>
-                        Menjadi platform pembelajaran teknologi yang membantu
-                        generasi muda menguasai keterampilan digital untuk
-                        menghadapi masa depan.
-                    </p>
+                    <div class="mb-40">
+                        <h3 class="mb-15">Our Mission</h3>
+                        <p>
+                            Memberikan akses pembelajaran teknologi yang mudah
+                            dipahami oleh semua orang mulai dari pemula hingga
+                            tingkat lanjut melalui kurikulum yang terstruktur.
+                        </p>
+                    </div>
+
+                    <div class="mb-40">
+                        <h3 class="mb-15">Why Choose Us</h3>
+                        <p>
+                            Kami menyediakan materi up to date, pembelajaran
+                            berbasis praktik, serta dukungan mentor yang siap
+                            membantu siswa memahami konsep secara mendalam.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="mb-15">Our Vision</h3>
+                        <p>
+                            Menjadi platform pembelajaran teknologi yang membantu
+                            generasi muda menguasai keterampilan digital untuk
+                            menghadapi masa depan.
+                        </p>
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
-
-    </div>
-</section>
+    </section>
 
 
-<!-- STATISTICS -->
+    <section class="pt-100 pb-100 bg-light">
 
-<section class="pt-100 pb-100 bg-light">
-    <div class="container">
+        <div class="container py-5">
+            <div class="row justify-content-center g-4 text-center">
 
-        <div class="row text-center">
-
-            <div class="col-lg-3 col-md-6 mb-30">
-                <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">{{ $totalStudents }}+</h2>
-                    <p>Students</p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow h-100">
+                        <div class="card-body py-5">
+                            <i class="fas fa-user-graduate fa-3x text-primary mb-3"></i>
+                            <h2 class="fw-bold">{{ $totalStudents }}+</h2>
+                            <p class="text-muted mb-0">Students</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6 mb-30">
-                <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">{{ $totalCourses }}+</h2>
-                    <p>Courses</p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow h-100">
+                        <div class="card-body py-5">
+                            <i class="fas fa-book-open fa-3x text-success mb-3"></i>
+                            <h2 class="fw-bold">{{ $totalCourses }}+</h2>
+                            <p class="text-muted mb-0">Courses</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6 mb-30">
-                <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">{{ $totalMentors }}+</h2>
-                    <p>Mentors</p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card border-0 shadow h-100">
+                        <div class="card-body py-5">
+                            <i class="fas fa-chalkboard-teacher fa-3x text-warning mb-3"></i>
+                            <h2 class="fw-bold">{{ $totalMentors }}+</h2>
+                            <p class="text-muted mb-0">Mentors</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6 mb-30">
-                <div class="single-service p-4 shadow-sm">
-                    <h2 class="mb-10">5+</h2>
-                    <p>Years Experience</p>
-                </div>
             </div>
-
         </div>
 
-    </div>
-</section>
+    </section>
 
 
-<!-- CTA -->
+    <!-- CTA -->
 
-<section class="pt-80 pb-80 text-center">
-    <div class="container">
+    <section class="pt-80 pb-80 text-center">
+        <div class="container">
 
-        <h2 class="mb-20">Start Learning Today</h2>
+            <h2 class="mb-20">Start Learning Today</h2>
 
-        <p class="mb-30">
-            Bergabunglah dengan ratusan siswa yang telah meningkatkan
-            skill digital mereka bersama Bliss.
-        </p>
+            <p class="mb-30">
+                Bergabunglah dengan ratusan siswa yang telah meningkatkan
+                skill digital mereka bersama Bliss.
+            </p>
 
-        <a href="{{ route('siswa.register') }}" class="main-btn btn-hover">
-            Join Now
-        </a>
+            <a href="{{ route('siswa.register') }}" class="main-btn btn-hover">
+                Join Now
+            </a>
 
-    </div>
-</section>
+        </div>
+    </section>
 
 @endsection

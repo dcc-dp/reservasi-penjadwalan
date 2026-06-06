@@ -11,7 +11,6 @@ class Jadwal extends Model
         'tanggal',
         'hari',
         'jam',
-        'ruangan',
         'pertemuan',
     ];
 

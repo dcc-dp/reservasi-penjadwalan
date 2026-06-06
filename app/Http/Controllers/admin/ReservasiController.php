@@ -9,6 +9,7 @@ use App\Models\Paket;
 use App\Models\Pembayaran;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ReservasiController extends Controller
@@ -20,59 +21,93 @@ class ReservasiController extends Controller
         return view('modern.admin.reservasi.index', compact('reserv'));
     }
 
-    public function create()
-    {
-        $kursusList = Kursus::with('pakets')->get();
-
-        return view('modern.admin.reservasi.create', compact('kursusList'));
-    }
-
     public function store(Request $request)
     {
         $request->validate([
-            'id_kursus' => 'required|exists:kursuses,id',
-            'id_paket' => 'required|exists:pakets,id',
-            'jadwal.*.hari' => 'required',
-            'jadwal.*.jam' => 'required'
+            'id_kursus'     => 'required|exists:kursuses,id',
+            'id_paket'      => 'required|exists:pakets,id',
+            'tanggal_mulai' => 'required|date|after_or_equal:today',
+            'hari_belajar'  => 'required|array|min:1',
+            'jam_belajar'   => 'required'
         ]);
 
         $paket = Paket::findOrFail($request->id_paket);
 
-        // simpan reservasi
+        // 1. SIMPAN RESERVASI (SESUAI DB)
         $reservasi = Reservasi::create([
-            'id_user' => Auth::id(),
+            'id_user'   => Auth::id(),
             'id_kursus' => $request->id_kursus,
-            'id_paket' => $request->id_paket
+            'id_paket'  => $request->id_paket,
+            'ruangan'   => null,
+            'status'    => 'pending'
         ]);
 
-        // simpan jadwal
-        foreach ($request->jadwal as $j) {
+        // 2. MAP HARI
+        $mapHari = [
+            'Minggu' => 0,
+            'Senin'  => 1,
+            'Selasa' => 2,
+            'Rabu'   => 3,
+            'Kamis'  => 4,
+            'Jumat'  => 5,
+            'Sabtu'  => 6,
+        ];
 
-            if(!empty($j['hari']) && !empty($j['jam'])){
+        $hariTerpilih = [];
 
-                Jadwal::create([
-                    'reservasi_id' => $reservasi->id,
-                    'hari' => $j['hari'],
-                    'jam' => $j['jam']
-                ]);
+        foreach ($request->hari_belajar as $h) {
+            if (isset($mapHari[$h])) {
+                $hariTerpilih[] = $mapHari[$h];
             }
         }
 
-        // buat pembayaran
+        $currentDate = Carbon::parse($request->tanggal_mulai);
+        $pertemuan = 1;
+        $totalPertemuan = 15;
+
+        while ($pertemuan <= $totalPertemuan) {
+
+            if (in_array($currentDate->dayOfWeek, $hariTerpilih)) {
+
+                $namaHari = [
+                    'Minggu',
+                    'Senin',
+                    'Selasa',
+                    'Rabu',
+                    'Kamis',
+                    'Jumat',
+                    'Sabtu'
+                ][$currentDate->dayOfWeek];
+
+                Jadwal::create([
+                    'reservasi_id' => $reservasi->id,
+                    'tanggal'      => $currentDate->toDateString(),
+                    'hari'         => $namaHari,
+                    'jam'          => $request->jam_belajar,
+                    'pertemuan'    => $pertemuan,
+                ]);
+
+                $pertemuan++;
+            }
+
+            $currentDate->addDay();
+        }
+
+        // 3. PEMBAYARAN
         Pembayaran::create([
             'reservasi_id' => $reservasi->id,
-            'order_id' => 'ORD-' . time() . '-' . $reservasi->id,
-            'total' => $paket->harga,
-            'status' => 'pending'
+            'order_id'     => 'ORD-' . time() . '-' . $reservasi->id,
+            'total'        => $paket->harga,
+            'status'       => 'pending'
         ]);
 
         return redirect()->route('reservasi.index')
-        ->with('success','Reservasi berhasil dibuat');
+            ->with('success', 'Reservasi berhasil dibuat + 15 jadwal otomatis');
     }
-
+    
     public function show($id)
     {
-        $reserv = Reservasi::with(['user','kursus','paket','jadwals'])->findOrFail($id);
+        $reserv = Reservasi::with(['user', 'kursus', 'paket', 'jadwals'])->findOrFail($id);
 
         return view('modern.admin.reservasi.show', compact('reserv'));
     }
@@ -98,6 +133,6 @@ class ReservasiController extends Controller
         $reserv->delete();
 
         return redirect()->route('reservasi.index')
-            ->with('success','Reservasi berhasil dihapus');
+            ->with('success', 'Reservasi berhasil dihapus');
     }
 }
