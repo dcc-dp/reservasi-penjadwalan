@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Instruktur_Profile;
 use App\Models\Jadwal;
-use App\Models\User ;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -82,19 +82,51 @@ class InstrukturProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    // public function update(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'keahlian' => 'required|string|max:255',
+    //         'pengalaman' => 'required|string|max:255',
+    //         'bio' => 'nullable|string',
+    //     ]);
+
+
+    //     $profile = Instruktur_Profile::findOrFail($id);
+    //     $profile->update($request->all());
+
+    //     return redirect()->route('instruktur.index')->with('success', 'Profile berhasil diperbarui');
+    // }
+
     public function update(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'keahlian' => 'required|string|max:255',
-            'pengalaman' => 'required|string|max:255',
-            'bio' => 'nullable|string',
+            'name'        => 'required|string|max:100',
+            'email'       => 'required|email',
+            'keahlian'    => 'required|string|max:255',
+            'pengalaman'  => 'required|string|max:255',
+            'bio'         => 'nullable|string',
         ]);
 
-        $profile = Instruktur_Profile::findOrFail($id);
-        $profile->update($request->all());
+        $profile = Instruktur_Profile::with('user')->findOrFail($id);
 
-        return redirect()->route('instruktur.index')->with('success', 'Profile berhasil diperbarui');
+        // update tabel users
+        $profile->user->update([
+            'name'   => $request->name,
+            'email'  => $request->email,
+            'notelp' => $request->notelp,
+            'alamat' => $request->alamat,
+        ]);
+
+        // update tabel instruktur_profiles
+        $profile->update([
+            'keahlian'   => $request->keahlian,
+            'pengalaman' => $request->pengalaman,
+            'bio'        => $request->bio,
+        ]);
+
+        return redirect()
+            ->route('instruktur.index')
+            ->with('success', 'Profile berhasil diperbarui');
     }
 
 
@@ -118,8 +150,9 @@ class InstrukturProfileController extends Controller
             ->with('success', 'Instruktur berhasil dihapus');
     }
 
-    public function userInstruktur(){
-          $jadwals = Jadwal::with(['user', 'kursus'])->get();
-            return view('instruktur.jadwal', compact('jadwals'));
+    public function userInstruktur()
+    {
+        $jadwals = Jadwal::with(['user', 'kursus'])->get();
+        return view('instruktur.jadwal', compact('jadwals'));
     }
 }
